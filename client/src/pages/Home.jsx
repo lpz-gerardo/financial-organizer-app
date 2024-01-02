@@ -34,6 +34,26 @@ const Home = () => {
                             </Table>
                         </TableContainer>
                     </Box>
+                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 5 }}>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography>Account Table</Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography>Empty Table</Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Box>
                 </Box>
             </Box>
         </React.Fragment>
