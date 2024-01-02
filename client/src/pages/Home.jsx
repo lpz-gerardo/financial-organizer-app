@@ -54,6 +54,26 @@ const Home = () => {
                             </Table>
                         </TableContainer>
                     </Box>
+                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 5 }}>
+                        <Box sx={{ maxWidth: '400px', maxHeight: '900px' }}>
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align={'center'} colSpan={2}>
+                                                <Typography>Payment Calendar</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell size='small'><Typography>Day</Typography></TableCell>
+                                            <TableCell size='small'><Typography>Amount</Typography></TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                </Table>
+                            </TableContainer>
+                        </Box>
+                        
+                    </Box>
                 </Box>
             </Box>
         </React.Fragment>
