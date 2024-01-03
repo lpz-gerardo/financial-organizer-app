@@ -66,12 +66,12 @@ const Home = () => {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align={'center'} colSpan={2}>
-                                                <Typography>Payment Calendar</Typography>
+                                                <Typography variant='h4'>Payment Calendar</Typography>
                                             </TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell size='small'><Typography>Day</Typography></TableCell>
-                                            <TableCell size='small'><Typography>Amount</Typography></TableCell>
+                                            <TableCell size='small' align='center'><Typography variant='body1'>Day</Typography></TableCell>
+                                            <TableCell size='small' align='center'><Typography variant='body1'>Amount</Typography></TableCell>
                                         </TableRow>
                                     </TableHead>
                                 </Table>
