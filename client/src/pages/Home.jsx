@@ -55,7 +55,7 @@ const Home = () => {
                         </TableContainer>
                     </Box>
                     <Box sx={{ gridColumnStart: 3, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 2 }}>
-                        <Box sx={{ maxWidth: '400px', maxHeight: '900px' }}>
+                        <Box sx={{ maxWidth: '75%', maxHeight: '900px' }}>
                             <TableContainer component={Paper}>
                                 <Table>
                                     <TableHead>
