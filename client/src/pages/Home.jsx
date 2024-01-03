@@ -12,9 +12,9 @@ import Typography from '@mui/material/Typography';
 const Home = () => {
     return(
         <React.Fragment>
-            <Box sx={{ width: '80vw', height: '800px' }}>
-                <Box display={'grid'} gridTemplateColumns={'repeat(4, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
-                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
+            <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
+                <Box display={'grid'} gridTemplateColumns={'repeat(3, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
+                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 1, gridRowEnd: 1}}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
@@ -34,7 +34,7 @@ const Home = () => {
                             </Table>
                         </TableContainer>
                     </Box>
-                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 5 }}>
+                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 2, gridRowEnd: 2 }}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
@@ -54,7 +54,7 @@ const Home = () => {
                             </Table>
                         </TableContainer>
                     </Box>
-                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 5 }}>
+                    <Box sx={{ gridColumnStart: 3, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 2 }}>
                         <Box sx={{ maxWidth: '400px', maxHeight: '900px' }}>
                             <TableContainer component={Paper}>
                                 <Table>
