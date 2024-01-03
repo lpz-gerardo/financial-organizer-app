@@ -8,54 +8,59 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const Home = () => {
     return(
         <React.Fragment>
             <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
-                <Box display={'grid'} gridTemplateColumns={'repeat(3, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
-                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 1, gridRowEnd: 1}}>
+                <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
+                    <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>
-                                            <Typography>Member Table</Typography>
+                                        <TableCell align='center'>
+                                            <Typography variant='h4'>Member Table</Typography>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
-                                            <Typography>Empty Table</Typography>
+                                        <TableCell align='center'>
+                                            <Button>
+                                                <Typography variant='body1'>Add Member</Typography>
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
                         </TableContainer>
                     </Box>
-                    <Box sx={{ gridColumnStart: 1, gridColumnEnd: 3, gridRowStart: 2, gridRowEnd: 2 }}>
+                    <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>
-                                            <Typography>Account Table</Typography>
+                                        <TableCell align='center'>
+                                            <Typography variant='h4'>Account Table</Typography>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
-                                            <Typography>Empty Table</Typography>
+                                        <TableCell align='center'>
+                                            <Button>
+                                                <Typography variant='body1'>Add Account</Typography>
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
                         </TableContainer>
                     </Box>
-                    <Box sx={{ gridColumnStart: 3, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 2 }}>
-                        <Box sx={{ maxWidth: '75%', maxHeight: '900px' }}>
+                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 2 }}>
+                        <Box sx={{ maxWidth: '100%', maxHeight: '900px' }}>
                             <TableContainer component={Paper}>
                                 <Table>
                                     <TableHead>
