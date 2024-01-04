@@ -27,17 +27,30 @@ const modalStyle = {
 const Home = () => {
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
     const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
+    const [members, setMembers] = useState([]);
 
     const handleOpenMemberModal = () => {
         setIsMemberModalOpen(!isMemberModalOpen);
     }
-
-    const handleAddMemberClick = () => {
-        setIsMemberTableEmpty(!isMemberTableEmpty);
-    }
-
+ 
     const handleCloseMemberModal = () => {
         setIsMemberModalOpen(!isMemberModalOpen);
+    }
+
+    const handleAddMemberSubmit = (event) => {
+       event.preventDefault();
+       const name = event.target[0].value;
+       console.log(name);
+       if (name == '') {
+            console.log('Empty name field');
+       } else {
+            setMembers([
+                ...members,
+                name
+            ]);
+            setIsMemberTableEmpty(false);
+       }
+       handleCloseMemberModal();
     }
 
     return(
@@ -80,7 +93,7 @@ const Home = () => {
                                             <TableCell align='center'><Typography>Debt</Typography></TableCell>
                                             <TableCell align='center'><Typography>Monthly Payment</Typography></TableCell>
                                             <TableCell align='center'>
-                                                <Button onClick={handleAddMemberClick}>
+                                                <Button onClick={handleOpenMemberModal}>
                                                     <Typography variant='body1'>Add Member</Typography>
                                                 </Button>
                                             </TableCell>
@@ -92,6 +105,15 @@ const Home = () => {
                                             <TableCell align='center'><Typography>$500.00</Typography></TableCell> 
                                             <TableCell align='center'><Typography>$45.00</Typography></TableCell> 
                                         </TableRow>
+                                        {members.map((member) => (
+                                            <TableRow
+                                                key={member}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0} }}>
+                                                    <TableCell align='center'>{member}</TableCell>
+                                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                                            </TableRow>
+                                        ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -144,7 +166,7 @@ const Home = () => {
             <Modal open={isMemberModalOpen} onClose={handleCloseMemberModal}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Member</Typography>
-                    <form>
+                    <form onSubmit={handleAddMemberSubmit}>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField type='input' label='Name'></TextField>
                         </Box>
