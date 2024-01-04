@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -11,31 +12,68 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const Home = () => {
+    const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
+
+    const handleAddMemberClick = () => {
+        setIsMemberTableEmpty(!isMemberTableEmpty);
+    }
+
     return(
         <React.Fragment>
             <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
                 <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
-                        <TableContainer component={Paper}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align='center'>
-                                            <Typography variant='h4'>Member Table</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell align='center'>
-                                            <Button>
-                                                <Typography variant='body1'>Add Member</Typography>
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                        {isMemberTableEmpty ?
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align='center'>
+                                                <Typography variant='h4'>Member Table</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell align='center'>
+                                                <Button onClick={handleAddMemberClick}>
+                                                    <Typography variant='body1'>Add Member</Typography>
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        : 
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align='center' colSpan={4}>
+                                                <Typography variant='h4'>Member Table</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align='center'><Typography>Name</Typography></TableCell>
+                                            <TableCell align='center'><Typography>Debt</Typography></TableCell>
+                                            <TableCell align='center'><Typography>Monthly Payment</Typography></TableCell>
+                                            <TableCell align='center'>
+                                                <Button onClick={handleAddMemberClick}>
+                                                    <Typography variant='body1'>Add Member</Typography>
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell align='center'><Typography>Sample Name</Typography></TableCell> 
+                                            <TableCell align='center'><Typography>$500.00</Typography></TableCell> 
+                                            <TableCell align='center'><Typography>$45.00</Typography></TableCell> 
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        }
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
                         <TableContainer component={Paper}>
