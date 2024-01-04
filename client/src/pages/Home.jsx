@@ -10,12 +10,34 @@ import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+
+const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 350,
+    bgcolor: '#edf0f5',
+    boxShadow: 24,
+    padding: 8,
+}
 
 const Home = () => {
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
+    const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
+
+    const handleOpenMemberModal = () => {
+        setIsMemberModalOpen(!isMemberModalOpen);
+    }
 
     const handleAddMemberClick = () => {
         setIsMemberTableEmpty(!isMemberTableEmpty);
+    }
+
+    const handleCloseMemberModal = () => {
+        setIsMemberModalOpen(!isMemberModalOpen);
     }
 
     return(
@@ -36,7 +58,7 @@ const Home = () => {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell align='center'>
-                                                <Button onClick={handleAddMemberClick}>
+                                                <Button onClick={handleOpenMemberModal}>
                                                     <Typography variant='body1'>Add Member</Typography>
                                                 </Button>
                                             </TableCell>
@@ -119,6 +141,19 @@ const Home = () => {
                     </Box>
                 </Box>
             </Box>
+            <Modal open={isMemberModalOpen} onClose={handleCloseMemberModal}>
+                <Box sx={modalStyle}>
+                    <Typography variant='h5' color={'black'}>Add New Member</Typography>
+                    <form>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Name'></TextField>
+                        </Box>
+                        <Button type='submit'>
+                            Submit
+                        </Button>
+                    </form>
+                </Box>
+            </Modal>
         </React.Fragment>
     )
 }
