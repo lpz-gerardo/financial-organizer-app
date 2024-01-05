@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -28,6 +28,7 @@ const Home = () => {
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
     const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
     const [members, setMembers] = useState([]);
+    const [isAddAccountDisabled, setIsAccountDisabled] = useState(true);
 
     const handleOpenMemberModal = () => {
         setIsMemberModalOpen(!isMemberModalOpen);
@@ -52,6 +53,14 @@ const Home = () => {
        }
        handleCloseMemberModal();
     }
+
+   useEffect(() => {
+    if (members.length !== 0) {
+        setIsAccountDisabled(false);
+    } else {
+        setIsAccountDisabled(true);
+    }
+   }, [members]) 
 
     return(
         <React.Fragment>
@@ -132,7 +141,7 @@ const Home = () => {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell align='center'>
-                                            <Button>
+                                            <Button disabled={isAddAccountDisabled}>
                                                 <Typography variant='body1'>Add Account</Typography>
                                             </Button>
                                         </TableCell>
