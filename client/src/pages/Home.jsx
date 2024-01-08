@@ -31,6 +31,19 @@ const Home = () => {
     const [accounts, setAccounts] = useState([]);
     const [isAddAccountDisabled, setIsAccountDisabled] = useState(true);
     const [isAccountTableEmpty, setIsAccountTableEmpty] = useState(true);
+    const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+
+    const handleAddAccountSubmit = (event) => {
+        event.preventDefault();
+    }
+
+    const handleOpenAccountModal = () => {
+        setIsAccountModalOpen(true);
+    }
+
+    const handleCloseAccountModal = () => {
+        setIsAccountModalOpen(!isAccountModalOpen);
+    }
 
     const handleOpenMemberModal = () => {
         setIsMemberModalOpen(!isMemberModalOpen);
@@ -144,7 +157,7 @@ const Home = () => {
                                     <TableBody>
                                         <TableRow>
                                             <TableCell align='center'>
-                                                <Button disabled={isAddAccountDisabled}>
+                                                <Button disabled={isAddAccountDisabled} onClick={handleOpenAccountModal}>
                                                     <Typography variant='body1'>Add Account</Typography>
                                                 </Button>
                                             </TableCell>
@@ -207,6 +220,34 @@ const Home = () => {
                     <form onSubmit={handleAddMemberSubmit}>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField type='input' label='Name'></TextField>
+                        </Box>
+                        <Button type='submit'>
+                            Submit
+                        </Button>
+                    </form>
+                </Box>
+            </Modal>
+            <Modal open={isAccountModalOpen} onClose={handleCloseAccountModal}>
+                <Box sx={modalStyle}>
+                    <Typography variant='h5' color={'black'}>Add New Account</Typography>
+                    <form onSubmit={handleAddAccountSubmit}>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Account Name'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Member'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Starting Debt'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Remaining Debt'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Monthly Payment'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='APR'></TextField>
                         </Box>
                         <Button type='submit'>
                             Submit
