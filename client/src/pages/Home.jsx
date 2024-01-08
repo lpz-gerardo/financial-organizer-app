@@ -28,7 +28,9 @@ const Home = () => {
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
     const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
     const [members, setMembers] = useState([]);
+    const [accounts, setAccounts] = useState([]);
     const [isAddAccountDisabled, setIsAccountDisabled] = useState(true);
+    const [isAccountTableEmpty, setIsAccountTableEmpty] = useState(true);
 
     const handleOpenMemberModal = () => {
         setIsMemberModalOpen(!isMemberModalOpen);
@@ -129,26 +131,53 @@ const Home = () => {
                         }
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
-                        <TableContainer component={Paper}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align='center'>
-                                            <Typography variant='h4'>Account Table</Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell align='center'>
-                                            <Button disabled={isAddAccountDisabled}>
-                                                <Typography variant='body1'>Add Account</Typography>
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                        {isAccountTableEmpty ?
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align='center'>
+                                                <Typography variant='h4'>Account Table</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell align='center'>
+                                                <Button disabled={isAddAccountDisabled}>
+                                                    <Typography variant='body1'>Add Account</Typography>
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        :
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align='center' colSpan={7}>
+                                                <Typography variant='h4'>Account Priority Table</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell><Typography>Account</Typography></TableCell>
+                                            <TableCell><Typography>Member</Typography></TableCell>
+                                            <TableCell><Typography>Starting Debt</Typography></TableCell>
+                                            <TableCell><Typography>Remaining Debt</Typography></TableCell>
+                                            <TableCell><Typography>Monthly Payment</Typography></TableCell>
+                                            <TableCell><Typography>APR</Typography></TableCell>
+                                            <TableCell align='center'>
+                                                <Button>
+                                                    <Typography variant='body1'>Add Account</Typography>
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                </Table>
+                            </TableContainer>
+                        }
                     </Box>
                     <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 2 }}>
                         <Box sx={{ maxWidth: '100%', maxHeight: '900px' }}>
