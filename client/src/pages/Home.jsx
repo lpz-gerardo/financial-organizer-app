@@ -124,11 +124,6 @@ const Home = () => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        <TableRow>
-                                            <TableCell align='center'><Typography>Sample Name</Typography></TableCell> 
-                                            <TableCell align='center'><Typography>$500.00</Typography></TableCell> 
-                                            <TableCell align='center'><Typography>$45.00</Typography></TableCell> 
-                                        </TableRow>
                                         {members.map((member) => (
                                             <TableRow
                                                 key={member}
