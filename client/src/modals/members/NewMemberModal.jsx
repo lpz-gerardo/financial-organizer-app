@@ -20,12 +20,14 @@ const modalStyle = {
 const NewMemberModal = ({ isModalOpen, handleClose }) => {
     const [memberName, setMemberName] = useState('');
     const [isMemberNameError, setIsMemberNameError] = useState(false);
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
     const onChangeMemberName = (event) => {
         const regex = /^[a-z A-Z]{0,20}$/;
         const name = event.target.value;
         setMemberName(name);
         setIsMemberNameError(!name.match(regex) ? true : false);
+        setIsSubmitDisabled((!name.match(regex) || name.length == 0) ? true : false);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -46,9 +48,10 @@ const NewMemberModal = ({ isModalOpen, handleClose }) => {
                                 value={memberName}
                                 error={isMemberNameError}
                                 onChange={(event) => onChangeMemberName(event)}
+                                helperText={isMemberNameError ? 'Max 20 characters. Alpha only.' : ''}
                             />
                         </Box>
-                        <Button type='submit'>
+                        <Button type='submit' disabled={isSubmitDisabled}>
                             Submit
                         </Button>
                     </form>
