@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,7 +18,15 @@ const modalStyle = {
 }
 
 const NewMemberModal = ({ isModalOpen, handleClose }) => {
+    const [memberName, setMemberName] = useState('');
+    const [isMemberNameError, setIsMemberNameError] = useState(false);
 
+    const onChangeMemberName = (event) => {
+        const regex = /^[a-z A-Z]{0,20}$/;
+        const name = event.target.value;
+        setMemberName(name);
+        setIsMemberNameError(!name.match(regex) ? true : false);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
     }
@@ -29,7 +38,15 @@ const NewMemberModal = ({ isModalOpen, handleClose }) => {
                     <Typography variant='h5' color={'black'}>Add New Member</Typography>
                     <form onSubmit={handleSubmit}>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Name'></TextField>
+                            <TextField
+                                type='input'
+                                label='Name'
+                                color='primary'
+                                variant='outlined'
+                                value={memberName}
+                                error={isMemberNameError}
+                                onChange={(event) => onChangeMemberName(event)}
+                            />
                         </Box>
                         <Button type='submit'>
                             Submit
