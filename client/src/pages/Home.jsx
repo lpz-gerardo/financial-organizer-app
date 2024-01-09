@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 
+import MemberTable from '../components/MemberTable';
+
 const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -83,26 +85,7 @@ const Home = () => {
                 <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
                         {isMemberTableEmpty ?
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align='center'>
-                                                <Typography variant='h4'>Member Table</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell align='center'>
-                                                <Button onClick={handleOpenMemberModal}>
-                                                    <Typography variant='body1'>Add Member</Typography>
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                            <MemberTable />
                         : 
                             <TableContainer component={Paper}>
                                 <Table>
