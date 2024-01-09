@@ -71,55 +71,14 @@ const Home = () => {
        handleCloseMemberModal();
     }
 
-   useEffect(() => {
-    if (members.length !== 0) {
-        setIsAccountDisabled(false);
-    } else {
-        setIsAccountDisabled(true);
-    }
-   }, [members]) 
-
     return(
         <React.Fragment>
             <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
                 <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
-                        {isMemberTableEmpty ?
-                            <MemberTable />
-                        : 
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align='center' colSpan={4}>
-                                                <Typography variant='h4'>Member Table</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell align='center'><Typography>Name</Typography></TableCell>
-                                            <TableCell align='center'><Typography>Debt</Typography></TableCell>
-                                            <TableCell align='center'><Typography>Monthly Payment</Typography></TableCell>
-                                            <TableCell align='center'>
-                                                <Button onClick={handleOpenMemberModal}>
-                                                    <Typography variant='body1'>Add Member</Typography>
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {members.map((member) => (
-                                            <TableRow
-                                                key={member}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0} }}>
-                                                    <TableCell align='center'>{member}</TableCell>
-                                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
-                                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        }
+                        <MemberTable
+                            members={members}
+                        />
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
                         {isAccountTableEmpty ?
