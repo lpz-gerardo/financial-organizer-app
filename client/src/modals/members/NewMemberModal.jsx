@@ -29,13 +29,22 @@ const NewMemberModal = ({ isModalOpen, handleClose }) => {
         setIsMemberNameError(!name.match(regex) ? true : false);
         setIsSubmitDisabled((!name.match(regex) || name.length == 0) ? true : false);
     }
+
     const handleSubmit = (event) => {
         event.preventDefault();
     }
 
+    const onClose = () => {
+        setMemberName('');
+        setIsMemberNameError(false);
+        setIsSubmitDisabled(true);
+
+        handleClose();
+    }
+
     return (
         <React.Fragment>
-            <Modal open={isModalOpen} onClose={handleClose}>
+            <Modal open={isModalOpen} onClose={onClose}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Member</Typography>
                     <form onSubmit={handleSubmit}>
