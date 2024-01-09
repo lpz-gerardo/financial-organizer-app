@@ -11,8 +11,13 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import NewMemberModal from '../modals/members/NewMemberModal';
+
 const MemberTable = ({ members }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
+
+    const toggleNewMemberModal = () => setIsModalOpen(!isModalOpen);
 
     useEffect(() => {
         if (members.length !== 0) {
@@ -37,7 +42,7 @@ const MemberTable = ({ members }) => {
                     <TableBody>
                         <TableRow>
                             <TableCell align='center'>
-                                <Button>
+                                <Button onClick={toggleNewMemberModal}>
                                     <Typography variant='body1'>Add Member</Typography>
                                 </Button>
                             </TableCell>
@@ -59,7 +64,7 @@ const MemberTable = ({ members }) => {
                             <TableCell align='center'><Typography>Debt</Typography></TableCell>
                             <TableCell align='center'><Typography>Monthly Payment</Typography></TableCell>
                             <TableCell align='center'>
-                                <Button >
+                                <Button onClick={toggleNewMemberModal}>
                                     <Typography variant='body1'>Add Member</Typography>
                                 </Button>
                             </TableCell>
@@ -79,6 +84,10 @@ const MemberTable = ({ members }) => {
                 </Table>
             </TableContainer>
             }
+            <NewMemberModal
+                isModalOpen={isModalOpen}
+                handleClose={toggleNewMemberModal}
+            />
         </React.Fragment>
     )
 }

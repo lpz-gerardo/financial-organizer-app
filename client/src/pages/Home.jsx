@@ -151,19 +151,6 @@ const Home = () => {
                     </Box>
                 </Box>
             </Box>
-            <Modal open={isMemberModalOpen} onClose={handleCloseMemberModal}>
-                <Box sx={modalStyle}>
-                    <Typography variant='h5' color={'black'}>Add New Member</Typography>
-                    <form onSubmit={handleAddMemberSubmit}>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Name'></TextField>
-                        </Box>
-                        <Button type='submit'>
-                            Submit
-                        </Button>
-                    </form>
-                </Box>
-            </Modal>
             <Modal open={isAccountModalOpen} onClose={handleCloseAccountModal}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
