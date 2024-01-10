@@ -27,7 +27,20 @@ router.post('/', async (request, response) => {
 
     } catch (error) {
         console.log(error);
-        response.status(500).send({ message: error.message });
+        return response.status(500).send({ message: error.message });
+    }
+})
+
+router.get('/', async (request, response) => {
+    try {
+        const members = await Member.find({});
+        return response.status(200).json({
+            count: members.length,
+            data: members,
+        });
+    } catch (error) {
+        console.log(error);
+        return response.status(500).send({ message: error.message });
     }
 })
 
