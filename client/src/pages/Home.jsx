@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 
+import { REACT_APP_DEV_URL } from '../../config.js';
 import MemberTable from '../components/MemberTable';
 
 const modalStyle = {
@@ -70,6 +71,23 @@ const Home = () => {
        }
        handleCloseMemberModal();
     }
+
+    async function getMemberData() {
+        fetch(REACT_APP_DEV_URL + 'member', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            setMembers(data.data);
+        });
+    }
+
+    useEffect(() => {
+        getMemberData();
+    }, []);
 
     return(
         <React.Fragment>

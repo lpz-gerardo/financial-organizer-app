@@ -73,9 +73,9 @@ const MemberTable = ({ members }) => {
                     <TableBody>
                         {members.map((member) => (
                             <TableRow
-                                key={member}
+                                key={member.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0} }}>
-                                    <TableCell align='center'>{member}</TableCell>
+                                    <TableCell align='center'>{member.name}</TableCell>
                                     <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                     <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                             </TableRow>
