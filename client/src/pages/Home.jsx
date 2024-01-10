@@ -28,8 +28,6 @@ const modalStyle = {
 }
 
 const Home = () => {
-    const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
-    const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
     const [members, setMembers] = useState([]);
     const [accounts, setAccounts] = useState([]);
     const [isAddAccountDisabled, setIsAccountDisabled] = useState(true);
@@ -46,30 +44,6 @@ const Home = () => {
 
     const handleCloseAccountModal = () => {
         setIsAccountModalOpen(!isAccountModalOpen);
-    }
-
-    const handleOpenMemberModal = () => {
-        setIsMemberModalOpen(!isMemberModalOpen);
-    }
- 
-    const handleCloseMemberModal = () => {
-        setIsMemberModalOpen(!isMemberModalOpen);
-    }
-
-    const handleAddMemberSubmit = (event) => {
-       event.preventDefault();
-       const name = event.target[0].value;
-       console.log(name);
-       if (name == '') {
-            console.log('Empty name field');
-       } else {
-            setMembers([
-                ...members,
-                name
-            ]);
-            setIsMemberTableEmpty(false);
-       }
-       handleCloseMemberModal();
     }
 
     async function getMemberData() {
