@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 
 import NewMemberModal from '../modals/members/NewMemberModal';
 
-const MemberTable = ({ members }) => {
+const MemberTable = ({ members, handleUpdateMembers }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
 
@@ -87,6 +87,7 @@ const MemberTable = ({ members }) => {
             <NewMemberModal
                 isModalOpen={isModalOpen}
                 handleClose={toggleNewMemberModal}
+                handleUpdateMembers={handleUpdateMembers}
             />
         </React.Fragment>
     )

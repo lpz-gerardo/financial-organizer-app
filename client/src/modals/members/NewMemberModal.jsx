@@ -18,7 +18,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const NewMemberModal = ({ isModalOpen, handleClose }) => {
+const NewMemberModal = ({ isModalOpen, handleClose, handleUpdateMembers }) => {
     const [memberName, setMemberName] = useState('');
     const [isMemberNameError, setIsMemberNameError] = useState(false);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -51,6 +51,7 @@ const NewMemberModal = ({ isModalOpen, handleClose }) => {
         });
         const member = await response.json();
         console.log(member);
+        handleUpdateMembers();
     }
 
     const onClose = () => {
