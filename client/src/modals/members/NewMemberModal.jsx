@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { REACT_APP_DEV_URL } from '../../../config.js';
 
 const modalStyle = {
     position: 'absolute',
@@ -32,6 +33,24 @@ const NewMemberModal = ({ isModalOpen, handleClose }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const name = event.target[0].value;
+        if (name) {
+            const data = { name: name };
+            postMemberData(REACT_APP_DEV_URL + 'member', data);
+        }
+        onClose();
+    }
+
+    async function postMemberData(url, data) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const member = await response.json();
+        console.log(member);
     }
 
     const onClose = () => {
