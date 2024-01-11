@@ -41,4 +41,17 @@ router.post('/', async (request, response) => {
     }
 })
 
+router.get('/', async (request, response) => {
+    try {
+        const accounts = await Account.find({}).exec();
+        return response.status(200).json({
+            count: accounts.length,
+            data: accounts,
+        });
+    } catch (error) {
+        console.log(error);
+        return response.status(500).send({ message: error.message });
+    }
+})
+
 export default router;
