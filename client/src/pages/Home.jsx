@@ -75,34 +75,9 @@ const Home = () => {
                         />
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
-                        {isAccountTableEmpty ?
-                            <AccountTable />
-                        :
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align='center' colSpan={7}>
-                                                <Typography variant='h4'>Account Priority Table</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell><Typography>Account</Typography></TableCell>
-                                            <TableCell><Typography>Member</Typography></TableCell>
-                                            <TableCell><Typography>Starting Debt</Typography></TableCell>
-                                            <TableCell><Typography>Remaining Debt</Typography></TableCell>
-                                            <TableCell><Typography>Monthly Payment</Typography></TableCell>
-                                            <TableCell><Typography>APR</Typography></TableCell>
-                                            <TableCell align='center'>
-                                                <Button>
-                                                    <Typography variant='body1'>Add Account</Typography>
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                </Table>
-                            </TableContainer>
-                        }
+                        <AccountTable
+                            accounts={accounts}
+                        />
                     </Box>
                     <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 2 }}>
                         <Box sx={{ maxWidth: '100%', maxHeight: '900px' }}>
