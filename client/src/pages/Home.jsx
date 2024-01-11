@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 
 import { REACT_APP_DEV_URL } from '../../config.js';
 import MemberTable from '../components/MemberTable';
+import AccountTable from '../components/AccountTable.jsx';
 
 const modalStyle = {
     position: 'absolute',
@@ -75,26 +76,7 @@ const Home = () => {
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
                         {isAccountTableEmpty ?
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align='center'>
-                                                <Typography variant='h4'>Account Table</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell align='center'>
-                                                <Button disabled={isAddAccountDisabled} onClick={handleOpenAccountModal}>
-                                                    <Typography variant='body1'>Add Account</Typography>
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                            <AccountTable />
                         :
                             <TableContainer component={Paper}>
                                 <Table>
