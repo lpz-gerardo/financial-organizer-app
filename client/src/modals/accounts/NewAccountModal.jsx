@@ -30,16 +30,19 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                             <TextField type='input' label='Member'></TextField>
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Starting Debt'></TextField>
+                            <TextField type='input' label='Credit Limit'></TextField>
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Remaining Debt'></TextField>
+                            <TextField type='input' label='Debt'></TextField>
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField type='input' label='Monthly Payment'></TextField>
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='APR'></TextField>
+                            <TextField type='input' label='Annual Percent Rate'></TextField>
+                        </Box>
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField type='input' label='Payment Day'></TextField>
                         </Box>
                         <Button type='submit'>
                             Submit
