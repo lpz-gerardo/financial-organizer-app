@@ -14,6 +14,9 @@ import NewAccountModal from '../modals/accounts/NewAccountModal';
 
 const AccountTable = ({ accounts }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
 
     return (
         <React.Fragment>
@@ -30,7 +33,7 @@ const AccountTable = ({ accounts }) => {
                         <TableBody>
                             <TableRow>
                                 <TableCell align='center'>
-                                    <Button >
+                                    <Button onClick={toggleNewAccountModal}>
                                         <Typography variant='body1'>Add Account</Typography>
                                     </Button>
                                 </TableCell>
@@ -55,7 +58,7 @@ const AccountTable = ({ accounts }) => {
                                 <TableCell><Typography>Monthly Payment</Typography></TableCell>
                                 <TableCell><Typography>APR</Typography></TableCell>
                                 <TableCell align='center'>
-                                    <Button>
+                                    <Button onClick={toggleNewAccountModal}>
                                         <Typography variant='body1'>Add Account</Typography>
                                     </Button>
                                 </TableCell>
@@ -64,7 +67,10 @@ const AccountTable = ({ accounts }) => {
                     </Table>
                 </TableContainer>
             }
-            <NewAccountModal />
+            <NewAccountModal
+                isModalOpen={isModalOpen}
+                handleClose={toggleNewAccountModal}
+            />
         </React.Fragment>
     )
 }

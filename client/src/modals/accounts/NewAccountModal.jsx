@@ -16,10 +16,10 @@ const modalStyle = {
     padding: 8,
 }
 
-const NewAccountModal = () => {
+const NewAccountModal = ({ isModalOpen, handleClose }) => {
     return (
         <React.Fragment>
-            <Modal >
+            <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form >
