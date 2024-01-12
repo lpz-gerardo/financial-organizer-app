@@ -101,34 +101,6 @@ const Home = () => {
                     </Box>
                 </Box>
             </Box>
-            <Modal open={isAccountModalOpen} onClose={handleCloseAccountModal}>
-                <Box sx={modalStyle}>
-                    <Typography variant='h5' color={'black'}>Add New Account</Typography>
-                    <form onSubmit={handleAddAccountSubmit}>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Account Name'></TextField>
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Member'></TextField>
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Starting Debt'></TextField>
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Remaining Debt'></TextField>
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Monthly Payment'></TextField>
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='APR'></TextField>
-                        </Box>
-                        <Button type='submit'>
-                            Submit
-                        </Button>
-                    </form>
-                </Box>
-            </Modal>
         </React.Fragment>
     )
 }
