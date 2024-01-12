@@ -28,6 +28,13 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         'paymentDay': '',
     });
 
+    const handleFormFieldChange = (prop, value) => {
+        setNewAccountForm({
+            ...newAccountForm,
+            [prop]: value,
+        });
+    }
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
@@ -43,6 +50,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='accountName'
                                 label='Account Name'
                                 value={newAccountForm.accountName}
+                                onChange={e => handleFormFieldChange('accountName', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -54,6 +62,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='memberName'
                                 label='Member'
                                 value={newAccountForm.memberName}
+                                onChange={e => handleFormFieldChange('memberName', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -65,6 +74,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='creditLimit'
                                 label='Credit Limit'
                                 value={newAccountForm.creditLimit}
+                                onChange={e => handleFormFieldChange('creditLimit', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -76,6 +86,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='debt'
                                 label='Debt'
                                 value={newAccountForm.debt}
+                                onChange={e => handleFormFieldChange('debt', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -87,6 +98,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='monthlyPayment'
                                 label='Monthly Payment'
                                 value={newAccountForm.monthlyPayment}
+                                onChange={e => handleFormFieldChange('monthlyPayment', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -98,6 +110,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='annualPercentRate'
                                 label='Annual Percent Rate'
                                 value={newAccountForm.annualPercentRate}
+                                onChange={e => handleFormFieldChange('annualPercentRate', e.target.value)}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -109,6 +122,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='paymentDay'
                                 label='Payment Day'
                                 value={newAccountForm.paymentDay}
+                                onChange={e => handleFormFieldChange('paymentDay', e.target.value)}
                             />
                         </Box>
                         <Button type='submit'>
