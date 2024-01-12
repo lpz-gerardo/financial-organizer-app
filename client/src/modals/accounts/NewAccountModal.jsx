@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,6 +18,16 @@ const modalStyle = {
 }
 
 const NewAccountModal = ({ isModalOpen, handleClose }) => {
+    const [newAccountForm, setNewAccountForm] = useState({
+        'accountName': '',
+        'memberName': '',
+        'creditLimit': '',
+        'debt': '',
+        'monthlyPayment': '',
+        'annualPercentRate': '',
+        'paymentDay': '',
+    });
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
@@ -24,25 +35,81 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form >
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Account Name'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='accountName'
+                                label='Account Name'
+                                value={newAccountForm.accountName}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Member'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='memberName'
+                                label='Member'
+                                value={newAccountForm.memberName}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Credit Limit'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='creditLimit'
+                                label='Credit Limit'
+                                value={newAccountForm.creditLimit}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Debt'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='debt'
+                                label='Debt'
+                                value={newAccountForm.debt}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Monthly Payment'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='monthlyPayment'
+                                label='Monthly Payment'
+                                value={newAccountForm.monthlyPayment}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Annual Percent Rate'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='annualPercentRate'
+                                label='Annual Percent Rate'
+                                value={newAccountForm.annualPercentRate}
+                            />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField type='input' label='Payment Day'></TextField>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='paymentDay'
+                                label='Payment Day'
+                                value={newAccountForm.paymentDay}
+                            />
                         </Box>
                         <Button type='submit'>
                             Submit
