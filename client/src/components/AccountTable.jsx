@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import NewAccountModal from '../modals/accounts/NewAccountModal';
+
 const AccountTable = ({ accounts }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
 
@@ -62,6 +64,7 @@ const AccountTable = ({ accounts }) => {
                     </Table>
                 </TableContainer>
             }
+            <NewAccountModal />
         </React.Fragment>
     )
 }
