@@ -35,9 +35,23 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         });
     }
 
+    const handleModalClose = () => {
+        setNewAccountForm({
+            ...newAccountForm,
+            'accountName': '',
+            'memberName': '',
+            'creditLimit': '',
+            'debt': '',
+            'monthlyPayment': '',
+            'annualPercentRate': '',
+            'paymentDay': '',
+        });
+        handleClose();
+    }
+
     return (
         <React.Fragment>
-            <Modal open={isModalOpen} onClose={handleClose}>
+            <Modal open={isModalOpen} onClose={handleModalClose}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form >
