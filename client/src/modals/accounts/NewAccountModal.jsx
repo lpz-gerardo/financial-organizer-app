@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { REACT_APP_DEV_URL } from '../../../config.js';
 
 const modalStyle = {
     position: 'absolute',
@@ -51,12 +52,42 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         handleClose();
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const data = {
+            'accountType': newAccountForm.accountType,
+            'accountName': newAccountForm.accountName,
+            'memberName': newAccountForm.memberName,
+            'creditLimit': newAccountForm.creditLimit,
+            'debt': newAccountForm.debt,
+            'monthlyPayment': newAccountForm.monthlyPayment,
+            'annualPercentRate': newAccountForm.annualPercentRate,
+            'paymentDay': newAccountForm.paymentDay,
+        };
+
+        postAccountData(REACT_APP_DEV_URL + 'account', data);
+        handleModalClose();
+    }
+
+    async function postAccountData(url, data) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const account = await response.json();
+        console.log(account);
+    }
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleModalClose}>
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
-                    <form >
+                    <form onSubmit={handleSubmit}>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField
                                 required
