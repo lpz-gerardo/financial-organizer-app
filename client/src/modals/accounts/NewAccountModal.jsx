@@ -19,6 +19,7 @@ const modalStyle = {
 
 const NewAccountModal = ({ isModalOpen, handleClose }) => {
     const [newAccountForm, setNewAccountForm] = useState({
+        'accountType': '',
         'accountName': '',
         'memberName': '',
         'creditLimit': '',
@@ -38,6 +39,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
     const handleModalClose = () => {
         setNewAccountForm({
             ...newAccountForm,
+            'accountType': '',
             'accountName': '',
             'memberName': '',
             'creditLimit': '',
@@ -55,6 +57,18 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form >
+                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                            <TextField
+                                required
+                                type='input'
+                                color='primary'
+                                variant='outlined'
+                                name='accountType'
+                                label='Account Type'
+                                value={newAccountForm.accountType}
+                                onChange={e => handleFormFieldChange('accountType', e.target.value)}
+                            />
+                        </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField
                                 required
