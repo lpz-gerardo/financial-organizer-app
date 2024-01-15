@@ -40,13 +40,6 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         'paymentDayError': false,
     });
 
-    const handleFormFieldChange = (prop, value) => {
-        setNewAccountForm({
-            ...newAccountForm,
-            [prop]: value,
-        });
-    }
-
     const handleModalClose = () => {
         setNewAccountForm({
             ...newAccountForm,
@@ -71,6 +64,33 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
             'paymentDayError': false,
         });
         handleClose();
+    }
+
+    const handleFormFieldChange = (prop, value) => {
+        setNewAccountForm({
+            ...newAccountForm,
+            [prop]: value,
+        });
+        handleValidation(prop, value);
+    }
+
+    const handleValidation = (prop, value) => {
+        switch (prop) {
+            case 'accountName':
+                isAccountNameValid(value);
+                break;
+            case 'creditLimit':
+                isCreditLimitValid(value);
+                break;
+            case 'debt':
+                isDebtValueValid(value);
+                break;
+            case 'monthlyPayment':
+                isMonthlyPaymentValid(value);
+                break;
+            case 'annualPercentRate':
+                isAnnualPercentRateValid(value);
+        }
     }
 
     const isAccountNameValid = (accountName) => {
