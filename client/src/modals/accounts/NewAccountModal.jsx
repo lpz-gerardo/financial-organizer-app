@@ -104,17 +104,17 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
     }
 
     const isDebtValueValid = (debt) => {
-        const regex = /^[0-9]{0,6}((?:[.]([0-9]{1,2})){0,1})$/;
+        const regex = /^[0-9]{0,7}((?:[.]([0-9]{1,2})){0,1})$/;
         handleErrorMessage(regex, 'debtError', debt);
     }
 
     const isMonthlyPaymentValid = (monthlyPayment) => {
-        const regex = /^[0-9]{0,5}((?:[.]([0-9]{1,2})){0,1})$/;
+        const regex = /^[0-9]{0,7}((?:[.]([0-9]{1,2})){0,1})$/;
         handleErrorMessage(regex, 'monthlyPaymentError', monthlyPayment);
     }
 
     const isAnnualPercentRateValid = (annualPercentRate) => {
-        const regex = /^[0-9]{0,2}((?:[.]([0-9]{1,2})){0,1})$/;
+        const regex = /^[0-9]{0,3}((?:[.]([0-9]{1,2})){0,1})$/;
         handleErrorMessage(regex, 'annualPercentRateError', annualPercentRate);
     }
 
@@ -182,7 +182,9 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='accountName'
                                 label='Account Name'
                                 value={newAccountForm.accountName}
+                                error={newAccountFormErrors.accountNameError}
                                 onChange={e => handleFormFieldChange('accountName', e.target.value)}
+                                helperText={newAccountFormErrors.accountNameError ? 'Max 25 characters. [A-Z -]' : ''}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -206,7 +208,9 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='creditLimit'
                                 label='Credit Limit'
                                 value={newAccountForm.creditLimit}
+                                error={newAccountFormErrors.creditLimitError}
                                 onChange={e => handleFormFieldChange('creditLimit', e.target.value)}
+                                helperText={newAccountFormErrors.creditLimitError ? 'Max 7 numbers. [0-9]' : ''}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -218,7 +222,9 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='debt'
                                 label='Debt'
                                 value={newAccountForm.debt}
+                                error={newAccountFormErrors.debtError}
                                 onChange={e => handleFormFieldChange('debt', e.target.value)}
+                                helperText={newAccountFormErrors.debtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -230,7 +236,9 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='monthlyPayment'
                                 label='Monthly Payment'
                                 value={newAccountForm.monthlyPayment}
+                                error={newAccountFormErrors.monthlyPaymentError}
                                 onChange={e => handleFormFieldChange('monthlyPayment', e.target.value)}
+                                helperText={newAccountFormErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
@@ -242,7 +250,9 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
                                 name='annualPercentRate'
                                 label='Annual Percent Rate'
                                 value={newAccountForm.annualPercentRate}
+                                error={newAccountFormErrors.annualPercentRateError}
                                 onChange={e => handleFormFieldChange('annualPercentRate', e.target.value)}
+                                helperText={newAccountFormErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
                             />
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
