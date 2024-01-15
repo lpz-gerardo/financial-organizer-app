@@ -29,6 +29,16 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         'annualPercentRate': '',
         'paymentDay': '',
     });
+    const [newAccountFormErrors, setNewAccountFormErrors] = useState({
+        'accountTypeError': false,
+        'accountNameError': false,
+        'memberNameError': false,
+        'creditLimitError': false,
+        'debtError': false,
+        'monthlyPaymentError': false,
+        'annualPercentRateError': false,
+        'paymentDayError': false,
+    });
 
     const handleFormFieldChange = (prop, value) => {
         setNewAccountForm({
@@ -48,6 +58,17 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
             'monthlyPayment': '',
             'annualPercentRate': '',
             'paymentDay': '',
+        });
+        setNewAccountFormErrors({
+            ...newAccountFormErrors,
+            'accountTypeError': false,
+            'accountNameError': false,
+            'memberNameError': false,
+            'creditLimitError': false,
+            'debtError': false,
+            'monthlyPaymentError': false,
+            'annualPercentRateError': false,
+            'paymentDayError': false,
         });
         handleClose();
     }
