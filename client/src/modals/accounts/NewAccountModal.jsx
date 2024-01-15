@@ -73,6 +73,38 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         handleClose();
     }
 
+    const isAccountNameValid = (accountName) => {
+        const regex = /^[a-zA-Z -]{0,25}$/;
+        handleErrorMessage(regex, 'accountNameError', accountName);
+    }
+
+    const isCreditLimitValid = (creditLimit) => {
+        const regex = /^[0-9]{0,7}$/;
+        handleErrorMessage(regex, 'creditLimitError', creditLimit)
+    }
+
+    const isDebtValueValid = (debt) => {
+        const regex = /^[0-9]{0,6}((?:[.]([0-9]{1,2})){0,1})$/;
+        handleErrorMessage(regex, 'debtError', debt);
+    }
+
+    const isMonthlyPaymentValid = (monthlyPayment) => {
+        const regex = /^[0-9]{0,5}((?:[.]([0-9]{1,2})){0,1})$/;
+        handleErrorMessage(regex, 'monthlyPaymentError', monthlyPayment);
+    }
+
+    const isAnnualPercentRateValid = (annualPercentRate) => {
+        const regex = /^[0-9]{0,2}((?:[.]([0-9]{1,2})){0,1})$/;
+        handleErrorMessage(regex, 'annualPercentRateError', annualPercentRate);
+    }
+
+    const handleErrorMessage = (regexPattern, prop, value) => {
+        setNewAccountFormErrors({
+            ...newAccountFormErrors,
+            [prop]: (!value.match(regexPattern)) ? true : false,
+        });
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
