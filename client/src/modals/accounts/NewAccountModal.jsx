@@ -5,6 +5,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { REACT_APP_DEV_URL } from '../../../config.js';
 
 const modalStyle = {
@@ -188,18 +192,25 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                 helperText={newAccountFormErrors.accountNameError ? 'Max 25 characters. [A-Z -]' : ''}
                             />
                         </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='memberName'
-                                label='Member'
-                                value={newAccountForm.memberName}
-                                onChange={e => handleFormFieldChange('memberName', e.target.value)}
-                            />
-                        </Box>
+                            <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
+                                <FormControl fullWidth>
+                                    <InputLabel required>Member</InputLabel>
+                                    <Select
+                                        required
+                                        label='Member'
+                                        id='memberName'
+                                        name='memberName'
+                                        value={newAccountForm.memberName}
+                                        onChange={e => handleFormFieldChange('memberName', e.target.value)}
+                                    >
+                                        {members.map((member) => (
+                                            <MenuItem key={member.name} value={member.name}>
+                                                {member.name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField
                                 required
