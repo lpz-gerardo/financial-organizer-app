@@ -29,6 +29,20 @@ const Home = () => {
         }).then((data) => {
             setMembers(data.data);
         });
+        getAccountData();
+    }
+
+    async function getAccountData() {
+        fetch(REACT_APP_DEV_URL + 'account', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            setAccounts(data.data);
+        });
     }
 
     useEffect(() => {
