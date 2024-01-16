@@ -29,7 +29,6 @@ const Home = () => {
         }).then((data) => {
             setMembers(data.data);
         });
-        getAccountData();
     }
 
     async function getAccountData() {
@@ -45,8 +44,13 @@ const Home = () => {
         });
     }
 
-    useEffect(() => {
+    const getData = () => {
         getMemberData();
+        getAccountData();
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
 
     return(
@@ -56,7 +60,7 @@ const Home = () => {
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
                         <MemberTable
                             members={members}
-                            handleUpdateMembers={getMemberData}
+                            refreshData={getData}
                         />
                     </Box>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 
 import NewMemberModal from '../modals/members/NewMemberModal';
 
-const MemberTable = ({ members, handleUpdateMembers }) => {
+const MemberTable = ({ members, refreshData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
 
@@ -72,12 +72,10 @@ const MemberTable = ({ members, handleUpdateMembers }) => {
                     </TableHead>
                     <TableBody>
                         {members.map((member) => (
-                            <TableRow
-                                key={member.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0} }}>
-                                    <TableCell align='center'>{member.name}</TableCell>
-                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
-                                    <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                            <TableRow key={member.name}>
+                                <TableCell align='center'>{member.name}</TableCell>
+                                <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                                <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -87,7 +85,7 @@ const MemberTable = ({ members, handleUpdateMembers }) => {
             <NewMemberModal
                 isModalOpen={isModalOpen}
                 handleClose={toggleNewMemberModal}
-                handleUpdateMembers={handleUpdateMembers}
+                refreshData={refreshData}
             />
         </React.Fragment>
     )
