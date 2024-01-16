@@ -64,6 +64,18 @@ const AccountTable = ({ accounts }) => {
                                 </TableCell>
                             </TableRow>
                         </TableHead>
+                        <TableBody>
+                            {accounts.map((account) => (
+                                <TableRow key={account._id}>
+                                    <TableCell>{account.name}</TableCell>
+                                    <TableCell>{account.memberName}</TableCell>
+                                    <TableCell>{account.startingDebt}</TableCell>
+                                    <TableCell>{account.remainingDebt}</TableCell>
+                                    <TableCell>{account.minimumMonthlyPayment}</TableCell>
+                                    <TableCell>{account.annualPercentRate}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </TableContainer>
             }
