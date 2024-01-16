@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -17,6 +17,14 @@ const AccountTable = ({ accounts }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
+
+    useEffect(() => {
+        if (accounts.length !== 0) {
+            setIsTableEmpty(false);
+        } else {
+            setIsTableEmpty(true);
+        }
+    }, [accounts]);
 
     return (
         <React.Fragment>
