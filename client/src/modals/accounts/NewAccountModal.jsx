@@ -18,7 +18,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const NewAccountModal = ({ isModalOpen, handleClose }) => {
+const NewAccountModal = ({ isModalOpen, handleClose, refreshData }) => {
     const [newAccountForm, setNewAccountForm] = useState({
         'accountType': '',
         'accountName': '',
@@ -153,6 +153,7 @@ const NewAccountModal = ({ isModalOpen, handleClose }) => {
         });
         const account = await response.json();
         console.log(account);
+        refreshData();
     }
 
     return (

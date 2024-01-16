@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 
 import NewAccountModal from '../modals/accounts/NewAccountModal';
 
-const AccountTable = ({ accounts }) => {
+const AccountTable = ({ accounts, refreshData }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -90,6 +90,7 @@ const AccountTable = ({ accounts }) => {
             <NewAccountModal
                 isModalOpen={isModalOpen}
                 handleClose={toggleNewAccountModal}
+                refreshData={refreshData}
             />
         </React.Fragment>
     )
