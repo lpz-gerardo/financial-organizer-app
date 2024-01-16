@@ -66,6 +66,7 @@ const Home = () => {
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
                         <AccountTable
                             accounts={accounts}
+                            members={members}
                             refreshData={getData}
                         />
                     </Box>

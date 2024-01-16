@@ -18,7 +18,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const NewAccountModal = ({ isModalOpen, handleClose, refreshData }) => {
+const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => {
     const [newAccountForm, setNewAccountForm] = useState({
         'accountType': '',
         'accountName': '',
