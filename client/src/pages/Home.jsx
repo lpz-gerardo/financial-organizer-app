@@ -4,48 +4,19 @@ import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
-import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
 
 import { REACT_APP_DEV_URL } from '../../config.js';
 import MemberTable from '../components/MemberTable';
 import AccountTable from '../components/AccountTable.jsx';
 
-const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 350,
-    bgcolor: '#edf0f5',
-    boxShadow: 24,
-    padding: 8,
-}
 
 const Home = () => {
     const [members, setMembers] = useState([]);
     const [accounts, setAccounts] = useState([]);
-    const [isAddAccountDisabled, setIsAccountDisabled] = useState(true);
-    const [isAccountTableEmpty, setIsAccountTableEmpty] = useState(true);
-    const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
-
-    const handleAddAccountSubmit = (event) => {
-        event.preventDefault();
-    }
-
-    const handleOpenAccountModal = () => {
-        setIsAccountModalOpen(true);
-    }
-
-    const handleCloseAccountModal = () => {
-        setIsAccountModalOpen(!isAccountModalOpen);
-    }
 
     async function getMemberData() {
         fetch(REACT_APP_DEV_URL + 'member', {
