@@ -38,6 +38,17 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         return formatMoney(startingDebtTotal);
     }
 
+    const calculateRemainingDebtTotal = () => {
+        let remainingDebtTotal = 0;
+        if (!accounts) {
+            return remainingDebtTotal;
+        }
+
+        remainingDebtTotal = getTotal('remainingDebt');
+
+        return formatMoney(remainingDebtTotal);
+    }
+
     const getTotal = (column) => {
         let sum = 0;
         for (const key of Object.keys(accounts)) {
@@ -122,7 +133,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 <TableCell><Typography>Total</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                                 <TableCell><Typography>{calculateStartingDebtTotal()}</Typography></TableCell>
-                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>{calculateRemainingDebtTotal()}</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                             </TableRow>
