@@ -4,6 +4,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
+import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
@@ -92,6 +93,16 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 </TableRow>
                             ))}
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TableCell><Typography>Total</Typography></TableCell>
+                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>-</Typography></TableCell>
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </TableContainer>
             }
