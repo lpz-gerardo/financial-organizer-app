@@ -170,6 +170,10 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                             <FormControl fullWidth>
                                 <InputLabel>Account Type</InputLabel>
                                 <Select
+                                    required
+                                    color='primary'
+                                    variant='outlined'
+                                    id='accountType'
                                     name='accountType'
                                     label='Account Type'
                                     value={newAccountForm.accountType}
@@ -198,9 +202,11 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                     <InputLabel required>Member</InputLabel>
                                     <Select
                                         required
-                                        label='Member'
+                                        color='primary'
+                                        variant='outlined'
                                         id='memberName'
                                         name='memberName'
+                                        label='Member'
                                         value={newAccountForm.memberName}
                                         onChange={e => handleFormFieldChange('memberName', e.target.value)}
                                     >
@@ -268,17 +274,24 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                 helperText={newAccountFormErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
                             />
                         </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='paymentDay'
-                                label='Payment Day'
-                                value={newAccountForm.paymentDay}
-                                onChange={e => handleFormFieldChange('paymentDay', e.target.value)}
-                            />
+                        <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
+                            <FormControl fullWidth>
+                                <InputLabel>Payment Day</InputLabel>
+                                <Select
+                                    required
+                                    id='paymentDay'
+                                    color='primary'
+                                    variant='outlined'
+                                    name='paymentDay'
+                                    label='Payment Day'
+                                    value={newAccountForm.paymentDay}
+                                    onChange={e => handleFormFieldChange('paymentDay', e.target.value)}
+                                >
+                                    {[...Array(31).keys()].map((item) => (
+                                        <MenuItem key={'paymentDay'+`${item+1}`} value={item+1}>{item+1}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Box>
                         <Button type='submit'>
                             Submit
