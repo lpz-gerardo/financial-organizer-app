@@ -166,17 +166,18 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                 <Box sx={modalStyle}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form onSubmit={handleSubmit}>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='accountType'
-                                label='Account Type'
-                                value={newAccountForm.accountType}
-                                onChange={e => handleFormFieldChange('accountType', e.target.value)}
-                            />
+                        <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
+                            <FormControl fullWidth>
+                                <InputLabel>Account Type</InputLabel>
+                                <Select
+                                    name='accountType'
+                                    label='Account Type'
+                                    value={newAccountForm.accountType}
+                                    onChange={e => handleFormFieldChange('accountType', e.target.value)}
+                                >
+                                    <MenuItem value={'Credit'}>Credit</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Box>
                         <Box sx={{ marginTop: 3, marginBottom: 3}}>
                             <TextField
