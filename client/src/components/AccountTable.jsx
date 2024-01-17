@@ -60,6 +60,17 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         return formatMoney(monthlyPaymentTotal);
     }
 
+    const calculateAnnualPercentRateAverage = () => {
+        let annualPercentRateAverage = 0;
+        if (!accounts) {
+            return annualPercentRateAverage;
+        }
+
+        annualPercentRateAverage = (getTotal('annualPercentRate') / accounts.length);
+
+        return formatPercent(annualPercentRateAverage);
+    }
+
     const getTotal = (column) => {
         let sum = 0;
         for (const key of Object.keys(accounts)) {
@@ -146,7 +157,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 <TableCell><Typography>{calculateStartingDebtTotal()}</Typography></TableCell>
                                 <TableCell><Typography>{calculateRemainingDebtTotal()}</Typography></TableCell>
                                 <TableCell><Typography>{calculateMonthlyPaymentTotal()}</Typography></TableCell>
-                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>{calculateAnnualPercentRateAverage()}</Typography></TableCell>
                             </TableRow>
                         </TableFooter>
                     </Table>
