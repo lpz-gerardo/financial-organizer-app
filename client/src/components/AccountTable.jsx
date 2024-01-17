@@ -27,6 +27,30 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         return String(Number.parseFloat(percent).toFixed(2) + '%');
     }
 
+    const calculateStartingDebtTotal = () => {
+        let startingDebtTotal = 0;
+        if (!accounts) {
+            return startingDebtTotal;
+        }
+
+        startingDebtTotal = getTotal('startingDebt');
+
+        return formatMoney(startingDebtTotal);
+    }
+
+    const getTotal = (column) => {
+        let sum = 0;
+        for (const key of Object.keys(accounts)) {
+            for (const [k, v] of Object.entries(accounts[key])) {
+                if (k == column) {
+                    sum += v;
+                }
+            }
+        }
+
+        return sum;
+    }
+
     useEffect(() => {
         if (accounts.length !== 0) {
             setIsTableEmpty(false);
@@ -97,7 +121,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                             <TableRow>
                                 <TableCell><Typography>Total</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
-                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>{calculateStartingDebtTotal()}</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
