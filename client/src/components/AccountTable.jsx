@@ -18,6 +18,14 @@ const AccountTable = ({ accounts, members, refreshData }) => {
 
     const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
 
+    const formatMoney = (amount) => {
+        return '$' + String(Number.parseFloat(amount).toFixed(2));
+    }
+
+    const formatPercent = (percent) => {
+        return String(Number.parseFloat(percent).toFixed(2) + '%');
+    }
+
     useEffect(() => {
         if (accounts.length !== 0) {
             setIsTableEmpty(false);
@@ -77,10 +85,10 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 <TableRow key={account._id}>
                                     <TableCell>{account.name}</TableCell>
                                     <TableCell>{account.memberName}</TableCell>
-                                    <TableCell>{account.startingDebt}</TableCell>
-                                    <TableCell>{account.remainingDebt}</TableCell>
-                                    <TableCell>{account.minimumMonthlyPayment}</TableCell>
-                                    <TableCell>{account.annualPercentRate}</TableCell>
+                                    <TableCell>{formatMoney(account.startingDebt)}</TableCell>
+                                    <TableCell>{formatMoney(account.remainingDebt)}</TableCell>
+                                    <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
+                                    <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
