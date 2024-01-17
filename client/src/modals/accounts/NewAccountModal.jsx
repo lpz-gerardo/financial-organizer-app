@@ -160,6 +160,17 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
         refreshData();
     }
 
+    const isSubmitDisabled = () => {
+        return (
+            !newAccountForm.memberName || !newAccountForm.paymentDay || !newAccountForm.accountType
+            || (!newAccountForm.accountName || newAccountFormErrors.accountNameError)
+            || (!newAccountForm.creditLimit || newAccountFormErrors.creditLimitError)
+            || (!newAccountForm.debt || newAccountFormErrors.debtError)
+            || (!newAccountForm.monthlyPayment || newAccountFormErrors.monthlyPaymentError)
+            || (!newAccountForm.annualPercentRate || newAccountFormErrors.annualPercentRateError)
+        )
+    }
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleModalClose}>
@@ -293,7 +304,7 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                 </Select>
                             </FormControl>
                         </Box>
-                        <Button type='submit'>
+                        <Button type='submit' disabled={isSubmitDisabled()}>
                             Submit
                         </Button>
                     </form>
