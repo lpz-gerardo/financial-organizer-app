@@ -49,6 +49,17 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         return formatMoney(remainingDebtTotal);
     }
 
+    const calculateMonthlyPaymentTotal = () => {
+        let monthlyPaymentTotal = 0;
+        if (!accounts) {
+            return monthlyPaymentTotal;
+        }
+
+        monthlyPaymentTotal = getTotal('minimumMonthlyPayment');
+
+        return formatMoney(monthlyPaymentTotal);
+    }
+
     const getTotal = (column) => {
         let sum = 0;
         for (const key of Object.keys(accounts)) {
@@ -134,7 +145,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 <TableCell><Typography>-</Typography></TableCell>
                                 <TableCell><Typography>{calculateStartingDebtTotal()}</Typography></TableCell>
                                 <TableCell><Typography>{calculateRemainingDebtTotal()}</Typography></TableCell>
-                                <TableCell><Typography>-</Typography></TableCell>
+                                <TableCell><Typography>{calculateMonthlyPaymentTotal()}</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
                             </TableRow>
                         </TableFooter>
