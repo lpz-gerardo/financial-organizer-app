@@ -12,4 +12,13 @@ const createAccount = async (newAccount) => {
     }
 }
 
-export { Account, createAccount };
+const findAccounts = async () => {
+    try {
+        const accounts = await Account.find({}).exec();
+        return accounts;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { Account, createAccount, findAccounts };
