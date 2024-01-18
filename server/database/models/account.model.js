@@ -21,4 +21,21 @@ const findAccounts = async () => {
     }
 }
 
-export { Account, createAccount, findAccounts };
+const updateAccount = async (account) => {
+    try {
+        account.save();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteAccount = async (conditions) => {
+    try {
+        const result = await Account.where().findOneAndDelete(conditions).exec();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { Account, createAccount, findAccounts, updateAccount, deleteAccount };
