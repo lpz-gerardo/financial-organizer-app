@@ -13,12 +13,21 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 
 import NewAccountModal from '../modals/accounts/NewAccountModal';
+import DeleteAccountModal from '../modals/accounts/DeleteAccountModal';
 
 const AccountTable = ({ accounts, members, refreshData }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [selectedAccount, setSelectedAccount] = useState('');
 
     const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
+    const toggleDeleteModal = () => setIsDeleteModalOpen(!isDeleteModalOpen);
+
+    const handleDeleteAccountClick = (accountId) => {
+        setSelectedAccount(accountId);
+        toggleDeleteModal();
+    }
 
     const formatMoney = (amount) => {
         return '$' + String(Number.parseFloat(amount).toFixed(2));
@@ -150,7 +159,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
                                     <TableCell>
                                         <Chip label={'Edit'}></Chip>
-                                        <Chip label={'Delete'}></Chip>
+                                        <Chip label={'Delete'} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -173,6 +182,10 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                 handleClose={toggleNewAccountModal}
                 members={members}
                 refreshData={refreshData}
+            />
+            <DeleteAccountModal
+                isModalOpen={isDeleteModalOpen}
+                handleClose={toggleDeleteModal}
             />
         </React.Fragment>
     )

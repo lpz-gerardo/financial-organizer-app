@@ -15,10 +15,13 @@ const modalStyle = {
     padding: 8,
 }
 
-const DeleteAccountModal = () => {
+const DeleteAccountModal = ({ isModalOpen, handleClose }) => {
     return (
         <React.Fragment>
-            <Modal>
+            <Modal
+                open={isModalOpen}
+                onClose={handleClose}
+            >
                 <Box sx={modalStyle}>
                     <Typography>Delete?</Typography>
                     <Box>
