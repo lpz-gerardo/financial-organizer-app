@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 
 import NewAccountModal from '../modals/accounts/NewAccountModal';
 
@@ -147,6 +148,10 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell>{formatMoney(account.remainingDebt)}</TableCell>
                                     <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
                                     <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
+                                    <TableCell>
+                                        <Chip label={'Edit'}></Chip>
+                                        <Chip label={'Delete'}></Chip>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
