@@ -12,6 +12,15 @@ const createAccount = async (newAccount) => {
     }
 }
 
+const findAccount = async (id) => {
+    try {
+        const account = await Account.findById(id).exec();
+        return account;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const findAccounts = async () => {
     try {
         const accounts = await Account.find({}).exec();
@@ -38,4 +47,4 @@ const deleteAccount = async (conditions) => {
     }
 }
 
-export { Account, createAccount, findAccounts, updateAccount, deleteAccount };
+export { Account, createAccount, findAccount, findAccounts, updateAccount, deleteAccount };
