@@ -22,12 +22,28 @@ const AccountTable = ({ accounts, members, refreshData }) => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState('');
+    const [editAccountDetails, setEditAccountDetails] = useState({
+        'selectedAccount': '',
+        'editAccountName': '',
+        'editAccountDebt': '',
+        'editAccoutMonthlyPayment': '',
+        'editAccountAnnualPercentRate': '',
+    });
 
     const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
     const toggleEditAccountModal = () => setIsEditModalOpen(!isEditModalOpen);
     const toggleDeleteModal = () => setIsDeleteModalOpen(!isDeleteModalOpen);
 
-    const handleEditClick = () => {
+    const handleEditClick = (account) => {
+        setSelectedAccount(account);
+        setEditAccountDetails({
+            ...editAccountDetails,
+            'selectedAccount': account.id,
+            'editAccountName': account.name,
+            'editAccountDebt': account.debt,
+            'editAccoutMonthlyPayment': account.monthlyPayment,
+            'editAccountAnnualPercentRate': account.annualPercentRate,
+        });
         toggleEditAccountModal();
     }
 
@@ -165,7 +181,13 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
                                     <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
                                     <TableCell align='center'>
-                                        <Chip label={'Edit'} onClick={() => handleEditClick()}></Chip>
+                                        <Chip label={'Edit'} onClick={() => handleEditClick({
+                                            id: account._id,
+                                            name: account.name,
+                                            debt: account.remainingDebt,
+                                            monthlyPayment: account.minimumMonthlyPayment,
+                                            annualPercentRate: account.annualPercentRate,
+                                        })}></Chip>
                                         <Chip label={'Delete'} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
                                 </TableRow>
