@@ -23,13 +23,13 @@ const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refresh
                 onClose={handleClose}
             >
                 <Box sx={modalStyle}>
-                    <Typography>Delete?</Typography>
-                    <Box>
-                        <Box>
-                            <Button>Cancel</Button>
+                    <Typography variant='h6' component='h2' color='black'>Delete this account?</Typography>
+                    <Box display={'grid'} gridTemplateColumns={'repeat(2, 1fr)'} gridTemplateRows={'1fr'} columnGap={2} rowGap={2} padding={2}>
+                        <Box sx={{ gridColumn: 1 }}>
+                            <Button variant='contained'>Cancel</Button>
                         </Box>
-                        <Box>
-                            <Button>Delete</Button>
+                        <Box sx={{ gridColumn: 2 }}>
+                            <Button variant='contained' color='error'>Delete</Button>
                         </Box>
                     </Box>
                 </Box>
