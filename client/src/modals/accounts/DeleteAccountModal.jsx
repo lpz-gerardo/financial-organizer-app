@@ -21,7 +21,7 @@ const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refresh
 
     const handleDelete = () => {
         const id = selectedAccount;
-        deleteAccount(REACT_APP_DEV_URL + `/account/${id}`);
+        deleteAccount(REACT_APP_DEV_URL + `account/${id}`);
     }
 
     async function deleteAccount(url) {
@@ -48,7 +48,7 @@ const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refresh
                     <Typography variant='h6' component='h2' color='black'>Delete this account?</Typography>
                     <Box display={'grid'} gridTemplateColumns={'repeat(2, 1fr)'} gridTemplateRows={'1fr'} columnGap={2} rowGap={2} padding={2}>
                         <Box sx={{ gridColumn: 1 }}>
-                            <Button variant='contained'>Cancel</Button>
+                            <Button variant='contained' onClick={handleClose}>Cancel</Button>
                         </Box>
                         <Box sx={{ gridColumn: 2 }}>
                             <Button variant='contained' color='error' onClick={() => handleDelete()}>Delete</Button>
