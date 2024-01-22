@@ -13,16 +13,23 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 
 import NewAccountModal from '../modals/accounts/NewAccountModal';
+import EditAccountModal from '../modals/accounts/EditAccountModal';
 import DeleteAccountModal from '../modals/accounts/DeleteAccountModal';
 
 const AccountTable = ({ accounts, members, refreshData }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState('');
 
     const toggleNewAccountModal = () => setIsModalOpen(!isModalOpen);
+    const toggleEditAccountModal = () => setIsEditModalOpen(!isEditModalOpen);
     const toggleDeleteModal = () => setIsDeleteModalOpen(!isDeleteModalOpen);
+
+    const handleEditClick = () => {
+        toggleEditAccountModal();
+    }
 
     const handleDeleteAccountClick = (accountId) => {
         setSelectedAccount(accountId);
@@ -158,7 +165,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
                                     <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
                                     <TableCell align='center'>
-                                        <Chip label={'Edit'}></Chip>
+                                        <Chip label={'Edit'} onClick={() => handleEditClick()}></Chip>
                                         <Chip label={'Delete'} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
                                 </TableRow>
@@ -182,6 +189,10 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                 handleClose={toggleNewAccountModal}
                 members={members}
                 refreshData={refreshData}
+            />
+            <EditAccountModal
+                isModalOpen={isEditModalOpen}
+                handleClose={toggleEditAccountModal}
             />
             <DeleteAccountModal
                 isModalOpen={isDeleteModalOpen}

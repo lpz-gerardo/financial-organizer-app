@@ -16,10 +16,10 @@ const modalStyle = {
     padding: 8,
 }
 
-const EditAccountModal = () => {
+const EditAccountModal = ({ isModalOpen, handleClose }) => {
     return (
         <React.Fragment>
-            <Modal>
+            <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
                     <Typography>Edit Account</Typography>
                     <Box>
