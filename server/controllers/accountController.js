@@ -1,4 +1,4 @@
-import { createAccount, findAccounts } from '../database/models/account.model.js';
+import { createAccount, findAccounts, deleteAccount } from '../database/models/account.model.js';
 
 const addAccount = async (request, response) => {
     try {
@@ -51,4 +51,26 @@ const getAccounts = async (request, response) => {
     }
 }
 
-export { addAccount, getAccounts };
+const removeAccount = async(request, response) => {
+    try {
+        const { id } = request.params;
+        const conditions = { _id: id };
+
+        const result = await deleteAccount(conditions);
+
+        if (!result) {
+            return response.status(404).json({
+                message: 'Account does not exist.'
+            });
+        }
+
+        return response.status(200).send({
+            message: 'Account was successfully deleted.'
+        });
+    } catch (error) {
+        console.log(error);
+        return response.status(500).send({ message: error.message })
+    }
+}
+
+export { addAccount, getAccounts, removeAccount };
