@@ -200,6 +200,8 @@ const AccountTable = ({ accounts, members, refreshData }) => {
             <EditAccountModal
                 isModalOpen={isEditModalOpen}
                 handleClose={toggleEditAccountModal}
+                selectedAccount={selectedAccount}
+                refreshData={refreshData}
             />
             <DeleteAccountModal
                 isModalOpen={isDeleteModalOpen}
