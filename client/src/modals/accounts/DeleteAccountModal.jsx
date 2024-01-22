@@ -15,7 +15,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const DeleteAccountModal = ({ isModalOpen, handleClose }) => {
+const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
     return (
         <React.Fragment>
             <Modal

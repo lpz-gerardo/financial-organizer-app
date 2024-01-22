@@ -157,7 +157,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell>{formatMoney(account.remainingDebt)}</TableCell>
                                     <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
                                     <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
-                                    <TableCell>
+                                    <TableCell align='center'>
                                         <Chip label={'Edit'}></Chip>
                                         <Chip label={'Delete'} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
@@ -186,6 +186,8 @@ const AccountTable = ({ accounts, members, refreshData }) => {
             <DeleteAccountModal
                 isModalOpen={isDeleteModalOpen}
                 handleClose={toggleDeleteModal}
+                selectedAccount={selectedAccount}
+                refreshData={refreshData}
             />
         </React.Fragment>
     )
