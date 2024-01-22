@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import { REACT_APP_DEV_URL } from '../../../config.js';
+
 const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -16,6 +18,26 @@ const modalStyle = {
 }
 
 const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
+
+    const handleDelete = () => {
+        const id = selectedAccount;
+        deleteAccount(REACT_APP_DEV_URL + `/account/${id}`);
+    }
+
+    async function deleteAccount(url) {
+        await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'appplication/json',
+            },
+        }).then((response) => {
+            return response.json();
+        }).then(() => {
+            refreshData();
+            handleClose();
+        });
+    }
+
     return (
         <React.Fragment>
             <Modal
@@ -29,7 +51,7 @@ const DeleteAccountModal = ({ isModalOpen, handleClose, selectedAccount, refresh
                             <Button variant='contained'>Cancel</Button>
                         </Box>
                         <Box sx={{ gridColumn: 2 }}>
-                            <Button variant='contained' color='error'>Delete</Button>
+                            <Button variant='contained' color='error' onClick={() => handleDelete()}>Delete</Button>
                         </Box>
                     </Box>
                 </Box>
