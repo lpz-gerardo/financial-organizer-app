@@ -21,18 +21,36 @@ const EditAccountModal = ({ isModalOpen, handleClose }) => {
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
-                    <Typography>Edit Account</Typography>
-                    <Box>
-                        <TextField></TextField>
+                    <Typography variant='h6' component='h2' color='black'>Edit Account</Typography>
+                    <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>
+                        <TextField
+                            type='text'
+                            color='primary'
+                            variant='outlined'
+                            name='editAccountDebt'
+                            label='Remaining Debt'
+                        />
+                    </Box>
+                    <Box sx={{ marginBottom: '15px' }}>
+                        <TextField
+                            type='text'
+                            color='primary'
+                            variant='outlined'
+                            name='editAccountMonthlyPayment'
+                            label='Monthly Payment'
+                        />
+                    </Box>
+                    <Box sx={{ marginBottom: '15px' }}>
+                        <TextField
+                            type='text'
+                            color='primary'
+                            variant='outlined'
+                            name='editAccountAnnualPercentRate'
+                            label='Annual Percent Rate'
+                        />
                     </Box>
                     <Box>
-                        <TextField></TextField>
-                    </Box>
-                    <Box>
-                        <TextField></TextField>
-                    </Box>
-                    <Box>
-                        <Button>Submit</Button>
+                        <Button variant='contained'>Submit</Button>
                     </Box>
                 </Box>
             </Modal>
