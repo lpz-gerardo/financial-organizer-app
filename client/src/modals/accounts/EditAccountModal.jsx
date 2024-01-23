@@ -82,9 +82,9 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         });
         setEditAccountDetailErrors({
             ...editAccountDetailErrors,
-            'remainingDebtError': '',
-            'monthlyPaymentError': '',
-            'annualPercentRateError': '',
+            'remainingDebtError': false,
+            'monthlyPaymentError': false,
+            'annualPercentRateError': false,
         });
 
         handleClose();
