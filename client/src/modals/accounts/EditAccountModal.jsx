@@ -80,6 +80,12 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
             'monthlyPayment': '',
             'annualPercentRate': '',
         });
+        setEditAccountDetailErrors({
+            ...editAccountDetailErrors,
+            'remainingDebtError': '',
+            'monthlyPaymentError': '',
+            'annualPercentRateError': '',
+        });
 
         handleClose();
     }
@@ -97,7 +103,9 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             name='editAccountDebt'
                             label='Remaining Debt'
                             value={editAccountDetails.remainingDebt}
+                            error={editAccountDetailErrors.remainingDebtError}
                             onChange={e => handleInputChanges('remainingDebt', e.target.value)}
+                            helperText={editAccountDetailErrors.remainingDebtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                         />
                         <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
                             <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
@@ -111,7 +119,9 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             name='editAccountMonthlyPayment'
                             label='Monthly Payment'
                             value={editAccountDetails.monthlyPayment}
+                            error={editAccountDetailErrors.monthlyPaymentError}
                             onChange={e => handleInputChanges('monthlyPayment', e.target.value)}
+                            helperText={editAccountDetailErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                         />
                         <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
                             <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
@@ -125,7 +135,9 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             name='editAccountAnnualPercentRate'
                             label='Annual Percent Rate'
                             value={editAccountDetails.annualPercentRate}
+                            error={editAccountDetailErrors.annualPercentRateError}
                             onChange={e => handleInputChanges('annualPercentRate', e.target.value)}
+                            helperText={editAccountDetailErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
                         />
                     </Box>
                     <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
