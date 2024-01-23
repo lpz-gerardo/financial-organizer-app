@@ -31,9 +31,20 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         });
     }
 
+    const handleCloseModal = () => {
+        setEditAccountDetails({
+            ...editAccountDetails,
+            'remainingDebt': '',
+            'monthlyPayment': '',
+            'annualPercentRate': '',
+        });
+
+        handleClose();
+    }
+
     return (
         <React.Fragment>
-            <Modal open={isModalOpen} onClose={handleClose}>
+            <Modal open={isModalOpen} onClose={handleCloseModal}>
                 <Box sx={modalStyle}>
                     <Typography variant='h6' component='h2' color='black'>Edit "{selectedAccount.name}" Account</Typography>
                     <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>
