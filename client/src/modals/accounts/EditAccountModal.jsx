@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,6 +18,19 @@ const modalStyle = {
 }
 
 const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
+    const [editAccountDetails, setEditAccountDetails] = useState({
+        'remainingDebt': '',
+        'monthlyPayment': '',
+        'annualPercentRate': '',
+    });
+
+    const handleInputChanges = (prop, value) => {
+        setEditAccountDetails({
+            ...editAccountDetails,
+            [prop]: value,
+        });
+    }
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
@@ -29,6 +43,8 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             variant='outlined'
                             name='editAccountDebt'
                             label='Remaining Debt'
+                            value={editAccountDetails.remainingDebt}
+                            onChange={e => handleInputChanges('remainingDebt', e.target.value)}
                         />
                         <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
                             <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
@@ -41,6 +57,8 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             variant='outlined'
                             name='editAccountMonthlyPayment'
                             label='Monthly Payment'
+                            value={editAccountDetails.monthlyPayment}
+                            onChange={e => handleInputChanges('monthlyPayment', e.target.value)}
                         />
                         <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
                             <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
@@ -53,6 +71,8 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             variant='outlined'
                             name='editAccountAnnualPercentRate'
                             label='Annual Percent Rate'
+                            value={editAccountDetails.annualPercentRate}
+                            onChange={e => handleInputChanges('annualPercentRate', e.target.value)}
                         />
                     </Box>
                     <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
