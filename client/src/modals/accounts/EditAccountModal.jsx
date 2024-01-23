@@ -23,11 +23,53 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         'monthlyPayment': '',
         'annualPercentRate': '',
     });
+    const [editAccountDetailErrors, setEditAccountDetailErrors] = useState({
+        'remainingDebtError': false,
+        'monthlyPaymentError': false,
+        'annualPercentRateError': false,
+    });
 
     const handleInputChanges = (prop, value) => {
         setEditAccountDetails({
             ...editAccountDetails,
             [prop]: value,
+        });
+        handleValidation(prop, value);
+    }
+
+    const handleValidation = (prop, value) => {
+        switch (prop) {
+            case 'remainingDebt':
+                isRemainingDebtInputValid(value);
+                break;
+            case 'monthlyPayment':
+                isMonthlyPaymentInputValid(value);
+                break;
+            case 'annualPercentRate':
+                isAnnualPercentRateInputValid(value);
+                break;
+        }
+    }
+
+    const isRemainingDebtInputValid = (input) => {
+        const regex = /^[0-9]{0,7}((?:[.]([0-9]{1,2})){0,1})$/;
+        handelInputErrors('remainingDebtError', input, regex);
+    }
+
+    const isMonthlyPaymentInputValid = (input) => {
+        const regex = /^[0-9]{0,7}((?:[.]([0-9]{1,2})){0,1})$/;
+        handelInputErrors('monthlyPaymentError', input, regex);
+    }
+
+    const isAnnualPercentRateInputValid = (input) => {
+        const regex = /^[0-9]{0,3}((?:[.]([0-9]{1,2})){0,1})$/;
+        handelInputErrors('annualPercentRateError', input, regex);
+    }
+
+    const handelInputErrors = (prop, value, regex) => {
+        setEditAccountDetailErrors({
+            ...editAccountDetailErrors,
+            [prop]: (!value.match(regex)) ? true : false,
         });
     }
 
