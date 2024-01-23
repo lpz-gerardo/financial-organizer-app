@@ -21,7 +21,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
-                    <Typography variant='h6' component='h2' color='black'>Edit Account</Typography>
+                    <Typography variant='h6' component='h2' color='black'>Edit "{selectedAccount.name}" Account</Typography>
                     <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>
                         <TextField
                             type='text'
@@ -30,6 +30,9 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             name='editAccountDebt'
                             label='Remaining Debt'
                         />
+                        <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                            <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
+                        </Box>
                     </Box>
                     <Box sx={{ marginBottom: '15px' }}>
                         <TextField
@@ -39,8 +42,11 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             name='editAccountMonthlyPayment'
                             label='Monthly Payment'
                         />
+                        <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                            <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
+                        </Box>
                     </Box>
-                    <Box sx={{ marginBottom: '15px' }}>
+                    <Box>
                         <TextField
                             type='text'
                             color='primary'
@@ -49,7 +55,10 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             label='Annual Percent Rate'
                         />
                     </Box>
-                    <Box>
+                    <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                        <Typography color={'grey'} variant='italic'> Current Value: {selectedAccount.annualPercentRate}%</Typography>
+                    </Box>
+                    <Box sx={{ marginTop: '15px'}}>
                         <Button variant='contained'>Submit</Button>
                     </Box>
                 </Box>
