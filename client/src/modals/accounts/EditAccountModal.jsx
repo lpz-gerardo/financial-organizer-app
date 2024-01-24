@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+import { REACT_APP_DEV_URL } from '../../../config.js';
+
 const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -75,6 +77,26 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const data = {
+            'remainingDebt': editAccountDetails.remainingDebt,
+            'monthlyPayment': editAccountDetails.monthlyPayment,
+            'annualPercentRate': editAccountDetails.annualPercentRate,
+        };
+        updateAccount(REACT_APP_DEV_URL + `account/${selectedAccount.id}`, data);
+        refreshData();
+        handleCloseModal();
+    }
+
+    async function updateAccount(url, data) {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const account = await response.json();
+        console.log(account);
     }
 
     const handleCloseModal = () => {
