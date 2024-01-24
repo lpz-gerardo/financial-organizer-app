@@ -73,6 +73,10 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         });
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    }
+
     const handleCloseModal = () => {
         setEditAccountDetails({
             ...editAccountDetails,
@@ -95,57 +99,59 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
             <Modal open={isModalOpen} onClose={handleCloseModal}>
                 <Box sx={modalStyle}>
                     <Typography variant='h6' component='h2' color='black'>Edit "{selectedAccount.name}" Account</Typography>
-                    <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>
-                        <TextField
-                            type='text'
-                            color='primary'
-                            variant='outlined'
-                            name='editAccountDebt'
-                            label='Remaining Debt'
-                            value={editAccountDetails.remainingDebt}
-                            error={editAccountDetailErrors.remainingDebtError}
-                            onChange={e => handleInputChanges('remainingDebt', e.target.value)}
-                            helperText={editAccountDetailErrors.remainingDebtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
-                        />
-                        <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                            <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
+                    <form onSubmit={handleSubmit}>
+                        <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>
+                            <TextField
+                                type='text'
+                                color='primary'
+                                variant='outlined'
+                                name='editAccountDebt'
+                                label='Remaining Debt'
+                                value={editAccountDetails.remainingDebt}
+                                error={editAccountDetailErrors.remainingDebtError}
+                                onChange={e => handleInputChanges('remainingDebt', e.target.value)}
+                                helperText={editAccountDetailErrors.remainingDebtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
+                            />
+                            <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                                <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
+                            </Box>
                         </Box>
-                    </Box>
-                    <Box sx={{ marginBottom: '15px' }}>
-                        <TextField
-                            type='text'
-                            color='primary'
-                            variant='outlined'
-                            name='editAccountMonthlyPayment'
-                            label='Monthly Payment'
-                            value={editAccountDetails.monthlyPayment}
-                            error={editAccountDetailErrors.monthlyPaymentError}
-                            onChange={e => handleInputChanges('monthlyPayment', e.target.value)}
-                            helperText={editAccountDetailErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
-                        />
-                        <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                            <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
+                        <Box sx={{ marginBottom: '15px' }}>
+                            <TextField
+                                type='text'
+                                color='primary'
+                                variant='outlined'
+                                name='editAccountMonthlyPayment'
+                                label='Monthly Payment'
+                                value={editAccountDetails.monthlyPayment}
+                                error={editAccountDetailErrors.monthlyPaymentError}
+                                onChange={e => handleInputChanges('monthlyPayment', e.target.value)}
+                                helperText={editAccountDetailErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
+                            />
+                            <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                                <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
+                            </Box>
                         </Box>
-                    </Box>
-                    <Box>
-                        <TextField
-                            type='text'
-                            color='primary'
-                            variant='outlined'
-                            name='editAccountAnnualPercentRate'
-                            label='Annual Percent Rate'
-                            value={editAccountDetails.annualPercentRate}
-                            error={editAccountDetailErrors.annualPercentRateError}
-                            onChange={e => handleInputChanges('annualPercentRate', e.target.value)}
-                            helperText={editAccountDetailErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
-                        />
-                    </Box>
-                    <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                        <Typography color={'grey'} variant='italic'> Current Value: {selectedAccount.annualPercentRate}%</Typography>
-                    </Box>
-                    <Box sx={{ marginTop: '15px'}}>
-                        <Button variant='contained'>Submit</Button>
-                    </Box>
+                        <Box>
+                            <TextField
+                                type='text'
+                                color='primary'
+                                variant='outlined'
+                                name='editAccountAnnualPercentRate'
+                                label='Annual Percent Rate'
+                                value={editAccountDetails.annualPercentRate}
+                                error={editAccountDetailErrors.annualPercentRateError}
+                                onChange={e => handleInputChanges('annualPercentRate', e.target.value)}
+                                helperText={editAccountDetailErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
+                            />
+                            <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
+                                <Typography color={'grey'} variant='italic'> Current Value: {selectedAccount.annualPercentRate}%</Typography>
+                            </Box>
+                        </Box>
+                        <Box sx={{ marginTop: '15px'}}>
+                            <Button type='submit' variant='contained'>Submit</Button>
+                        </Box>
+                    </form>
                 </Box>
             </Modal>
         </React.Fragment>
