@@ -78,12 +78,11 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
-            'remainingDebt': editAccountDetails.remainingDebt,
-            'monthlyPayment': editAccountDetails.monthlyPayment,
-            'annualPercentRate': editAccountDetails.annualPercentRate,
+            'remainingDebt': editAccountDetails.remainingDebt ? editAccountDetails.remainingDebt : selectedAccount.remainingDebt,
+            'monthlyPayment': editAccountDetails.monthlyPayment ? editAccountDetails.monthlyPayment : selectedAccount.monthlyPayment,
+            'annualPercentRate': editAccountDetails.annualPercentRate ? editAccountDetails.annualPercentRate : selectedAccount.annualPercentRate,
         };
         updateAccount(REACT_APP_DEV_URL + `account/${selectedAccount.id}`, data);
-        refreshData();
         handleCloseModal();
     }
 
@@ -97,6 +96,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         });
         const account = await response.json();
         console.log(account);
+        refreshData();
     }
 
     const handleCloseModal = () => {
@@ -114,6 +114,13 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
         });
 
         handleClose();
+    }
+
+    const isSubmitDisabled = () => {
+        return (
+            (editAccountDetailErrors.remainingDebtError || editAccountDetailErrors.monthlyPaymentError || editAccountDetailErrors.annualPercentRateError)
+            || (!editAccountDetails.remainingDebt && !editAccountDetails.monthlyPayment && !editAccountDetails.annualPercentRate)
+        )
     }
 
     return (
@@ -171,7 +178,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                             </Box>
                         </Box>
                         <Box sx={{ marginTop: '15px'}}>
-                            <Button type='submit' variant='contained'>Submit</Button>
+                            <Button type='submit' variant='contained' disabled={isSubmitDisabled()}>Submit</Button>
                         </Box>
                     </form>
                 </Box>
