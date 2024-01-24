@@ -1,4 +1,10 @@
-import { createAccount, findAccounts, deleteAccount } from '../database/models/account.model.js';
+import {
+    createAccount,
+    findAccount,
+    findAccounts,
+    updateAccount,
+    deleteAccount
+} from '../database/models/account.model.js';
 
 const addAccount = async (request, response) => {
     try {
@@ -51,6 +57,28 @@ const getAccounts = async (request, response) => {
     }
 }
 
+const editAccount = async (request, response) => {
+    try {
+        const { id } = request.params;
+        const account = await findAccount(id);
+
+        if (!account) {
+            return response.status(404).send({ message: 'Account does not exist.' });
+        }
+
+        account.remainingDebt = request.body.remainingDebt;
+        account.minimumMonthlyPayment = request.body.monthlyPayment;
+        account.annualPercentRate = request.body.annualPercentRate;
+        await updateAccount(account);
+
+        return response.status(200).send({ message: 'Account data updated.' });
+
+    } catch (error) {
+        console.log(error);
+        return response.status(200).send({ message: error.message });
+    }
+}
+
 const removeAccount = async(request, response) => {
     try {
         const { id } = request.params;
@@ -59,9 +87,7 @@ const removeAccount = async(request, response) => {
         const result = await deleteAccount(conditions);
 
         if (!result) {
-            return response.status(404).json({
-                message: 'Account does not exist.'
-            });
+            return response.status(404).send({ message: 'Account does not exist.' });
         }
 
         return response.status(200).send({
@@ -73,4 +99,4 @@ const removeAccount = async(request, response) => {
     }
 }
 
-export { addAccount, getAccounts, removeAccount };
+export { addAccount, getAccounts, editAccount, removeAccount };
