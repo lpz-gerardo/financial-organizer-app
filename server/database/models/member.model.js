@@ -47,4 +47,13 @@ const updateMember = async (member) => {
     }
 }
 
-export { Member, createMember, memberExists, findMember, findMembers, updateMember, };
+const deleteMember = async (conditions) => {
+    try {
+        const result = await Member.where().findOneAndDelete(conditions).exec();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { Member, createMember, memberExists, findMember, findMembers, updateMember, deleteMember };
