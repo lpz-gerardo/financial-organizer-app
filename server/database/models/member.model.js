@@ -12,4 +12,13 @@ const createMember = async (data) => {
     }
 }
 
-export { Member, createMember };
+const memberExists = async (filter) => {
+    try {
+        const result = await Member.exists(filter);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { Member, createMember, memberExists };
