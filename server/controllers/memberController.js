@@ -15,6 +15,7 @@ const addMember = async (request, response) => {
 
         const newMember = {
             name: request.body.name,
+            accounts: [],
         }
 
         const result = createMember(newMember);
