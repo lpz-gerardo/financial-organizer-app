@@ -21,6 +21,15 @@ const memberExists = async (filter) => {
     }
 }
 
+const findMember = async (filter) => {
+    try {
+        const member = await Member.findOne(filter).exec();
+        return member;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const findMembers = async () => {
     try {
         const members = await Member.find({});
@@ -30,4 +39,4 @@ const findMembers = async () => {
     }
 }
 
-export { Member, createMember, memberExists, findMembers };
+export { Member, createMember, memberExists, findMember, findMembers };
