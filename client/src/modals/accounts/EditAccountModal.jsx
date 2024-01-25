@@ -78,7 +78,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
-            'remainingDebt': editAccountDetails.remainingDebt ? editAccountDetails.remainingDebt : selectedAccount.remainingDebt,
+            'remainingDebt': editAccountDetails.remainingDebt ? editAccountDetails.remainingDebt : selectedAccount.debt,
             'monthlyPayment': editAccountDetails.monthlyPayment ? editAccountDetails.monthlyPayment : selectedAccount.monthlyPayment,
             'annualPercentRate': editAccountDetails.annualPercentRate ? editAccountDetails.annualPercentRate : selectedAccount.annualPercentRate,
         };
