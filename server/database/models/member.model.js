@@ -39,4 +39,12 @@ const findMembers = async () => {
     }
 }
 
-export { Member, createMember, memberExists, findMember, findMembers };
+const updateMember = async (member) => {
+    try {
+        member.save();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export { Member, createMember, memberExists, findMember, findMembers, updateMember, };
