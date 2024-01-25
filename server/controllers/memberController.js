@@ -1,6 +1,7 @@
 import {
     createMember,
     memberExists,
+    findMembers,
 } from '../database/models/member.model.js';
 
 const addMember = async (request, response) => {
@@ -26,4 +27,16 @@ const addMember = async (request, response) => {
     }
 }
 
-export { addMember };
+const getMembers = async (request, response) => {
+    try {
+        const members = await findMembers();
+        return response.status(200).send({
+            data: members,
+        });
+    } catch (error) {
+        console.log(error);
+        return response.status(500).send({ message: error.message });
+    }
+}
+
+export { addMember, getMembers, };
