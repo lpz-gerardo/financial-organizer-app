@@ -19,9 +19,15 @@ const MemberTable = ({ members, refreshData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
+    const [selectedMember, setSelectedMember] = useState('');
 
     const toggleNewMemberModal = () => setIsModalOpen(!isModalOpen);
     const toggleEditMemberModal = () => setIsEditModalOpen(!isEditModalOpen);
+
+    const handleEditMember = (name) => {
+        setSelectedMember(name);
+        toggleEditMemberModal();
+    }
 
     useEffect(() => {
         if (members.length !== 0) {
@@ -81,7 +87,7 @@ const MemberTable = ({ members, refreshData }) => {
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'>
-                                    <Chip label={'Edit'} onClick={toggleEditMemberModal}></Chip>
+                                    <Chip label={'Edit'} onClick={() => handleEditMember(member.name)}></Chip>
                                     <Chip label={'Delete'}></Chip>
                                 </TableCell>
                             </TableRow>
@@ -98,6 +104,8 @@ const MemberTable = ({ members, refreshData }) => {
             <EditMemberModal
                 isModalOpen={isEditModalOpen}
                 handleClose={toggleEditMemberModal}
+                member={selectedMember}
+                refreshData={refreshData}
             />
         </React.Fragment>
     )

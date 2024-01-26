@@ -16,7 +16,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const EditMemberModal = ({ isModalOpen, handleClose}) => {
+const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
