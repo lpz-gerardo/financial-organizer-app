@@ -13,12 +13,15 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 
 import NewMemberModal from '../modals/members/NewMemberModal';
+import EditMemberModal from '../modals/members/EditMemberModal';
 
 const MemberTable = ({ members, refreshData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
 
     const toggleNewMemberModal = () => setIsModalOpen(!isModalOpen);
+    const toggleEditMemberModal = () => setIsEditModalOpen(!isEditModalOpen);
 
     useEffect(() => {
         if (members.length !== 0) {
@@ -78,7 +81,7 @@ const MemberTable = ({ members, refreshData }) => {
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'>
-                                    <Chip label={'Edit'}></Chip>
+                                    <Chip label={'Edit'} onClick={toggleEditMemberModal}></Chip>
                                     <Chip label={'Delete'}></Chip>
                                 </TableCell>
                             </TableRow>
@@ -91,6 +94,10 @@ const MemberTable = ({ members, refreshData }) => {
                 isModalOpen={isModalOpen}
                 handleClose={toggleNewMemberModal}
                 refreshData={refreshData}
+            />
+            <EditMemberModal
+                isModalOpen={isEditModalOpen}
+                handleClose={toggleEditMemberModal}
             />
         </React.Fragment>
     )

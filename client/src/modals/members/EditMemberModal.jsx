@@ -16,12 +16,12 @@ const modalStyle = {
     padding: 8,
 }
 
-const EditMemberModal = () => {
+const EditMemberModal = ({ isModalOpen, handleClose}) => {
     return (
         <React.Fragment>
-            <Modal>
+            <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
-                    <Typography>
+                    <Typography variant='h6' component='h2' color='black'>
                         Edit Member Name
                     </Typography>
                     <form>
