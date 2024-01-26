@@ -19,9 +19,12 @@ const modalStyle = {
 
 const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
     const [memberName, setMemberName] = useState('');
+    const [isMemberNameError, setIsMemberNameError] = useState(false);
 
     const onChangeMemberName = (name) => {
         setMemberName(name);
+        const regex = /^[a-z A-Z]{0,20}$/;
+        setIsMemberNameError(!name.match(regex) ? true : false);
     }
 
     return (
@@ -39,7 +42,9 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
                                 color='primary'
                                 label='Name'
                                 value={memberName}
+                                error={isMemberNameError}
                                 onChange={(e) => onChangeMemberName(e.target.value)}
+                                helperText={isMemberNameError ? 'Max 20 characters. Alpha only' : ''}
                             />
                         </Box>
                         <Button>
