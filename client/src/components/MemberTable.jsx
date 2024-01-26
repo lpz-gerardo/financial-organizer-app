@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 
 import NewMemberModal from '../modals/members/NewMemberModal';
 
@@ -76,6 +77,10 @@ const MemberTable = ({ members, refreshData }) => {
                                 <TableCell align='center'>{member.name}</TableCell>
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                                <TableCell align='center'>
+                                    <Chip label={'Edit'}></Chip>
+                                    <Chip label={'Delete'}></Chip>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
