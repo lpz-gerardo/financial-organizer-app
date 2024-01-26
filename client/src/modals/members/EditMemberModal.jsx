@@ -20,11 +20,13 @@ const modalStyle = {
 const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
     const [memberName, setMemberName] = useState('');
     const [isMemberNameError, setIsMemberNameError] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const onChangeMemberName = (name) => {
         setMemberName(name);
         const regex = /^[a-z A-Z]{0,20}$/;
         setIsMemberNameError(!name.match(regex) ? true : false);
+        setIsButtonDisabled((!name.match(regex) || name.length == 0) ? true : false);
     }
 
     return (
@@ -47,7 +49,7 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
                                 helperText={isMemberNameError ? 'Max 20 characters. Alpha only' : ''}
                             />
                         </Box>
-                        <Button>
+                        <Button disabled={isButtonDisabled}>
                             Submit
                         </Button>
                     </form>
