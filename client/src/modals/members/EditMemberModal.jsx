@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,6 +18,12 @@ const modalStyle = {
 }
 
 const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
+    const [memberName, setMemberName] = useState('');
+
+    const onChangeMemberName = (name) => {
+        setMemberName(name);
+    }
+
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
@@ -31,6 +38,8 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
                                 variant='outlined'
                                 color='primary'
                                 label='Name'
+                                value={memberName}
+                                onChange={(e) => onChangeMemberName(e.target.value)}
                             />
                         </Box>
                         <Button>
