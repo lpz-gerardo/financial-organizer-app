@@ -29,9 +29,16 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
         setIsButtonDisabled((!name.match(regex) || name.length == 0) ? true : false);
     }
 
+    const onCloseModal = () => {
+        setMemberName('');
+        setIsMemberNameError(false);
+        setIsButtonDisabled(true);
+        handleClose();
+    }
+
     return (
         <React.Fragment>
-            <Modal open={isModalOpen} onClose={handleClose}>
+            <Modal open={isModalOpen} onClose={onCloseModal}>
                 <Box sx={modalStyle}>
                     <Typography variant='h6' component='h2' color='black'>
                         Edit Member Name
