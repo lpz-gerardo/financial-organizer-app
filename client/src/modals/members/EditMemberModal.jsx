@@ -41,10 +41,10 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
     const handleEditSubmit = (event) => {
         event.preventDefault();
         const data = {
-            'currentName': member,
-            'newName': memberName,
+            currentName: member,
+            newName: memberName,
         }
-        if (newName != '' && newName != currentName) {
+        if (memberName != '' && memberName != member) {
             updateMemberName(REACT_APP_DEV_URL + `member/${member}`, data);
         }
         onCloseModal();
@@ -56,6 +56,7 @@ const EditMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify(data),
         });
         const member = await response.json();
         console.log(member);
