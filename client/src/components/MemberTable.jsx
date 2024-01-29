@@ -14,19 +14,27 @@ import Chip from '@mui/material/Chip';
 
 import NewMemberModal from '../modals/members/NewMemberModal';
 import EditMemberModal from '../modals/members/EditMemberModal';
+import DeleteMemberModal from '../modals/members/DeleteMemberModal';
 
 const MemberTable = ({ members, refreshData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isMemberTableEmpty, setIsMemberTableEmpty] = useState(true);
     const [selectedMember, setSelectedMember] = useState('');
 
     const toggleNewMemberModal = () => setIsModalOpen(!isModalOpen);
     const toggleEditMemberModal = () => setIsEditModalOpen(!isEditModalOpen);
+    const toggleDeleteMemberModal = () => setIsDeleteModalOpen(!isDeleteModalOpen);
 
     const handleEditMember = (name) => {
         setSelectedMember(name);
         toggleEditMemberModal();
+    }
+
+    const handleDeleteMember = (name) => {
+        setSelectedMember(name);
+        toggleDeleteMemberModal();
     }
 
     useEffect(() => {
@@ -88,7 +96,7 @@ const MemberTable = ({ members, refreshData }) => {
                                 <TableCell align='center'><Typography>$0.00</Typography></TableCell>
                                 <TableCell align='center'>
                                     <Chip label={'Edit'} onClick={() => handleEditMember(member.name)}></Chip>
-                                    <Chip label={'Delete'}></Chip>
+                                    <Chip label={'Delete'} onClick={() => handleDeleteMember(member.name)}></Chip>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -106,6 +114,10 @@ const MemberTable = ({ members, refreshData }) => {
                 handleClose={toggleEditMemberModal}
                 member={selectedMember}
                 refreshData={refreshData}
+            />
+            <DeleteMemberModal
+                isModalOpen={isDeleteModalOpen}
+                handleClose={toggleDeleteMemberModal}
             />
         </React.Fragment>
     )
