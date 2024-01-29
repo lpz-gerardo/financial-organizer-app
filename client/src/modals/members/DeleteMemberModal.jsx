@@ -15,7 +15,7 @@ const modalStyle = {
     padding: 8,
 }
 
-const DeleteMemberModal = ({ isModalOpen, handleClose }) => {
+const DeleteMemberModal = ({ isModalOpen, handleClose, member, refreshData }) => {
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -118,6 +117,8 @@ const MemberTable = ({ members, refreshData }) => {
             <DeleteMemberModal
                 isModalOpen={isDeleteModalOpen}
                 handleClose={toggleDeleteMemberModal}
+                member={selectedMember}
+                refreshData={refreshData}
             />
         </React.Fragment>
     )
