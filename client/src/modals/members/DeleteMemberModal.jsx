@@ -20,15 +20,16 @@ const DeleteMemberModal = ({ isModalOpen, handleClose }) => {
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleClose}>
                 <Box sx={modalStyle}>
-                    <Box>
-                        <Typography variant='h6' component='h2' color='black'>Do you want to Delete?</Typography>
+                    <Box sx={{ marginBottom: '5px' }}>
+                        <Typography variant='h5' component='h2' color='black'>Confirm Deletion</Typography>
+                        <Typography variant='subtitle' color='grey'>Are you sure you want to delete?</Typography>
                     </Box>
-                    <Box>
-                        <Box>
+                    <Box display='grid' gridTemplateColumns={'repeat(2, 1fr)'} gridTemplateRows={'1fr'} columnGap={2} rowGap={2} padding={2}>
+                        <Box sx={{ gridColumn: 1 }}>
                             <Button>Cancel</Button>
                         </Box>
-                        <Box>
-                            <Button>Delete</Button>
+                        <Box sx={{ gridColumn: 2 }}>
+                            <Button variant='contained' color='error' >Delete</Button>
                         </Box>
                     </Box>
                 </Box>
