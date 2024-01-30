@@ -4,6 +4,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
+import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
@@ -104,6 +105,14 @@ const MemberTable = ({ members, refreshData }) => {
                             </TableRow>
                         ))}
                     </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TableCell align='center'><Typography>Total</Typography></TableCell>
+                            <TableCell align='center'><Typography>-</Typography></TableCell>
+                            <TableCell align='center'><Typography>-</Typography></TableCell>
+                            <TableCell />
+                        </TableRow>
+                    </TableFooter>
                 </Table>
             </TableContainer>
             }
