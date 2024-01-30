@@ -36,6 +36,10 @@ const MemberTable = ({ members, refreshData }) => {
         toggleDeleteMemberModal();
     }
 
+    const formatMoney = (amount) => {
+        return '$' + String(Number.parseFloat(amount).toFixed(2));
+    }
+
     useEffect(() => {
         if (members.length !== 0) {
             setIsMemberTableEmpty(false);
@@ -91,8 +95,8 @@ const MemberTable = ({ members, refreshData }) => {
                         {members.map((member) => (
                             <TableRow key={member.name}>
                                 <TableCell align='center'>{member.name}</TableCell>
-                                <TableCell align='center'><Typography>$0.00</Typography></TableCell>
-                                <TableCell align='center'><Typography>$0.00</Typography></TableCell>
+                                <TableCell align='center'>{formatMoney(member.debt)}</TableCell>
+                                <TableCell align='center'>{formatMoney(member.monthlyPayment)}</TableCell>
                                 <TableCell align='center'>
                                     <Chip label={'Edit'} onClick={() => handleEditMember(member.name)}></Chip>
                                     <Chip label={'Delete'} onClick={() => handleDeleteMember(member.name)}></Chip>
