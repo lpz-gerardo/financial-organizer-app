@@ -118,7 +118,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell align='center'>
-                                    <Typography variant='h4'>Account Table</Typography>
+                                    <Typography variant='h4'>Accounts</Typography>
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -139,7 +139,7 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell align='center' colSpan={7}>
-                                    <Typography variant='h4'>Account Priority Table</Typography>
+                                    <Typography variant='h4'>Accounts</Typography>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
