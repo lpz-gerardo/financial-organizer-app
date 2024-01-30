@@ -4,6 +4,7 @@ import {
     findMember,
     findMembers,
     updateMember,
+    deleteMember,
 } from '../database/models/member.model.js';
 
 const addMember = async (request, response) => {
@@ -68,4 +69,24 @@ const editMember = async (request, response) => {
     }
 }
 
-export { addMember, getMembers, editMember, };
+const removeMember = async (request, response) => {
+    try {
+        const conditions = { name: request.params.name };
+        const result = await deleteMember(conditions);
+        if (!result) {
+            return response.status(404).send({ message: 'Member does not exist.' });
+        }
+
+        return response.status(200).send({ message: 'Member was successfully deleted.' });
+    } catch (error) {
+        console.log(error);
+        return response.status(500).send({ message: error.message });
+    }
+}
+
+export {
+    addMember,
+    getMembers,
+    editMember,
+    deleteMember,
+};
