@@ -92,7 +92,7 @@ const MemberTable = ({ members, refreshData }) => {
                     <TableHead>
                         <TableRow>
                             <TableCell align='center'>
-                                <Typography variant='h4'>Member Table</Typography>
+                                <Typography variant='h4'>Members</Typography>
                             </TableCell>
                         </TableRow>
                     </TableHead>
@@ -113,7 +113,7 @@ const MemberTable = ({ members, refreshData }) => {
                     <TableHead>
                         <TableRow>
                             <TableCell align='center' colSpan={4}>
-                                <Typography variant='h4'>Member Table</Typography>
+                                <Typography variant='h4'>Members</Typography>
                             </TableCell>
                         </TableRow>
                         <TableRow>
