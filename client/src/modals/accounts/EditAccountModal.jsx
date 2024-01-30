@@ -8,17 +8,6 @@ import Button from '@mui/material/Button';
 
 import { REACT_APP_DEV_URL } from '../../../config.js';
 
-const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 350,
-    bgcolor: '#edf0f5',
-    boxShadow: 24,
-    padding: 8,
-}
-
 const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
     const [editAccountDetails, setEditAccountDetails] = useState({
         'remainingDebt': '',
@@ -126,7 +115,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleCloseModal}>
-                <Box sx={modalStyle}>
+                <Box className={'modal-style'}>
                     <Typography variant='h6' component='h2' color='black'>Edit "{selectedAccount.name}" Account</Typography>
                     <form onSubmit={handleSubmit}>
                         <Box sx={{ marginBottom: '15px', marginTop: '15px' }}>

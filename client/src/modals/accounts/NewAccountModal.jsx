@@ -11,17 +11,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { REACT_APP_DEV_URL } from '../../../config.js';
 
-const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 350,
-    bgcolor: '#edf0f5',
-    boxShadow: 24,
-    padding: 8,
-}
-
 const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => {
     const [newAccountForm, setNewAccountForm] = useState({
         'accountType': '',
@@ -174,7 +163,7 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
     return (
         <React.Fragment>
             <Modal open={isModalOpen} onClose={handleModalClose}>
-                <Box sx={modalStyle}>
+                <Box className={'modal-style'}>
                     <Typography variant='h5' color={'black'}>Add New Account</Typography>
                     <form onSubmit={handleSubmit}>
                         <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
