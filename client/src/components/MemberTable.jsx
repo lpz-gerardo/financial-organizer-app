@@ -41,6 +41,30 @@ const MemberTable = ({ members, refreshData }) => {
         return '$' + String(Number.parseFloat(amount).toFixed(2));
     }
 
+    const calculateDebtTotal = () => {
+        let debtTotal = 0;
+        if (!members) {
+            return debtTotal;
+        }
+
+        debtTotal = getTotal('debt');
+
+        return formatMoney(debtTotal);
+    }
+
+    const getTotal = (column) => {
+        let sum = 0;
+        for (const key of Object.keys(members)) {
+            for (const [k, v] of Object.entries(members[key])) {
+                if (k == column) {
+                    sum += v;
+                }
+            }
+        }
+
+        return sum;
+    }
+
     useEffect(() => {
         if (members.length !== 0) {
             setIsMemberTableEmpty(false);
@@ -108,7 +132,7 @@ const MemberTable = ({ members, refreshData }) => {
                     <TableFooter>
                         <TableRow>
                             <TableCell align='center'><Typography>Total</Typography></TableCell>
-                            <TableCell align='center'><Typography>-</Typography></TableCell>
+                            <TableCell align='center'><Typography>{calculateDebtTotal()}</Typography></TableCell>
                             <TableCell align='center'><Typography>-</Typography></TableCell>
                             <TableCell />
                         </TableRow>
