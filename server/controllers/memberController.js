@@ -88,5 +88,5 @@ export {
     addMember,
     getMembers,
     editMember,
-    deleteMember,
+    removeMember,
 };
