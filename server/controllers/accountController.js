@@ -103,6 +103,19 @@ const removeAccount = async(request, response) => {
     try {
         const { id } = request.params;
         const conditions = { _id: id };
+        const account = await findAccount(id);
+        if (!account) {
+            return response.status(404).send({ message: 'Accound does not exist.' });
+        }
+
+        const member = await findMember({ name: account.memberName });
+        if (member) {
+            member.debt = Number(member.debt) - Number(account.remainingDebt);
+            member.monthlyPayment = Number(member.monthlyPayment) - Number(account.minimumMonthlyPayment);
+            const index = member.account.indexOf(id);
+            member.account.splice(index, 1);
+            await updateMember(member);
+        }
 
         const result = await deleteAccount(conditions);
 
