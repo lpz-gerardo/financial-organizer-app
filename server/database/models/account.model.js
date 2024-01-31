@@ -47,4 +47,20 @@ const deleteAccount = async (conditions) => {
     }
 }
 
-export { Account, createAccount, findAccount, findAccounts, updateAccount, deleteAccount };
+const deleteAccounts = async (conditions) => {
+    try {
+        await Account.deleteMany(conditions);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export {
+    Account,
+    createAccount,
+    findAccount,
+    findAccounts,
+    updateAccount,
+    deleteAccount,
+    deleteAccounts,
+};
