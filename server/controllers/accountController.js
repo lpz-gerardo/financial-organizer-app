@@ -5,6 +5,10 @@ import {
     updateAccount,
     deleteAccount
 } from '../database/models/account.model.js';
+import {
+    findMember,
+    updateMember,
+} from '../database/models/member.model.js';
 
 const addAccount = async (request, response) => {
     try {
@@ -22,6 +26,11 @@ const addAccount = async (request, response) => {
                 });
             }
 
+            const member = await findMember({ name: request.body.memberName });
+            if (!member) {
+                return response.status(404).send({ message: 'Selected member does not exist.'});
+            }
+
             const newAccount = {
                 name: request.body.accountName,
                 accountType: request.body.accountType,
@@ -35,6 +44,10 @@ const addAccount = async (request, response) => {
             };
 
             const account = await createAccount(newAccount);
+            member.account.push(account);
+            member.debt = Number(member.debt) + Number(account.startingDebt);
+            member.monthlyPayment = Number(member.monthlyPayment) + Number(account.minimumMonthlyPayment);
+            await updateMember(member);
 
             return response.status(201).send(account);
 
