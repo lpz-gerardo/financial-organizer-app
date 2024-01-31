@@ -38,6 +38,14 @@ const updateAccount = async (account) => {
     }
 }
 
+const updateAccounts = async (filter, changes) => {
+    try {
+        await Account.updateMany(filter, changes);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const deleteAccount = async (conditions) => {
     try {
         const result = await Account.where().findOneAndDelete(conditions).exec();
@@ -47,4 +55,12 @@ const deleteAccount = async (conditions) => {
     }
 }
 
-export { Account, createAccount, findAccount, findAccounts, updateAccount, deleteAccount };
+export {
+    Account,
+    createAccount,
+    findAccount,
+    findAccounts,
+    updateAccount,
+    updateAccounts,
+    deleteAccount,
+};
