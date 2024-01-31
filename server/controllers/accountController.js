@@ -74,10 +74,17 @@ const editAccount = async (request, response) => {
     try {
         const { id } = request.params;
         const account = await findAccount(id);
-
         if (!account) {
             return response.status(404).send({ message: 'Account does not exist.' });
         }
+
+        const member = await findMember({ name: account.memberName });
+        if (!member) {
+            return response.status(404).send({ message: 'Selected member does not exist.' });
+        }
+        member.debt = member.debt - (account.remainingDebt - request.body.remainingDebt);
+        member.monthlyPayment = member.monthlyPayment - (account.minimumMonthlyPayment - request.body.monthlyPayment);
+        await updateMember(member);
 
         account.remainingDebt = request.body.remainingDebt;
         account.minimumMonthlyPayment = request.body.monthlyPayment;
