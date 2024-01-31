@@ -8,6 +8,7 @@ import {
 } from '../database/models/member.model.js';
 import {
     updateAccounts,
+    deleteAccounts,
 } from '../database/models/account.model.js';
 
 const addMember = async (request, response) => {
@@ -81,6 +82,7 @@ const removeMember = async (request, response) => {
             return response.status(404).send({ message: 'Member does not exist.' });
         }
 
+        await deleteAccounts({ memberName: request.params.name });
         return response.status(200).send({ message: 'Member was successfully deleted.' });
     } catch (error) {
         console.log(error);
