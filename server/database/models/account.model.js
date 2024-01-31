@@ -55,6 +55,14 @@ const deleteAccount = async (conditions) => {
     }
 }
 
+const deleteAccounts = async (conditions) => {
+    try {
+        await Account.deleteMany(conditions);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export {
     Account,
     createAccount,
@@ -63,4 +71,5 @@ export {
     updateAccount,
     updateAccounts,
     deleteAccount,
+    deleteAccounts,
 };
