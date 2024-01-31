@@ -6,6 +6,9 @@ import {
     updateMember,
     deleteMember,
 } from '../database/models/member.model.js';
+import {
+    updateAccounts,
+} from '../database/models/account.model.js';
 
 const addMember = async (request, response) => {
     try {
@@ -57,6 +60,7 @@ const editMember = async (request, response) => {
         const isNewNameTaken = await memberExists({ name: request.body.newName });
         if (!isNewNameTaken) {
             member.name = request.body.newName;
+            await updateAccounts({ memberName: request.params.currentName }, { memberName: member.name });
             await updateMember(member);
         } else {
             return response.status(403).send({ message: 'Member name already exists.' });
