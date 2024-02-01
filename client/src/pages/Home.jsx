@@ -49,7 +49,7 @@ const Home = () => {
     return(
         <React.Fragment>
             <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
-                <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(2, 1fr)'} columnGap={2} rowGap={2} padding={2}>
+                <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(3, 1fr)'} columnGap={2} rowGap={2} padding={2}>
                     <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
                         <MemberTable
                             members={members}
@@ -63,7 +63,7 @@ const Home = () => {
                             refreshData={getData}
                         />
                     </Box>
-                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 2 }}>
+                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 3 }}>
                         <PaymentTable />
                     </Box>
                 </Box>

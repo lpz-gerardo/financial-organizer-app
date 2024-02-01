@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TableContainer from '@mui/material/TableContainer';
@@ -10,6 +11,24 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 
 const PaymentTable = () => {
+    const [calendar, setCalendar] = useState([]);
+
+    function getCalendar() {
+        let calendar = [];
+        for (let i = 1; i <= 31; i++) {
+            calendar[i] = {
+                id: i,
+                amount: 0,
+            };
+        }
+
+        setCalendar(calendar);
+    }
+
+    useEffect(() => {
+        getCalendar();
+    }, [])
+
     return (
         <React.Fragment>
             <Box sx={{ maxWidth: '100%', maxHeight: '900px' }}>
@@ -26,6 +45,14 @@ const PaymentTable = () => {
                                 <TableCell size='small' align='center'><Typography variant='body1'>Amount</Typography></TableCell>
                             </TableRow>
                         </TableHead>
+                        <TableBody>
+                            {calendar.map((day) => (
+                                <TableRow key={day.id}>
+                                    <TableCell size='small' align='center'>{day.id}</TableCell>
+                                    <TableCell size='small' align='center'>$0.00</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </TableContainer>
             </Box>
