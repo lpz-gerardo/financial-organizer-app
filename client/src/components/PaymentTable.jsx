@@ -29,6 +29,10 @@ const PaymentTable = ({ accounts }) => {
         setCalendar(calendar);
     }
 
+    const formatMoney = (amount) => {
+        return '$' + String(Number.parseFloat(amount).toFixed(2));
+    }
+
     useEffect(() => {
         getCalendar();
     }, [accounts])
@@ -53,7 +57,7 @@ const PaymentTable = ({ accounts }) => {
                             {calendar.map((day) => (
                                 <TableRow key={day.id}>
                                     <TableCell size='small' align='center'>{day.id}</TableCell>
-                                    <TableCell size='small' align='center'>{day.amount}</TableCell>
+                                    <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
