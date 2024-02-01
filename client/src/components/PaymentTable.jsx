@@ -17,9 +17,13 @@ const PaymentTable = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    <Typography>Payments</Typography>
+                                <TableCell align='center' colSpan={2}>
+                                    <Typography variant='h4'>Payments</Typography>
                                 </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell size='small' align='center'><Typography variant='body1'>Day</Typography></TableCell>
+                                <TableCell size='small' align='center'><Typography variant='body1'>Amount</Typography></TableCell>
                             </TableRow>
                         </TableHead>
                     </Table>

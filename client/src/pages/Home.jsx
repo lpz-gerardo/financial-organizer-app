@@ -1,18 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 
 import { REACT_APP_DEV_URL } from '../../config.js';
 import MemberTable from '../components/MemberTable';
 import AccountTable from '../components/AccountTable.jsx';
-
+import PaymentTable from '../components/PaymentTable.jsx';
 
 const Home = () => {
     const [members, setMembers] = useState([]);
@@ -71,24 +64,7 @@ const Home = () => {
                         />
                     </Box>
                     <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 2 }}>
-                        <Box sx={{ maxWidth: '100%', maxHeight: '900px' }}>
-                            <TableContainer component={Paper}>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align={'center'} colSpan={2}>
-                                                <Typography variant='h4'>Payment Calendar</Typography>
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell size='small' align='center'><Typography variant='body1'>Day</Typography></TableCell>
-                                            <TableCell size='small' align='center'><Typography variant='body1'>Amount</Typography></TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                </Table>
-                            </TableContainer>
-                        </Box>
-                        
+                        <PaymentTable />
                     </Box>
                 </Box>
             </Box>
