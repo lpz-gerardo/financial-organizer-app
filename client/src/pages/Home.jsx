@@ -64,7 +64,9 @@ const Home = () => {
                         />
                     </Box>
                     <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 3 }}>
-                        <PaymentTable />
+                        <PaymentTable
+                            accounts={accounts}
+                        />
                     </Box>
                 </Box>
             </Box>

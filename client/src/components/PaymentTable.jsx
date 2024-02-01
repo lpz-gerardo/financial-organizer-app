@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 
-const PaymentTable = () => {
+const PaymentTable = ({ accounts }) => {
     const [calendar, setCalendar] = useState([]);
 
     function getCalendar() {
@@ -22,12 +22,16 @@ const PaymentTable = () => {
             };
         }
 
+        for (const account of Object.values(accounts)) {
+            calendar[account.paymentDay]['amount'] += account.minimumMonthlyPayment;
+        }
+
         setCalendar(calendar);
     }
 
     useEffect(() => {
         getCalendar();
-    }, [])
+    }, [accounts])
 
     return (
         <React.Fragment>
@@ -49,7 +53,7 @@ const PaymentTable = () => {
                             {calendar.map((day) => (
                                 <TableRow key={day.id}>
                                     <TableCell size='small' align='center'>{day.id}</TableCell>
-                                    <TableCell size='small' align='center'>$0.00</TableCell>
+                                    <TableCell size='small' align='center'>{day.amount}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
