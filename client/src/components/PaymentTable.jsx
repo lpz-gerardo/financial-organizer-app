@@ -97,6 +97,15 @@ const PaymentTable = ({ accounts }) => {
                                                             <TableCell size='small'>Amount</TableCell>
                                                         </TableRow>
                                                     </TableHead>
+                                                    <TableBody>
+                                                        {day['rows'].map((row) => (
+                                                            <TableRow key={row.account+row.member}>
+                                                                <TableCell size='small'>{row.account}</TableCell>
+                                                                <TableCell size='small'>{row.member}</TableCell>
+                                                                <TableCell size='small'>{formatMoney(row.amount)}</TableCell>
+                                                            </TableRow>
+                                                        ))}
+                                                    </TableBody>
                                                 </Table>
                                             </Collapse>
                                         </TableCell>
