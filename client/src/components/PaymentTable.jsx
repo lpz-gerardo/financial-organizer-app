@@ -91,10 +91,11 @@ const PaymentTable = ({ accounts }) => {
                                             <Collapse in={isOpen[day.id]}>
                                                 <Table>
                                                     <TableHead>
-                                                        <TableRow key={'nested-table-header' + day.id}></TableRow>
+                                                        <TableRow key={'nested-table-header' + day.id}>
                                                             <TableCell size='small'>Accounts</TableCell>
                                                             <TableCell size='small'>Members</TableCell>
                                                             <TableCell size='small'>Amount</TableCell>
+                                                        </TableRow>
                                                     </TableHead>
                                                 </Table>
                                             </Collapse>
