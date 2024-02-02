@@ -9,6 +9,7 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 
 const PaymentTable = ({ accounts }) => {
     const [calendar, setCalendar] = useState([]);
@@ -44,11 +45,12 @@ const PaymentTable = ({ accounts }) => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell align='center' colSpan={2}>
+                                <TableCell align='center' colSpan={3}>
                                     <Typography variant='h4'>Payments</Typography>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
+                                <TableCell size='small'></TableCell>
                                 <TableCell size='small' align='center'><Typography variant='body1'>Day</Typography></TableCell>
                                 <TableCell size='small' align='center'><Typography variant='body1'>Amount</Typography></TableCell>
                             </TableRow>
@@ -56,6 +58,7 @@ const PaymentTable = ({ accounts }) => {
                         <TableBody>
                             {calendar.map((day) => (
                                 <TableRow key={day.id}>
+                                    <TableCell size='small' ><IconButton size='small'></IconButton></TableCell>
                                     <TableCell size='small' align='center'>{day.id}</TableCell>
                                     <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
                                 </TableRow>
