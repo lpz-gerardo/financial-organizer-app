@@ -10,9 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 
 const PaymentTable = ({ accounts }) => {
     const [calendar, setCalendar] = useState([]);
+    const [isOpen, setIsOpen] = useState({});
 
     function getCalendar() {
         let calendarData = [];
@@ -40,6 +43,13 @@ const PaymentTable = ({ accounts }) => {
         return '$' + String(Number.parseFloat(amount).toFixed(2));
     }
 
+    const toggleRows = (day) => {
+        setIsOpen((previous) => ({
+            ...previous,
+            [day]: !(previous[day]),
+        }));
+    }
+
     useEffect(() => {
         getCalendar();
     }, [accounts])
@@ -64,7 +74,11 @@ const PaymentTable = ({ accounts }) => {
                         <TableBody>
                             {calendar.map((day) => (
                                 <TableRow key={day.id}>
-                                    <TableCell size='small' ><IconButton size='small'></IconButton></TableCell>
+                                    <TableCell size='small'>
+                                        <IconButton size='small' onClick={() => toggleRows(day.id)}>
+                                            {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                        </IconButton>
+                                    </TableCell>
                                     <TableCell size='small' align='center'>{day.id}</TableCell>
                                     <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
                                 </TableRow>
