@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 
@@ -73,15 +74,31 @@ const PaymentTable = ({ accounts }) => {
                         </TableHead>
                         <TableBody>
                             {calendar.map((day) => (
-                                <TableRow key={day.id}>
-                                    <TableCell size='small'>
-                                        <IconButton size='small' onClick={() => toggleRows(day.id)}>
-                                            {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                                        </IconButton>
-                                    </TableCell>
-                                    <TableCell size='small' align='center'>{day.id}</TableCell>
-                                    <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
-                                </TableRow>
+                                <React.Fragment key={day.id}>
+                                    <TableRow key={day.id}>
+                                        <TableCell size='small'>
+                                            <IconButton size='small' onClick={() => toggleRows(day.id)}>
+                                                {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                            </IconButton>
+                                        </TableCell>
+                                        <TableCell size='small' align='center'>{day.id}</TableCell>
+                                        <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
+                                    </TableRow>
+                                    <TableRow key={'individual-info' + day.id}>
+                                        <TableCell sx={{ paddingBottom: 0, paddingTop: 0}} colSpan={3}>
+                                            <Collapse in={isOpen[day.id]}>
+                                                <Table>
+                                                    <TableHead>
+                                                        <TableRow key={'nested-table-header' + day.id}></TableRow>
+                                                            <TableCell size='small'>Accounts</TableCell>
+                                                            <TableCell size='small'>Members</TableCell>
+                                                            <TableCell size='small'>Amount</TableCell>
+                                                    </TableHead>
+                                                </Table>
+                                            </Collapse>
+                                        </TableCell>
+                                    </TableRow>
+                                </React.Fragment>
                             ))}
                         </TableBody>
                     </Table>
