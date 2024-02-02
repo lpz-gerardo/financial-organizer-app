@@ -15,19 +15,25 @@ const PaymentTable = ({ accounts }) => {
     const [calendar, setCalendar] = useState([]);
 
     function getCalendar() {
-        let calendar = [];
+        let calendarData = [];
         for (let i = 1; i <= 31; i++) {
-            calendar[i] = {
+            calendarData[i] = {
                 id: i,
                 amount: 0,
+                rows: [],
             };
         }
 
         for (const account of Object.values(accounts)) {
-            calendar[account.paymentDay]['amount'] += account.minimumMonthlyPayment;
+            calendarData[account.paymentDay]['amount'] += account.minimumMonthlyPayment;
+            calendarData[account.paymentDay]['rows'].push({
+                account: account.name,
+                member: account.memberName,
+                amount: account.minimumMonthlyPayment,
+            });
         }
 
-        setCalendar(calendar);
+        setCalendar(calendarData);
     }
 
     const formatMoney = (amount) => {
