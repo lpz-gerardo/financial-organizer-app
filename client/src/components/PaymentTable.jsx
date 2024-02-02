@@ -77,9 +77,11 @@ const PaymentTable = ({ accounts }) => {
                                 <React.Fragment key={day.id}>
                                     <TableRow key={day.id}>
                                         <TableCell size='small'>
-                                            <IconButton size='small' onClick={() => toggleRows(day.id)}>
-                                                {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                                            </IconButton>
+                                            {(day.rows.length != 0) && (
+                                                <IconButton size='small' onClick={() => toggleRows(day.id)}>
+                                                    {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                                </IconButton>
+                                            )}
                                         </TableCell>
                                         <TableCell size='small' align='center'>{day.id}</TableCell>
                                         <TableCell size='small' align='center'>{formatMoney(day.amount)}</TableCell>
