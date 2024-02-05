@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import { REACT_APP_DEV_URL } from '../../../config.js';
+import { formatMoney } from '../../util/formatter.js';
 
 const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
     const [editAccountDetails, setEditAccountDetails] = useState({
@@ -131,7 +132,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                                 helperText={editAccountDetailErrors.remainingDebtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                             />
                             <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                                <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.debt}</Typography>
+                                <Typography color={'grey'} variant='italic'> Current Value: {formatMoney(selectedAccount.debt)}</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ marginBottom: '15px' }}>
@@ -147,7 +148,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                                 helperText={editAccountDetailErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
                             />
                             <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                                <Typography color={'grey'} variant='italic'> Current Value: ${selectedAccount.monthlyPayment}</Typography>
+                                <Typography color={'grey'} variant='italic'> Current Value: {formatMoney(selectedAccount.monthlyPayment)}</Typography>
                             </Box>
                         </Box>
                         <Box>
