@@ -14,6 +14,8 @@ import Collapse from '@mui/material/Collapse';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 
+import { formatMoney } from '../util/formatter';
+
 const PaymentTable = ({ accounts }) => {
     const [calendar, setCalendar] = useState([]);
     const [isOpen, setIsOpen] = useState({});
@@ -38,10 +40,6 @@ const PaymentTable = ({ accounts }) => {
         }
 
         setCalendar(calendarData);
-    }
-
-    const formatMoney = (amount) => {
-        return '$' + String(Number.parseFloat(amount).toFixed(2));
     }
 
     const toggleRows = (day) => {
