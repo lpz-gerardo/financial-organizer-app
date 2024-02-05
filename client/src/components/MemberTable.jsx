@@ -16,6 +16,8 @@ import NewMemberModal from '../modals/members/NewMemberModal';
 import EditMemberModal from '../modals/members/EditMemberModal';
 import DeleteMemberModal from '../modals/members/DeleteMemberModal';
 
+import { formatMoney } from '../util/formatter';
+
 const MemberTable = ({ members, refreshData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -35,10 +37,6 @@ const MemberTable = ({ members, refreshData }) => {
     const handleDeleteMember = (name) => {
         setSelectedMember(name);
         toggleDeleteMemberModal();
-    }
-
-    const formatMoney = (amount) => {
-        return '$' + String(Number.parseFloat(amount).toFixed(2));
     }
 
     const calculateDebtTotal = () => {
