@@ -16,6 +16,8 @@ import NewAccountModal from '../modals/accounts/NewAccountModal';
 import EditAccountModal from '../modals/accounts/EditAccountModal';
 import DeleteAccountModal from '../modals/accounts/DeleteAccountModal';
 
+import { formatMoney } from '../util/formatter';
+
 const AccountTable = ({ accounts, members, refreshData }) => {
     const [isTableEmpty, setIsTableEmpty] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,10 +37,6 @@ const AccountTable = ({ accounts, members, refreshData }) => {
     const handleDeleteAccountClick = (accountId) => {
         setSelectedAccount(accountId);
         toggleDeleteModal();
-    }
-
-    const formatMoney = (amount) => {
-        return '$' + String(Number.parseFloat(amount).toFixed(2));
     }
 
     const formatPercent = (percent) => {
