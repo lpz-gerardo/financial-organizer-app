@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import { REACT_APP_DEV_URL } from '../../../config.js';
-import { formatMoney } from '../../util/formatter.js';
+import { formatMoney, formatPercent } from '../../util/formatter.js';
 
 const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshData }) => {
     const [editAccountDetails, setEditAccountDetails] = useState({
@@ -164,7 +164,7 @@ const EditAccountModal = ({ isModalOpen, handleClose, selectedAccount, refreshDa
                                 helperText={editAccountDetailErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
                             />
                             <Box sx={{ marginLeft: '10px', marginTop: '5px'}}>
-                                <Typography color={'grey'} variant='italic'> Current Value: {selectedAccount.annualPercentRate}%</Typography>
+                                <Typography color={'grey'} variant='italic'> Current Value: {formatPercent(selectedAccount.annualPercentRate)}</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ marginTop: '15px'}}>
