@@ -139,14 +139,14 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                     <TableCell align='center'>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
                                     <TableCell align='center'>{formatPercent(account.annualPercentRate)}</TableCell>
                                     <TableCell align='center'>
-                                        <Chip icon={<Edit />} color={'info'} label={'Edit'} sx={{ margin: 1 }} onClick={() => handleEditClick({
+                                        <Chip icon={<Edit />} color={'info'} label={'Edit'} variant='outlined' sx={{ margin: 1 }} onClick={() => handleEditClick({
                                             id: account._id,
                                             name: account.name,
                                             debt: account.remainingDebt,
                                             monthlyPayment: account.minimumMonthlyPayment,
                                             annualPercentRate: account.annualPercentRate,
                                         })}></Chip>
-                                        <Chip icon={<Delete />} color={'error'} label={'Delete'} sx={{ margin: 1 }} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
+                                        <Chip icon={<Delete />} color={'error'} label={'Delete'} variant='outlined' sx={{ margin: 1 }} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
                                 </TableRow>
                             ))}
