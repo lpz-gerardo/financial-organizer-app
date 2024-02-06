@@ -122,8 +122,8 @@ const MemberTable = ({ members, refreshData }) => {
                                 <TableCell align='center'>{formatMoney(member.debt)}</TableCell>
                                 <TableCell align='center'>{formatMoney(member.monthlyPayment)}</TableCell>
                                 <TableCell align='center'>
-                                    <Chip icon={<Edit />} color={'info'} label={'Edit'} onClick={() => handleEditMember(member.name)} sx={{ margin: 1 }}></Chip>
-                                    <Chip icon={<Delete />} color={'error'} label={'Delete'} onClick={() => handleDeleteMember(member.name)} sx={{ margin: 1 }}></Chip>
+                                    <Chip icon={<Edit />} color={'info'} label={'Edit'} variant={'outlined'} onClick={() => handleEditMember(member.name)} sx={{ margin: 1 }}></Chip>
+                                    <Chip icon={<Delete />} color={'error'} label={'Delete'} variant={'outlined'} onClick={() => handleDeleteMember(member.name)} sx={{ margin: 1 }}></Chip>
                                 </TableCell>
                             </TableRow>
                         ))}
