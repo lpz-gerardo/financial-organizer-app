@@ -74,7 +74,7 @@ const PaymentTable = ({ accounts }) => {
                             {calendar.map((day) => (
                                 <React.Fragment key={day.id}>
                                     <TableRow key={day.id}>
-                                        <TableCell size='small'>
+                                        <TableCell size='small' align='center' sx={{ padding: 0 }}>
                                             {(day.rows.length != 0) && (
                                                 <IconButton size='small' onClick={() => toggleRows(day.id)}>
                                                     {isOpen[day.id] ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
