@@ -72,6 +72,16 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         return formatMoney(monthlyPaymentTotal);
     }
 
+    const calculateTotal = (column) => {
+        let total = 0;
+        if (!accounts) {
+            return total;
+        }
+
+        total = getTotal(column);
+        return formatMoney(total);
+    }
+
     const calculateAnnualPercentRateAverage = () => {
         let annualPercentRateAverage = 0;
         if (!accounts) {
@@ -176,9 +186,9 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                             <TableRow>
                                 <TableCell><Typography>Total</Typography></TableCell>
                                 <TableCell><Typography>-</Typography></TableCell>
-                                <TableCell><Typography>{calculateStartingDebtTotal()}</Typography></TableCell>
-                                <TableCell><Typography>{calculateRemainingDebtTotal()}</Typography></TableCell>
-                                <TableCell><Typography>{calculateMonthlyPaymentTotal()}</Typography></TableCell>
+                                <TableCell><Typography>{calculateTotal('startingDebt')}</Typography></TableCell>
+                                <TableCell><Typography>{calculateTotal('remainingDebt')}</Typography></TableCell>
+                                <TableCell><Typography>{calculateTotal('minimumMonthlyPayment')}</Typography></TableCell>
                                 <TableCell><Typography>{calculateAnnualPercentRateAverage()}</Typography></TableCell>
                             </TableRow>
                         </TableFooter>
