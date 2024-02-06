@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+import Edit from '@mui/icons-material/Edit';
+import Delete from '@mui/icons-material/Delete';
 
 import NewAccountModal from '../modals/accounts/NewAccountModal';
 import EditAccountModal from '../modals/accounts/EditAccountModal';
@@ -114,15 +116,15 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell><Typography>Account</Typography></TableCell>
-                                <TableCell><Typography>Member</Typography></TableCell>
-                                <TableCell><Typography>Starting Debt</Typography></TableCell>
-                                <TableCell><Typography>Remaining Debt</Typography></TableCell>
-                                <TableCell><Typography>Monthly Payment</Typography></TableCell>
-                                <TableCell><Typography>APR</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>Account</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>Member</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>Starting Debt</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>Remaining Debt</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>Monthly Payment</Typography></TableCell>
+                                <TableCell align='center'><Typography variant='body1'>APR</Typography></TableCell>
                                 <TableCell align='center'>
                                     <Button onClick={toggleNewAccountModal}>
-                                        <Typography variant='body1'>Add Account</Typography>
+                                        <Typography variant='button'>Add Account</Typography>
                                     </Button>
                                 </TableCell>
                             </TableRow>
@@ -130,33 +132,33 @@ const AccountTable = ({ accounts, members, refreshData }) => {
                         <TableBody>
                             {accounts.map((account) => (
                                 <TableRow key={account._id}>
-                                    <TableCell>{account.name}</TableCell>
-                                    <TableCell>{account.memberName}</TableCell>
-                                    <TableCell>{formatMoney(account.startingDebt)}</TableCell>
-                                    <TableCell>{formatMoney(account.remainingDebt)}</TableCell>
-                                    <TableCell>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
-                                    <TableCell>{formatPercent(account.annualPercentRate)}</TableCell>
+                                    <TableCell align='center'>{account.name}</TableCell>
+                                    <TableCell align='center'>{account.memberName}</TableCell>
+                                    <TableCell align='center'>{formatMoney(account.startingDebt)}</TableCell>
+                                    <TableCell align='center'>{formatMoney(account.remainingDebt)}</TableCell>
+                                    <TableCell align='center'>{formatMoney(account.minimumMonthlyPayment)}</TableCell>
+                                    <TableCell align='center'>{formatPercent(account.annualPercentRate)}</TableCell>
                                     <TableCell align='center'>
-                                        <Chip label={'Edit'} onClick={() => handleEditClick({
+                                        <Chip icon={<Edit />} color={'info'} label={'Edit'} sx={{ margin: 1 }} onClick={() => handleEditClick({
                                             id: account._id,
                                             name: account.name,
                                             debt: account.remainingDebt,
                                             monthlyPayment: account.minimumMonthlyPayment,
                                             annualPercentRate: account.annualPercentRate,
                                         })}></Chip>
-                                        <Chip label={'Delete'} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
+                                        <Chip icon={<Delete />} color={'error'} label={'Delete'} sx={{ margin: 1 }} onClick={() => handleDeleteAccountClick(account._id)}></Chip>
                                     </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                         <TableFooter>
                             <TableRow>
-                                <TableCell><Typography>Total</Typography></TableCell>
-                                <TableCell><Typography>-</Typography></TableCell>
-                                <TableCell><Typography>{calculateTotal('startingDebt')}</Typography></TableCell>
-                                <TableCell><Typography>{calculateTotal('remainingDebt')}</Typography></TableCell>
-                                <TableCell><Typography>{calculateTotal('minimumMonthlyPayment')}</Typography></TableCell>
-                                <TableCell><Typography>{calculateAnnualPercentRateAverage()}</Typography></TableCell>
+                                <TableCell align='center'><Typography>Total</Typography></TableCell>
+                                <TableCell align='center'><Typography>-</Typography></TableCell>
+                                <TableCell align='center'><Typography>{calculateTotal('startingDebt')}</Typography></TableCell>
+                                <TableCell align='center'><Typography>{calculateTotal('remainingDebt')}</Typography></TableCell>
+                                <TableCell align='center'><Typography>{calculateTotal('minimumMonthlyPayment')}</Typography></TableCell>
+                                <TableCell align='center'><Typography>{calculateAnnualPercentRateAverage()}</Typography></TableCell>
                             </TableRow>
                         </TableFooter>
                     </Table>
