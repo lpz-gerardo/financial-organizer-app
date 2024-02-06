@@ -39,39 +39,6 @@ const AccountTable = ({ accounts, members, refreshData }) => {
         toggleDeleteModal();
     }
 
-    const calculateStartingDebtTotal = () => {
-        let startingDebtTotal = 0;
-        if (!accounts) {
-            return startingDebtTotal;
-        }
-
-        startingDebtTotal = getTotal('startingDebt');
-
-        return formatMoney(startingDebtTotal);
-    }
-
-    const calculateRemainingDebtTotal = () => {
-        let remainingDebtTotal = 0;
-        if (!accounts) {
-            return remainingDebtTotal;
-        }
-
-        remainingDebtTotal = getTotal('remainingDebt');
-
-        return formatMoney(remainingDebtTotal);
-    }
-
-    const calculateMonthlyPaymentTotal = () => {
-        let monthlyPaymentTotal = 0;
-        if (!accounts) {
-            return monthlyPaymentTotal;
-        }
-
-        monthlyPaymentTotal = getTotal('minimumMonthlyPayment');
-
-        return formatMoney(monthlyPaymentTotal);
-    }
-
     const calculateTotal = (column) => {
         let total = 0;
         if (!accounts) {
