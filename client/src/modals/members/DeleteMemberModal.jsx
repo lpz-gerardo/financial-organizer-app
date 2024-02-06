@@ -36,7 +36,7 @@ const DeleteMemberModal = ({ isModalOpen, handleClose, member, refreshData }) =>
                 <Box className={'modal-style'}>
                     <Box sx={{ marginBottom: '5px' }}>
                         <Typography variant='h5' component='h2' color='black'>Confirm Deletion</Typography>
-                        <Typography variant='subtitle' color='grey'>Are you sure you want to delete?</Typography>
+                        <Typography variant='subtitle' color='grey'>This will delete the member's accounts.</Typography>
                     </Box>
                     <Box display='grid' gridTemplateColumns={'repeat(2, 1fr)'} gridTemplateRows={'1fr'} columnGap={2} rowGap={2} padding={2}>
                         <Box sx={{ gridColumn: 1 }}>
