@@ -61,6 +61,16 @@ const MemberTable = ({ members, refreshData }) => {
         return formatMoney(monthlyPaymentTotal);
     }
 
+    const calculateTotal = (column) => {
+        let total = 0;
+        if (!members) {
+            return total;
+        }
+
+        total = getTotal(column);
+        return formatMoney(total);
+    }
+
     const getTotal = (column) => {
         let sum = 0;
         for (const key of Object.keys(members)) {
@@ -141,8 +151,8 @@ const MemberTable = ({ members, refreshData }) => {
                     <TableFooter>
                         <TableRow>
                             <TableCell align='center'><Typography>Total</Typography></TableCell>
-                            <TableCell align='center'><Typography>{calculateDebtTotal()}</Typography></TableCell>
-                            <TableCell align='center'><Typography>{calculateMonthlyPaymentTotal()}</Typography></TableCell>
+                            <TableCell align='center'><Typography>{calculateTotal('debt')}</Typography></TableCell>
+                            <TableCell align='center'><Typography>{calculateTotal('monthlyPayment')}</Typography></TableCell>
                             <TableCell />
                         </TableRow>
                     </TableFooter>
