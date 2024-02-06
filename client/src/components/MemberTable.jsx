@@ -39,28 +39,6 @@ const MemberTable = ({ members, refreshData }) => {
         toggleDeleteMemberModal();
     }
 
-    const calculateDebtTotal = () => {
-        let debtTotal = 0;
-        if (!members) {
-            return debtTotal;
-        }
-
-        debtTotal = getTotal('debt');
-
-        return formatMoney(debtTotal);
-    }
-
-    const calculateMonthlyPaymentTotal = () => {
-        let monthlyPaymentTotal = 0;
-        if (!members) {
-            return monthlyPaymentTotal;
-        }
-
-        monthlyPaymentTotal = getTotal('monthlyPayment');
-
-        return formatMoney(monthlyPaymentTotal);
-    }
-
     const calculateTotal = (column) => {
         let total = 0;
         if (!members) {
