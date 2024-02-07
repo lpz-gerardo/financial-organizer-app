@@ -21,6 +21,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
         'monthlyPayment': '',
         'annualPercentRate': '',
         'paymentDay': '',
+        'remainingPayments': '',
+        'lengthOfLoan': '',
     });
     const [newAccountFormErrors, setNewAccountFormErrors] = useState({
         'accountTypeError': false,
@@ -31,6 +33,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
         'monthlyPaymentError': false,
         'annualPercentRateError': false,
         'paymentDayError': false,
+        'remainingPaymentsError': false,
+        'lengthOfLoanError': false,
     });
 
     const handleModalClose = () => {
@@ -44,6 +48,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
             'monthlyPayment': '',
             'annualPercentRate': '',
             'paymentDay': '',
+            'remainingPayments': '',
+            'lengthOfLoan': '',
         });
         setNewAccountFormErrors({
             ...newAccountFormErrors,
@@ -55,6 +61,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
             'monthlyPaymentError': false,
             'annualPercentRateError': false,
             'paymentDayError': false,
+            'remainingPaymentsError': false,
+            'lengthOfLoanError': false,
         });
         handleClose();
     }
@@ -130,6 +138,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
             'monthlyPayment': newAccountForm.monthlyPayment,
             'annualPercentRate': newAccountForm.annualPercentRate,
             'paymentDay': newAccountForm.paymentDay,
+            'remainingPayments': newAccountForm.remainingPayments ?? '',
+            'lengthOfLoan': newAccountForm.lengthOfLoan ?? '',
         };
 
         postAccountData(REACT_APP_DEV_URL + 'account', data);
