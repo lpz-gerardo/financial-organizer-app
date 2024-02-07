@@ -180,6 +180,7 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                     onChange={e => handleFormFieldChange('accountType', e.target.value)}
                                 >
                                     <MenuItem value={'Credit'}>Credit</MenuItem>
+                                    <MenuItem value={'Loan'}>Loan</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
