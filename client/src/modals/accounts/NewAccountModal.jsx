@@ -184,120 +184,124 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                 </Select>
                             </FormControl>
                         </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='accountName'
-                                label='Account Name'
-                                value={newAccountForm.accountName}
-                                error={newAccountFormErrors.accountNameError}
-                                onChange={e => handleFormFieldChange('accountName', e.target.value)}
-                                helperText={newAccountFormErrors.accountNameError ? 'Max 25 characters. [A-Z -]' : ''}
-                            />
-                        </Box>
-                            <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
-                                <FormControl fullWidth>
-                                    <InputLabel required>Member</InputLabel>
-                                    <Select
+                        {(newAccountForm.accountType == 'Credit') && (
+                            <Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
                                         required
+                                        type='input'
                                         color='primary'
                                         variant='outlined'
-                                        id='memberName'
-                                        name='memberName'
-                                        label='Member'
-                                        value={newAccountForm.memberName}
-                                        onChange={e => handleFormFieldChange('memberName', e.target.value)}
-                                    >
-                                        {members.map((member) => (
-                                            <MenuItem key={member.name} value={member.name}>
-                                                {member.name}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
+                                        name='accountName'
+                                        label='Account Name'
+                                        value={newAccountForm.accountName}
+                                        error={newAccountFormErrors.accountNameError}
+                                        onChange={e => handleFormFieldChange('accountName', e.target.value)}
+                                        helperText={newAccountFormErrors.accountNameError ? 'Max 25 characters. [A-Z -]' : ''}
+                                    />
+                                </Box>
+                                    <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
+                                        <FormControl fullWidth>
+                                            <InputLabel required>Member</InputLabel>
+                                            <Select
+                                                required
+                                                color='primary'
+                                                variant='outlined'
+                                                id='memberName'
+                                                name='memberName'
+                                                label='Member'
+                                                value={newAccountForm.memberName}
+                                                onChange={e => handleFormFieldChange('memberName', e.target.value)}
+                                            >
+                                                {members.map((member) => (
+                                                    <MenuItem key={member.name} value={member.name}>
+                                                        {member.name}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='creditLimit'
+                                        label='Credit Limit'
+                                        value={newAccountForm.creditLimit}
+                                        error={newAccountFormErrors.creditLimitError}
+                                        onChange={e => handleFormFieldChange('creditLimit', e.target.value)}
+                                        helperText={newAccountFormErrors.creditLimitError ? 'Max 7 numbers. [0-9]' : ''}
+                                    />
+                                </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='debt'
+                                        label='Debt'
+                                        value={newAccountForm.debt}
+                                        error={newAccountFormErrors.debtError}
+                                        onChange={e => handleFormFieldChange('debt', e.target.value)}
+                                        helperText={newAccountFormErrors.debtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
+                                    />
+                                </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='monthlyPayment'
+                                        label='Monthly Payment'
+                                        value={newAccountForm.monthlyPayment}
+                                        error={newAccountFormErrors.monthlyPaymentError}
+                                        onChange={e => handleFormFieldChange('monthlyPayment', e.target.value)}
+                                        helperText={newAccountFormErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
+                                    />
+                                </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='annualPercentRate'
+                                        label='Annual Percent Rate'
+                                        value={newAccountForm.annualPercentRate}
+                                        error={newAccountFormErrors.annualPercentRateError}
+                                        onChange={e => handleFormFieldChange('annualPercentRate', e.target.value)}
+                                        helperText={newAccountFormErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
+                                    />
+                                </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
+                                    <FormControl fullWidth>
+                                        <InputLabel>Payment Day</InputLabel>
+                                        <Select
+                                            required
+                                            id='paymentDay'
+                                            color='primary'
+                                            variant='outlined'
+                                            name='paymentDay'
+                                            label='Payment Day'
+                                            value={newAccountForm.paymentDay}
+                                            onChange={e => handleFormFieldChange('paymentDay', e.target.value)}
+                                        >
+                                            {[...Array(31).keys()].map((item) => (
+                                                <MenuItem key={'paymentDay'+`${item+1}`} value={item+1}>{item+1}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                                <Button type='submit' disabled={isSubmitDisabled()}>
+                                    Submit
+                                </Button>
                             </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='creditLimit'
-                                label='Credit Limit'
-                                value={newAccountForm.creditLimit}
-                                error={newAccountFormErrors.creditLimitError}
-                                onChange={e => handleFormFieldChange('creditLimit', e.target.value)}
-                                helperText={newAccountFormErrors.creditLimitError ? 'Max 7 numbers. [0-9]' : ''}
-                            />
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='debt'
-                                label='Debt'
-                                value={newAccountForm.debt}
-                                error={newAccountFormErrors.debtError}
-                                onChange={e => handleFormFieldChange('debt', e.target.value)}
-                                helperText={newAccountFormErrors.debtError ? 'Max 9 numbers with decimal. [0-9]' : ''}
-                            />
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='monthlyPayment'
-                                label='Monthly Payment'
-                                value={newAccountForm.monthlyPayment}
-                                error={newAccountFormErrors.monthlyPaymentError}
-                                onChange={e => handleFormFieldChange('monthlyPayment', e.target.value)}
-                                helperText={newAccountFormErrors.monthlyPaymentError ? 'Max 9 numbers with decimal. [0-9]' : ''}
-                            />
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3}}>
-                            <TextField
-                                required
-                                type='input'
-                                color='primary'
-                                variant='outlined'
-                                name='annualPercentRate'
-                                label='Annual Percent Rate'
-                                value={newAccountForm.annualPercentRate}
-                                error={newAccountFormErrors.annualPercentRateError}
-                                onChange={e => handleFormFieldChange('annualPercentRate', e.target.value)}
-                                helperText={newAccountFormErrors.annualPercentRateError ? 'Max 5 numbers with decimal. [0-9]' : ''}
-                            />
-                        </Box>
-                        <Box sx={{ marginTop: 3, marginBottom: 3, maxWidth: 235}}>
-                            <FormControl fullWidth>
-                                <InputLabel>Payment Day</InputLabel>
-                                <Select
-                                    required
-                                    id='paymentDay'
-                                    color='primary'
-                                    variant='outlined'
-                                    name='paymentDay'
-                                    label='Payment Day'
-                                    value={newAccountForm.paymentDay}
-                                    onChange={e => handleFormFieldChange('paymentDay', e.target.value)}
-                                >
-                                    {[...Array(31).keys()].map((item) => (
-                                        <MenuItem key={'paymentDay'+`${item+1}`} value={item+1}>{item+1}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                        <Button type='submit' disabled={isSubmitDisabled()}>
-                            Submit
-                        </Button>
-                    </form>
+                        )}
+                   </form>
                 </Box>
             </Modal>
         </React.Fragment>
