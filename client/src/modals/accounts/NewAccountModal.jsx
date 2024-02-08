@@ -91,6 +91,10 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                 break;
             case 'annualPercentRate':
                 isAnnualPercentRateValid(value);
+                break;
+            case 'remainingPayments':
+                isRemainingPaymentsValid(value);
+                break;
         }
     }
 
@@ -117,6 +121,11 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
     const isAnnualPercentRateValid = (annualPercentRate) => {
         const regex = /^[0-9]{0,3}((?:[.]([0-9]{1,2})){0,1})$/;
         handleErrorMessage(regex, 'annualPercentRateError', annualPercentRate);
+    }
+
+    const isRemainingPaymentsValid = (remainingPayments) => {
+        const regex = /^[0-9]{0,3}$/;
+        handleErrorMessage(regex, 'remainingPaymentsError', remainingPayments);
     }
 
     const handleErrorMessage = (regexPattern, prop, value) => {
