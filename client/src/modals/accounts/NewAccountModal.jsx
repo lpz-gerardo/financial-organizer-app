@@ -95,6 +95,9 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
             case 'remainingPayments':
                 isRemainingPaymentsValid(value);
                 break;
+            case 'lengthOfLoan':
+                isLengthOfLoanValid(value);
+                break;
         }
     }
 
@@ -126,6 +129,11 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
     const isRemainingPaymentsValid = (remainingPayments) => {
         const regex = /^[0-9]{0,3}$/;
         handleErrorMessage(regex, 'remainingPaymentsError', remainingPayments);
+    }
+
+    const isLengthOfLoanValid = (lengthOfLoan) => {
+        const regex = /^[0-9]{0,3}$/;
+        handleErrorMessage(regex, 'lengthOfLoanError', lengthOfLoan);
     }
 
     const handleErrorMessage = (regexPattern, prop, value) => {
