@@ -329,6 +329,20 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                         helperText={newAccountFormErrors.remainingPaymentsError ? 'Max 3 numbers. [0-9]' : ''}
                                     />
                                 </Box>
+                                 <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='lengthOfLoan'
+                                        label='Length of Loan'
+                                        value={newAccountForm.lengthOfLoan}
+                                        error={newAccountFormErrors.lengthOfLoanError}
+                                        onChange={e => handleFormFieldChange('lengthOfLoan', e.target.value)}
+                                        helperText={newAccountFormErrors.lengthOfLoanError ? 'Max 3 numbers. [0-9]' : ''}
+                                    />
+                                </Box>
                                 <Button type='submit' disabled={isSubmitDisabled()}>
                                     Submit
                                 </Button>
