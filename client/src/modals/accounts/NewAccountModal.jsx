@@ -306,6 +306,20 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                         </Select>
                                     </FormControl>
                                 </Box>
+                                <Box sx={{ marginTop: 3, marginBottom: 3}}>
+                                    <TextField
+                                        required
+                                        type='input'
+                                        color='primary'
+                                        variant='outlined'
+                                        name='remainingPayments'
+                                        label='Remaining Payments'
+                                        value={newAccountForm.remainingPayments}
+                                        error={newAccountFormErrors.remainingPaymentsError}
+                                        onChange={e => handleFormFieldChange('remainingPayments', e.target.value)}
+                                        helperText={newAccountFormErrors.remainingPaymentsError ? 'Max 3 numbers. [0-9]' : ''}
+                                    />
+                                </Box>
                                 <Button type='submit' disabled={isSubmitDisabled()}>
                                     Submit
                                 </Button>
