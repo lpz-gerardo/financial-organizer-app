@@ -184,6 +184,8 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
             || (!newAccountForm.debt || newAccountFormErrors.debtError)
             || (!newAccountForm.monthlyPayment || newAccountFormErrors.monthlyPaymentError)
             || (!newAccountForm.annualPercentRate || newAccountFormErrors.annualPercentRateError)
+            || (newAccountForm.accountType == 'Loan' && (!newAccountForm.remainingPayments || newAccountFormErrors.remainingPaymentsError))
+            || (newAccountForm.accountType == 'Loan' && (!newAccountForm.lengthOfLoan || newAccountFormErrors.lengthOfLoanError))
         )
     }
 
