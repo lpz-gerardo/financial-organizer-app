@@ -211,7 +211,7 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                 </Select>
                             </FormControl>
                         </Box>
-                        {(newAccountForm.accountType == 'Credit') && (
+                        {(newAccountForm.accountType == 'Credit' || newAccountForm.accountType == 'Loan') && (
                             <Box>
                                 <Box sx={{ marginTop: 3, marginBottom: 3}}>
                                     <TextField
@@ -323,6 +323,10 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                         </Select>
                                     </FormControl>
                                 </Box>
+                           </Box>
+                        )}
+                        {(newAccountForm.accountType == 'Loan') && (
+                            <Box>
                                 <Box sx={{ marginTop: 3, marginBottom: 3}}>
                                     <TextField
                                         required
@@ -351,6 +355,10 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                         helperText={newAccountFormErrors.lengthOfLoanError ? 'Max 3 numbers. [0-9]' : ''}
                                     />
                                 </Box>
+                            </Box>
+                        )}
+                        {(newAccountForm.accountType != '') && (
+                            <Box>
                                 <Button type='submit' disabled={isSubmitDisabled()}>
                                     Submit
                                 </Button>
