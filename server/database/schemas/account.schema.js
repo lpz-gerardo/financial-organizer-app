@@ -10,6 +10,8 @@ const accountSchema = new mongoose.Schema({
     annualPercentRate: Number,
     paymentDay: Number,
     memberName: String,
+    remainingPayments: Number,
+    lengthOfLoan: Number,
 });
 
 export default accountSchema;
