@@ -257,7 +257,7 @@ const NewAccountModal = ({ isModalOpen, handleClose, members, refreshData }) => 
                                         color='primary'
                                         variant='outlined'
                                         name='creditLimit'
-                                        label='Credit Limit'
+                                        label={newAccountForm.accountType == 'Loan' ? 'Loan Amount' : 'Credit Limit'}
                                         value={newAccountForm.creditLimit}
                                         error={newAccountFormErrors.creditLimitError}
                                         onChange={e => handleFormFieldChange('creditLimit', e.target.value)}
