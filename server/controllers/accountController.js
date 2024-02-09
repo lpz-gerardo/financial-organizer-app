@@ -41,6 +41,8 @@ const addAccount = async (request, response) => {
                 annualPercentRate: request.body.annualPercentRate,
                 paymentDay: request.body.paymentDay,
                 memberName: request.body.memberName,
+                remainingPayments: request.body.remainingPayments ?? 0,
+                lengthOfLoan: request.body.lengthOfLoan ?? 0,
             };
 
             const account = await createAccount(newAccount);
