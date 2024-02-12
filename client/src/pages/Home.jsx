@@ -48,22 +48,22 @@ const Home = () => {
 
     return(
         <React.Fragment>
-            <Box sx={{ width: '100%', height: '800px', justifySelf: 'center' }}>
-                <Box display={'grid'} gridTemplateColumns={'repeat(5, 1fr)'} gridTemplateRows={'repeat(3, 1fr)'} columnGap={2} rowGap={2} padding={2}>
-                    <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 1, gridRowEnd: 1}}>
+            <Box className={'box-home-wrapper'}>
+                <Box className={'grid-box-wrapper'}>
+                    <Box className={'grid-box-member-table'}>
                         <MemberTable
                             members={members}
                             refreshData={getData}
                         />
                     </Box>
-                    <Box sx={{ gridColumnStart: 2, gridColumnEnd: 4, gridRowStart: 2, gridRowEnd: 2 }}>
+                    <Box className={'grid-box-account-table'}>
                         <AccountTable
                             accounts={accounts}
                             members={members}
                             refreshData={getData}
                         />
                     </Box>
-                    <Box sx={{ gridColumnStart: 4, gridColumnEnd: 5, gridRowStart: 1, gridRowEnd: 3 }}>
+                    <Box className={'grid-box-payment-table'}>
                         <PaymentTable
                             accounts={accounts}
                         />
