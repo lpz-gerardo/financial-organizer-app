@@ -57,35 +57,3 @@
       ". at at at pt .";
   }
 }
-
-@media screen and (min-width: 150px) and (max-width: 1599px) {
-  .grid-box-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    column-gap: 20px;
-    row-gap: 20px;
-    padding: 20px;
-  }
-
-  .grid-box-member-table {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-
-  .grid-box-account-table {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-  }
-
-  .grid-box-payment-table {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 3;
-    grid-row-end: 4;
-  }
-}
