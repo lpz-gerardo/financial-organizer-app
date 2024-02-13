@@ -49,21 +49,21 @@ const Home = () => {
     return(
         <React.Fragment>
             <Box className={'box-home-wrapper'}>
-                <Box className={'grid-box-wrapper'}>
-                    <Box className={'grid-box-member-table'}>
+                <Box className={'home-wrapper'}>
+                    <Box className={'member-table'}>
                         <MemberTable
                             members={members}
                             refreshData={getData}
                         />
                     </Box>
-                    <Box className={'grid-box-account-table'}>
+                    <Box className={'account-table'}>
                         <AccountTable
                             accounts={accounts}
                             members={members}
                             refreshData={getData}
                         />
                     </Box>
-                    <Box className={'grid-box-payment-table'}>
+                    <Box className={'payment-table'}>
                         <PaymentTable
                             accounts={accounts}
                         />
