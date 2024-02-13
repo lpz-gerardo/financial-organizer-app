@@ -38,6 +38,7 @@
 
 .home-wrapper {
   display: grid;
+  gap: 24px;
   grid-template-areas:
     "mt"
     "at"
