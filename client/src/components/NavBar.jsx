@@ -1,9 +1,18 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const NavBar = () => {
     return (
-        <AppBar component={'nav'}></AppBar>
+        <Box>
+            <AppBar>
+                <Box>
+                    <Typography>Home</Typography>
+                </Box>
+            </AppBar>
+        </Box>
+
     )
 }
 
