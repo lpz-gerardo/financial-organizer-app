@@ -5,10 +5,12 @@ import Typography from '@mui/material/Typography';
 
 const NavBar = () => {
     return (
-        <Box>
+        <Box marginBottom={'25px'}>
             <AppBar>
-                <Box>
-                    <Typography>Home</Typography>
+                <Box  display={'grid'} gridTemplateColumns={'repeat(8, 1fr)'} alignItems={'center'} sx={{ height: '40px'}}>
+                    <Box gridColumn={1}>
+                        <Typography>Home</Typography>
+                    </Box>
                 </Box>
             </AppBar>
         </Box>
