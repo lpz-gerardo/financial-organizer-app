@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 
 import { REACT_APP_DEV_URL } from '../../config.js';
+import NavBar from '../components/NavBar.jsx';
 import MemberTable from '../components/MemberTable';
 import AccountTable from '../components/AccountTable.jsx';
 import PaymentTable from '../components/PaymentTable.jsx';
@@ -49,6 +50,7 @@ const Home = () => {
     return(
         <React.Fragment>
             <Box className={'box-home-wrapper'}>
+                <NavBar />
                 <Box className={'home-wrapper'}>
                     <Box className={'member-table'}>
                         <MemberTable
