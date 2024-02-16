@@ -49,8 +49,8 @@ const Home = () => {
 
     return(
         <React.Fragment>
+            <NavBar />
             <Box className={'box-home-wrapper'}>
-                <NavBar />
                 <Box className={'home-wrapper'}>
                     <Box className={'member-table'}>
                         <MemberTable
