@@ -7,4 +7,6 @@ const createSecretToken = (id) => {
     });
 };
 
-export default createSecretToken;
+export {
+    createSecretToken
+}

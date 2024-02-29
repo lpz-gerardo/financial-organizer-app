@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import User from '../database/models/user.model.js';
+import { User } from '../database/models/user.model.js';
 import { createSecretToken } from '../utils/SecretToken.js';
 
 const Signup = async (request, response, next) => {

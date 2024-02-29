@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
+import authRoutes from '../server/routes/authRoutes.js';
 import memberRoutes from '../server/routes/memberRoutes.js';
 import accountRoutes from '../server/routes/accountRoutes.js';
 const { MONGODB_URL, PORT } = process.env;
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+app.use('/', authRoutes);
 app.use('/member', memberRoutes);
 app.use('/account', accountRoutes);
 
