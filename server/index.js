@@ -11,10 +11,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (request, response) => {
-    response.send('Test connection.');
-})
-
 app.use('/member', memberRoutes);
 app.use('/account', accountRoutes);
 
