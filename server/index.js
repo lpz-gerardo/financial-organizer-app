@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 import memberRoutes from '../server/routes/memberRoutes.js';
 import accountRoutes from '../server/routes/accountRoutes.js';
@@ -9,6 +10,7 @@ const { MONGODB_URL, PORT } = process.env;
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 app.use('/member', memberRoutes);
