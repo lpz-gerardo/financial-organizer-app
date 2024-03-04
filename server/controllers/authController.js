@@ -33,6 +33,17 @@ const Signup = async (request, response, next) => {
    }
 }
 
+const Login = async (request, response, next) => {
+    try {
+        const { username, password } = request.body;
+        if (!username || !password) {
+            return response.status(400).send({ message: "All fields are required." });
+        }
+    } catch (error) {
+        return response.status(500).send({ message: error });
+    }
+}
+
 export {
     Signup,
 }
