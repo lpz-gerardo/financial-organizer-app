@@ -39,6 +39,22 @@ const Login = async (request, response, next) => {
         if (!username || !password) {
             return response.status(400).send({ message: "All fields are required." });
         }
+        const user = await User.findOne({ username });
+        if (!user) {
+            return response.status(403).send({ message: "Incorrect username or password." });
+        }
+        const auth = await bcrypt.compare(password, user.password);
+        if (!auth) {
+            return response.status(403).send({ message: "Incorrect username or password." });
+        }
+
+        const token = createSecretToken(user._id);
+        response.cookie('token', token, {
+            withCredentials: true,
+            httpOnly: false,
+        });
+        response.status(201).send({ message: 'User logged in successfully', success: true });
+        next();
     } catch (error) {
         return response.status(500).send({ message: error });
     }
@@ -46,4 +62,5 @@ const Login = async (request, response, next) => {
 
 export {
     Signup,
+    Login,
 }
