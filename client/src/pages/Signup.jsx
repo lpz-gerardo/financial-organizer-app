@@ -12,6 +12,14 @@ const Signup = () => {
         password: '',
     });
     const { username, password } = userInputs;
+
+    const handleOnInputChange = (prop, value) => {
+        setUserInputs({
+            ...userInputs,
+            [prop]: value,
+        });
+    }
+
     return(
         <Container sx={{ display: 'grid', justifyContent: 'center', }}>
             <Box sx={{ backgroundColor: 'white', padding: '50px', top: '50%', left: '50%', position: 'absolute' }}>
@@ -26,17 +34,20 @@ const Signup = () => {
                             name='username'
                             label='username'
                             value={username}
+                            onChange={e => handleOnInputChange('username', e.target.value)}
                        />
                     </Box>
                     <Box marginTop={'15px'}>
                        <TextField
                             required
-                            type='input'
+                            type='password'
                             color='primary'
                             variant='outlined'
                             name='password'
                             label='password'
                             value={password}
+                            onChange={e => handleOnInputChange('password', e.target.value)}
+
                        />
                     </Box>
                     <Box marginTop={'10px'}>
