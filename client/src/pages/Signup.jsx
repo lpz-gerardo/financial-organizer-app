@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -13,7 +14,7 @@ const Signup = () => {
         password: '',
     });
     const { username, password } = userInputs;
-
+    const navigate = useNavigate();
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
             ...userInputs,
@@ -23,10 +24,37 @@ const Signup = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = {
+        const credentials = {
             'username': username,
             'password': password,
         };
+        postSignup(REACT_APP_DEV_URL + 'signup', credentials);
+    }
+
+    const postSignup = async (url, credentials) => {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials),
+            });
+            const { success } = await response.json();
+            if (success) {
+                navigate("/");
+            } else {
+                console.log("Failed.");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        setUserInputs({
+            ...userInputs,
+            username: "",
+            password: "",
+        });
     }
 
     return(
