@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const Signup = () => {
     return(
@@ -29,6 +30,9 @@ const Signup = () => {
                             name='password'
                             label='password'
                        />
+                    </Box>
+                    <Box marginTop={'10px'}>
+                        <Button>Submit</Button>
                     </Box>
                 </form>
                 <Box marginTop={'15px'}>
