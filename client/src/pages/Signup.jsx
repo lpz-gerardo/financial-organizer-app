@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import { REACT_APP_DEV_URL } from '../../config.js';
 
 const Signup = () => {
@@ -59,9 +61,9 @@ const Signup = () => {
 
     const handlePasswordRequirements = (value) => {
         const isMinimumLength = value.match(/^.{8,}$/);
-        const isMinimumDigits = value.match(/^(?=.*[a-z]).{1,}$/);
-        const isMinimumLowercase = value.match(/^(?=.*[A-Z]).{1,}$/);
-        const isMinimumUppercase = value.match(/^(?=.*\d).{1,}$/);
+        const isMinimumDigits = value.match(/^(?=.*\d).{1,}$/);
+        const isMinimumLowercase = value.match(/^(?=.*[a-z]).{1,}$/);
+        const isMinimumUppercase = value.match(/^(?=.*[A-Z]).{1,}$/);
 
         setPasswordRequirements({
             ...passwordRequirements,
@@ -146,8 +148,22 @@ const Signup = () => {
                        />
                     </Box>
                     {password ? (
-                        <Box marginTop={'10px'} backgroundColor={'#cccecf'}>
+                        <Box marginTop={'10px'} backgroundColor={'#e3e5e6'}>
                             <Typography color={'black'}>Password Requirements</Typography>
+                            <List>
+                                <ListItem>
+                                    <Typography color={minimumLength ? 'green' : 'red'}>Minimum 8 characters</Typography>
+                                </ListItem>
+                                <ListItem>
+                                    <Typography color={minimumDigits ? 'green' : 'red'}>Minimum 1 digit</Typography>
+                                </ListItem>
+                                <ListItem>
+                                    <Typography color={minimumLowercase ? 'green' : 'red'}>Minimum 1 lowercase</Typography>
+                                </ListItem>
+                                <ListItem>
+                                    <Typography color={minimumUppercase ? 'green' : 'red'}>Minimum 1 uppercase</Typography>
+                                </ListItem>
+                            </List>
                         </Box>
                     ): <Box></Box>}
                     <Box marginTop={'10px'}>
