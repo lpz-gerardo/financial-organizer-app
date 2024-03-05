@@ -118,7 +118,7 @@ const Signup = () => {
 
     return(
         <Container sx={{ display: 'grid', justifyContent: 'center', }}>
-            <Box sx={{ backgroundColor: 'white', padding: '50px', top: '50%', left: '50%', position: 'absolute' }}>
+            <Box sx={{ backgroundColor: 'white', padding: '50px', top: '50%', left: '50%', position: 'static' }}>
                 <Typography variant='h4' color={'black'}>Signup</Typography>
                 <form onSubmit={handleSubmit}>
                     <Box marginTop={'15px'}>
