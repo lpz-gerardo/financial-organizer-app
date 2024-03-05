@@ -121,11 +121,11 @@ const Signup = () => {
     }
 
     return(
-        <Container sx={{ display: 'grid', justifyContent: 'center', }}>
-            <Box sx={{ backgroundColor: 'white', padding: '50px', top: '50%', left: '50%', position: 'static' }}>
+        <Container className={'container-signup'}>
+            <Box className={'box-signup'}>
                 <Typography variant='h4' color={'black'}>Signup</Typography>
                 <form onSubmit={handleSubmit}>
-                    <Box marginTop={'15px'}>
+                    <Box className={'box-signup-fields'}>
                        <TextField
                             required
                             type='input'
@@ -136,9 +136,10 @@ const Signup = () => {
                             value={username}
                             error={usernameErrors}
                             onChange={e => handleOnInputChange('username', e.target.value)}
+                            helperText={usernameErrors ? 'Alphanumeric only. Max 24 length.': ''}
                        />
                     </Box>
-                    <Box marginTop={'15px'}>
+                    <Box className={'box-signup-fields'}>
                        <TextField
                             required
                             type='password'
@@ -152,7 +153,7 @@ const Signup = () => {
                        />
                     </Box>
                     {password ? (
-                        <Box marginTop={'10px'} backgroundColor={'#e3e5e6'}>
+                        <Box className={'box-signup-requirements'}>
                             <Typography color={'black'}>Password Requirements</Typography>
                             <List>
                                 <ListItem>
@@ -170,11 +171,11 @@ const Signup = () => {
                             </List>
                         </Box>
                     ): <Box></Box>}
-                    <Box marginTop={'10px'}>
+                    <Box className={'box-signup-fields'}>
                         <Button variant={'contained'} type='submit' disabled={isSubmitDisabled()}>Submit</Button>
                     </Box>
                 </form>
-                <Box marginTop={'15px'}>
+                <Box className={'box-signup-fields'}>
                     <Typography variant='subtitle' color={'gray'}>Already have an account?</Typography>
                 </Box>
             </Box>
