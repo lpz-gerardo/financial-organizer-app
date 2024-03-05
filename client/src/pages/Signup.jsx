@@ -145,6 +145,11 @@ const Signup = () => {
                             onChange={e => handleOnInputChange('password', e.target.value)}
                        />
                     </Box>
+                    {password ? (
+                        <Box marginTop={'10px'} backgroundColor={'#cccecf'}>
+                            <Typography color={'black'}>Password Requirements</Typography>
+                        </Box>
+                    ): <Box></Box>}
                     <Box marginTop={'10px'}>
                         <Button type='submit'>Submit</Button>
                     </Box>
