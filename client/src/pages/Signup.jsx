@@ -13,12 +13,46 @@ const Signup = () => {
         username: '',
         password: '',
     });
+    const [inputErrors, setInputErrors] = useState({
+        usernameErrors: false,
+        passwordErrors: false,
+    })
     const { username, password } = userInputs;
+    const { usernameErrors, passwordErrors } = inputErrors;
     const navigate = useNavigate();
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
             ...userInputs,
             [prop]: value,
+        });
+        handleInputValidation(prop, value);
+    }
+
+    const handleInputValidation = (prop, value) => {
+        switch (prop) {
+            case "username":
+                isUsernameValid(value);
+                break;
+            case "password":
+                isPasswordValid(value);
+                break;
+        }
+    }
+
+    const isUsernameValid = (value) => {
+        const regex = /^[a-zA-Z]{4,24}$/;
+        handleErrorMessage(regex, 'usernameErrors', value);
+    }
+
+    const isPasswordValid = (value) => {
+        const regex = /^[a-zA-Z0-9]{6,30}$/;
+        handleErrorMessage(regex, 'passwordErrors', value);
+    }
+
+    const handleErrorMessage = (regexPattern, prop, value) => {
+        setInputErrors({
+            ...inputErrors,
+            [prop]: (!value.match(regexPattern)) ? true : false,
         });
     }
 
@@ -71,6 +105,7 @@ const Signup = () => {
                             name='username'
                             label='username'
                             value={username}
+                            error={usernameErrors}
                             onChange={e => handleOnInputChange('username', e.target.value)}
                        />
                     </Box>
@@ -83,8 +118,8 @@ const Signup = () => {
                             name='password'
                             label='password'
                             value={password}
+                            error={passwordErrors}
                             onChange={e => handleOnInputChange('password', e.target.value)}
-
                        />
                     </Box>
                     <Box marginTop={'10px'}>
