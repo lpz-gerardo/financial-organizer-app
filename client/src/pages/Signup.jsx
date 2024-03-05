@@ -116,6 +116,10 @@ const Signup = () => {
         });
     }
 
+    const isSubmitDisabled = () => {
+        return (!username || usernameErrors) || (!password || passwordErrors);
+    }
+
     return(
         <Container sx={{ display: 'grid', justifyContent: 'center', }}>
             <Box sx={{ backgroundColor: 'white', padding: '50px', top: '50%', left: '50%', position: 'static' }}>
@@ -167,7 +171,7 @@ const Signup = () => {
                         </Box>
                     ): <Box></Box>}
                     <Box marginTop={'10px'}>
-                        <Button type='submit'>Submit</Button>
+                        <Button variant={'contained'} type='submit' disabled={isSubmitDisabled()}>Submit</Button>
                     </Box>
                 </form>
                 <Box marginTop={'15px'}>
