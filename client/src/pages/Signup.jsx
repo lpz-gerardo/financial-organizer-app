@@ -40,12 +40,12 @@ const Signup = () => {
     }
 
     const isUsernameValid = (value) => {
-        const regex = /^[a-zA-Z]{4,24}$/;
+        const regex = /^[a-zA-Z0-9]{4,24}$/;
         handleErrorMessage(regex, 'usernameErrors', value);
     }
 
     const isPasswordValid = (value) => {
-        const regex = /^[a-zA-Z0-9]{6,30}$/;
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         handleErrorMessage(regex, 'passwordErrors', value);
     }
 
