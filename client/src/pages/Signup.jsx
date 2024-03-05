@@ -16,9 +16,16 @@ const Signup = () => {
     const [inputErrors, setInputErrors] = useState({
         usernameErrors: false,
         passwordErrors: false,
-    })
+    });
+    const [passwordRequirements, setPasswordRequirements] = useState({
+        minimumLength: false,
+        minimumDigits: false,
+        minimumLowercase: false,
+        minimumUppercase: false,
+    });
     const { username, password } = userInputs;
     const { usernameErrors, passwordErrors } = inputErrors;
+    const { minimumLength, minimumDigits, minimumLowercase, minimumUppercase } = passwordRequirements;
     const navigate = useNavigate();
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
@@ -46,7 +53,23 @@ const Signup = () => {
 
     const isPasswordValid = (value) => {
         const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        handlePasswordRequirements(value);
         handleErrorMessage(regex, 'passwordErrors', value);
+    }
+
+    const handlePasswordRequirements = (value) => {
+        const isMinimumLength = value.match(/^.{8,}$/);
+        const isMinimumDigits = value.match(/^(?=.*[a-z]).{1,}$/);
+        const isMinimumLowercase = value.match(/^(?=.*[A-Z]).{1,}$/);
+        const isMinimumUppercase = value.match(/^(?=.*\d).{1,}$/);
+
+        setPasswordRequirements({
+            ...passwordRequirements,
+            'minimumLength': isMinimumLength ? true : false,
+            'minimumDigits': isMinimumDigits ? true : false,
+            'minimumLowercase': isMinimumLowercase ? true : false,
+            'minimumUppercase': isMinimumUppercase ? true : false,
+        });
     }
 
     const handleErrorMessage = (regexPattern, prop, value) => {
