@@ -102,12 +102,12 @@
   }
 }
 
-.container-signup {
+.container-signup, .container-login {
   display: grid;
   justify-content: center;
 }
 
-.box-signup {
+.box-signup, .box-login {
   background-color: white;
   padding: 50px;
   top: 50%;
@@ -117,7 +117,7 @@
   border-radius: 25px;
 }
 
-.box-signup-fields {
+.box-signup-fields, .box-login-fields {
   margin-top: 15px;
 }
 
