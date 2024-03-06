@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -13,7 +13,12 @@ const Login = () => {
         username: '',
         password: '',
     });
+    const [inputError, setInputError] = useState({
+        usernameError: false,
+        passwordError: false,
+    });
     const { username, password } = userInputs;
+    const { usernameError, passwordError } = inputError;
     const navigate = useNavigate();
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
@@ -44,18 +49,31 @@ const Login = () => {
             if (success) {
                 navigate("/");
             } else {
-                console.log("Failed.");
+                setInputError({
+                    ...inputError,
+                    'usernameError': true,
+                    'passwordError': true,
+                });
             }
         } catch (error) {
             console.log(error);
         }
-
-        setUserInputs({
-            ...userInputs,
-            username: "",
-            password: "",
-        });
     }
+
+    useEffect(() => {
+        if (username == '') {
+            setInputError({
+                ...inputError,
+                'usernameError': false,
+            });
+        }
+        if (password == '') {
+            setInputError({
+                ...inputError,
+                'passwordError': false,
+            });
+        }
+    }, [username, password])
 
     return (
         <Container className={'container-login'}>
@@ -71,6 +89,7 @@ const Login = () => {
                             name='username'
                             label='username'
                             value={username}
+                            error={usernameError}
                             onChange={e => handleOnInputChange('username', e.target.value)}
                         />
                     </Box>
@@ -83,6 +102,7 @@ const Login = () => {
                             name='password'
                             label='password'
                             value={password}
+                            error={passwordError}
                             onChange={e => handleOnInputChange('password', e.target.value)}
                         />
                     </Box>
