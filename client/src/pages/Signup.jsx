@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -176,7 +176,7 @@ const Signup = () => {
                     </Box>
                 </form>
                 <Box className={'box-signup-fields'}>
-                    <Typography variant='subtitle' color={'gray'}>Already have an account?</Typography>
+                    <Typography variant='subtitle' color={'gray'}>Already have an account? </Typography><Link to={'/login'}>Login</Link>
                 </Box>
             </Box>
         </Container>
