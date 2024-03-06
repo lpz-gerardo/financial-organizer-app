@@ -6,6 +6,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const Login = () => {
+    const [userInputs, setUserInputs] = useState({
+        username: '',
+        password: '',
+    });
+    const { username, password } = userInputs;
+
     return (
         <Container className={'container-login'}>
             <Box className={'box-login'}>
@@ -18,6 +24,7 @@ const Login = () => {
                         variant='outlined'
                         name='username'
                         label='username'
+                        value={username}
                     />
                 </Box>
                 <Box className={'box-login-fields'}>
@@ -28,6 +35,7 @@ const Login = () => {
                         variant='outlined'
                         name='password'
                         label='password'
+                        value={password}
                     />
                 </Box>
                 <Box className={'box-login-fields'}>
