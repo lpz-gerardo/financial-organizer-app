@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -110,7 +110,9 @@ const Login = () => {
                         <Button type='submit'>Login</Button>
                     </Box>
                 </form>
-
+            <Box sx={{ marginTop: '10px' }}>
+                <Typography variant='subtitle' color={'black'}>Don't have an account? </Typography><Link to={'/signup'}>Signup</Link>
+            </Box>
             </Box>
         </Container>
     )
