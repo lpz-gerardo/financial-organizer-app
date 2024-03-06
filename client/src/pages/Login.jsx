@@ -18,19 +18,6 @@ const Login = () => {
             ...userInputs,
             [prop]: value,
         });
-        handleInputValidation(prop, value);
-    }
-
-    const handleInputValidation = (prop, value) => {
-        switch (prop) {
-            case "username":
-                isUsernameValid(value);
-                break;
-        }
-    }
-
-    const isUsernameValid = (value) => {
-        const regex = /^[a-zA-Z0-9]{4,24}$/;
     }
 
     return (
