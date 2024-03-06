@@ -12,11 +12,21 @@ const Login = () => {
                 <Typography color={'black'} variant='h4'>Login</Typography>
                 <Box className={'box-login-fields'}>
                     <TextField
+                        required
+                        type='input'
+                        color='primary'
+                        variant='outlined'
+                        name='username'
                         label='username'
                     />
                 </Box>
                 <Box className={'box-login-fields'}>
                     <TextField
+                        required
+                        type='password'
+                        color='primary'
+                        variant='outlined'
+                        name='password'
                         label='password'
                     />
                 </Box>
