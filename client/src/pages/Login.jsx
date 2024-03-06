@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,6 +12,26 @@ const Login = () => {
         password: '',
     });
     const { username, password } = userInputs;
+
+    const handleOnInputChange = (prop, value) => {
+        setUserInputs({
+            ...userInputs,
+            [prop]: value,
+        });
+        handleInputValidation(prop, value);
+    }
+
+    const handleInputValidation = (prop, value) => {
+        switch (prop) {
+            case "username":
+                isUsernameValid(value);
+                break;
+        }
+    }
+
+    const isUsernameValid = (value) => {
+        const regex = /^[a-zA-Z0-9]{4,24}$/;
+    }
 
     return (
         <Container className={'container-login'}>
@@ -25,6 +46,7 @@ const Login = () => {
                         name='username'
                         label='username'
                         value={username}
+                        onChange={e => handleOnInputChange('username', e.target.value)}
                     />
                 </Box>
                 <Box className={'box-login-fields'}>
