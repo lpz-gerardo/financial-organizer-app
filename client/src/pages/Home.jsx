@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Box from '@mui/material/Box';
 
 import { REACT_APP_DEV_URL } from '../../config.js';
@@ -11,6 +13,8 @@ import PaymentTable from '../components/PaymentTable.jsx';
 const Home = () => {
     const [members, setMembers] = useState([]);
     const [accounts, setAccounts] = useState([]);
+    const navigate = useNavigate();
+    const cookie = Cookies.get('token');
 
     async function getMemberData() {
         fetch(REACT_APP_DEV_URL + 'member', {
@@ -42,6 +46,29 @@ const Home = () => {
         getMemberData();
         getAccountData();
     }
+
+    useEffect(() => {
+        const verifyCookie = async () => {
+            if (!cookie) {
+                navigate('/login');
+            }
+            const response = await fetch(REACT_APP_DEV_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: cookie }),
+                credentials: 'same-origin',
+            });
+            const data = await response.json();
+            if (!data.status) {
+                Cookies.remove('token');
+                navigate('/login');
+            }
+            return data.status;
+        }
+        verifyCookie();
+    }, [cookie, navigate]);
 
     useEffect(() => {
         getData();

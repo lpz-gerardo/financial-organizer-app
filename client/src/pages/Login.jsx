@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -45,8 +46,9 @@ const Login = () => {
                 },
                 body: JSON.stringify(credentials),
             });
-            const { success } = await response.json();
-            if (success) {
+            const data = await response.json();
+            if (data.success) {
+                Cookies.set('token', data.token);
                 navigate("/");
             } else {
                 setInputError({
@@ -54,6 +56,7 @@ const Login = () => {
                     'usernameError': true,
                     'passwordError': true,
                 });
+                Cookies.remove('token');
             }
         } catch (error) {
             console.log(error);
