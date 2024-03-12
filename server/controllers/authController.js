@@ -16,15 +16,10 @@ const Signup = async (request, response, next) => {
 
         const user = await User.create({ username, password, createdAt });
         const token = createSecretToken(user._id);
-
-        response.cookie('token', token, {
-            withCredentials: true,
-            httpOnly: false,
-        });
-
         response.status(201).send({
             message: 'User signed in successfully.',
             success: true,
+            token: token,
             user
         });
         next();
