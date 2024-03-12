@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../database/models/user.model.js';
 
 const userVerification = (request, response) => {
-    const token = request.cookies.token;
+    const token = request.body.token;
     if (!token) {
         return response.send({ status: false });
     }

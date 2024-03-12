@@ -49,11 +49,7 @@ const Login = async (request, response, next) => {
         }
 
         const token = createSecretToken(user._id);
-        response.cookie('token', token, {
-            withCredentials: true,
-            httpOnly: false,
-        });
-        response.status(201).send({ message: 'User logged in successfully', success: true });
+        response.status(201).json({ message: 'User logged in successfully', success: true, token: token });
         next();
     } catch (error) {
         return response.status(500).send({ message: error });
