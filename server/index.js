@@ -1,8 +1,8 @@
-import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import authRoutes from '../server/routes/authRoutes.js';
 import memberRoutes from '../server/routes/memberRoutes.js';
@@ -11,8 +11,8 @@ const { MONGODB_URL, PORT } = process.env;
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
 
 app.use('/', authRoutes);
 app.use('/member', memberRoutes);
