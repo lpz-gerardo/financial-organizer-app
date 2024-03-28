@@ -2,10 +2,28 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { BrowserRouter } from 'react-router-dom';
+import { 
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+ } from 'react-router-dom';
+ import Home from './pages/Home.jsx';
+ import Login from './pages/Login.jsx';
+ import Signup from './pages/Signup.jsx';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<App />}>
+      <Route index={true} path='/' element={<Home />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<Signup />} />
+    </Route>
+  )
+)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-);
+  <React.StrictMode>
+    <RouterProvider router={ router } />
+  </React.StrictMode>
+  );
