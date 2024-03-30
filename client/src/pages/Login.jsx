@@ -1,13 +1,15 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slices/usersApiSlice.js';
+import { setCredentials } from '../slices/authSlice.js';
+
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { REACT_APP_DEV_URL } from '../../config.js';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Login = () => {
     const [userInputs, setUserInputs] = useState({
@@ -20,7 +22,14 @@ const Login = () => {
     });
     const { username, password } = userInputs;
     const { usernameError, passwordError } = inputError;
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [login, { isLoading }] = useLoginMutation();
+
+    const { userInfo } = useSelector((state) => state.auth);
+
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
             ...userInputs,
@@ -28,40 +37,22 @@ const Login = () => {
         });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const credentials = {
-            'username': username,
-            'password': password,
-        };
-        postLogin(REACT_APP_DEV_URL + 'login', credentials);
-    }
-
-    const postLogin = async (url, credentials) => {
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
-            const data = await response.json();
-            if (data.success) {
-                Cookies.set('token', data.token);
-                navigate("/");
-            } else {
-                setInputError({
-                    ...inputError,
-                    'usernameError': true,
-                    'passwordError': true,
-                });
-                Cookies.remove('token');
-            }
-        } catch (error) {
-            console.log(error);
+            const response = await login({ username, password }).unwrap();
+            dispatch(setCredentials({ ...response }));
+            navigate('/');
+        } catch (err) {
+            console.log(err);
         }
     }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate('/');
+        }
+    }, [navigate, userInfo]);
 
     useEffect(() => {
         if (username == '') {
@@ -109,6 +100,9 @@ const Login = () => {
                             onChange={e => handleOnInputChange('password', e.target.value)}
                         />
                     </Box>
+
+                    {isLoading && <CircularProgress />}
+
                     <Box className={'box-login-fields'}>
                         <Button type='submit'>Login</Button>
                     </Box>
