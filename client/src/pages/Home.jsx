@@ -1,82 +1,35 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../slices/authSlice.js';
+
 import Box from '@mui/material/Box';
 
-import { REACT_APP_DEV_URL } from '../../config.js';
-import NavBar from '../components/NavBar.jsx';
+import Hero from '../components/Hero.jsx';
 import MemberTable from '../components/MemberTable';
 import AccountTable from '../components/AccountTable.jsx';
 import PaymentTable from '../components/PaymentTable.jsx';
 
 const Home = () => {
+    const [name, setName] = useState('');
     const [members, setMembers] = useState([]);
     const [accounts, setAccounts] = useState([]);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const cookie = Cookies.get('token');
 
-    async function getMemberData() {
-        fetch(REACT_APP_DEV_URL + 'member', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            setMembers(data.data);
-        });
-    }
-
-    async function getAccountData() {
-        fetch(REACT_APP_DEV_URL + 'account', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            return response.json();
-        }).then((data) => {
-            setAccounts(data.data);
-        });
-    }
+    const { userInfo } = useSelector((state) => state.auth);
 
     const getData = () => {
         getMemberData();
         getAccountData();
     }
 
-    useEffect(() => {
-        const verifyCookie = async () => {
-            if (!cookie) {
-                navigate('/login');
-            }
-            const response = await fetch(REACT_APP_DEV_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token: cookie }),
-                credentials: 'same-origin',
-            });
-            const data = await response.json();
-            if (!data.status) {
-                Cookies.remove('token');
-                navigate('/login');
-            }
-            return data.status;
-        }
-        verifyCookie();
-    }, [cookie, navigate]);
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    return(
-        <React.Fragment>
-            <NavBar />
+    return (
+        <>
+        {userInfo ? (
+            <>
             <Box className={'box-home-wrapper'}>
                 <Box className={'home-wrapper'}>
                     <Box className={'member-table'}>
@@ -99,8 +52,14 @@ const Home = () => {
                     </Box>
                 </Box>
             </Box>
-        </React.Fragment>
-    )
-}
+            </>
+        ) : (
+            <>
+                <Hero />
+            </>
+        )}
+        </>
+    );
+};
 
 export default Home;
