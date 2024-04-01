@@ -1,7 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRegisterMutation } from '../slices/usersApiSlice.js';
+import { setCredentials } from '../slices/authSlice.js';
+import { toast } from 'react-toastify';
+
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,12 +12,13 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { REACT_APP_DEV_URL } from '../../config.js';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Signup = () => {
     const [userInputs, setUserInputs] = useState({
         username: '',
         password: '',
+        confirmPassword: '',
     });
     const [inputErrors, setInputErrors] = useState({
         usernameErrors: false,
@@ -26,10 +30,17 @@ const Signup = () => {
         minimumLowercase: false,
         minimumUppercase: false,
     });
-    const { username, password } = userInputs;
-    const { usernameErrors, passwordErrors } = inputErrors;
+    const { username, password, confirmPassword } = userInputs;
+    const { usernameErrors, passwordErrors, confirmPasswordErrors } = inputErrors;
     const { minimumLength, minimumDigits, minimumLowercase, minimumUppercase } = passwordRequirements;
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [register, { isLoading }] = useRegisterMutation();
+
+    const { userInfo } = useSelector((state) => state.auth);
+
     const handleOnInputChange = (prop, value) => {
         setUserInputs({
             ...userInputs,
@@ -47,7 +58,7 @@ const Signup = () => {
                 isPasswordValid(value);
                 break;
         }
-    }
+    };
 
     const isUsernameValid = (value) => {
         const regex = /^[a-zA-Z0-9]{4,24}$/;
@@ -82,45 +93,35 @@ const Signup = () => {
         });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const credentials = {
             'username': username,
             'password': password,
         };
-        postSignup(REACT_APP_DEV_URL + 'signup', credentials);
-    }
 
-    const postSignup = async (url, credentials) => {
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
-            const data = await response.json();
-            if (data.success) {
-                Cookies.set('token', data.token);
-                navigate("/");
-            } else {
-                Cookies.remove('token');
+        if (confirmPassword !== password) {
+            toast.error('Passwords do not match');
+        } else {
+            try {
+                const response = await register({ username, password }).unwrap();
+                dispatch(setCredentials({ ...response }));
+                navigate('/');
+            } catch (err) {
+                console.log(err);
             }
-        } catch (error) {
-            console.log(error);
         }
-
-        setUserInputs({
-            ...userInputs,
-            username: "",
-            password: "",
-        });
     }
 
     const isSubmitDisabled = () => {
-        return (!username || usernameErrors) || (!password || passwordErrors);
+        return (!username || usernameErrors) || (!password || passwordErrors) || (!confirmPassword);
     }
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate('/');
+        }
+    }, [navigate, userInfo]);
 
     return(
         <Container className={'container-signup'}>
@@ -134,7 +135,7 @@ const Signup = () => {
                             color='primary'
                             variant='outlined'
                             name='username'
-                            label='username'
+                            label='Username'
                             value={username}
                             error={usernameErrors}
                             onChange={e => handleOnInputChange('username', e.target.value)}
@@ -148,13 +149,26 @@ const Signup = () => {
                             color='primary'
                             variant='outlined'
                             name='password'
-                            label='password'
+                            label='Password'
                             value={password}
                             error={passwordErrors}
                             onChange={e => handleOnInputChange('password', e.target.value)}
                        />
                     </Box>
-                    {password ? (
+                    <Box className={'box-signup-fields'}>
+                       <TextField
+                            required
+                            type='password'
+                            color='primary'
+                            variant='outlined'
+                            name='confirmPassword'
+                            label='Confirm password'
+                            value={confirmPassword}
+                            onChange={e => handleOnInputChange('confirmPassword', e.target.value)}
+                       />
+                    </Box>
+
+                    {password && (
                         <Box className={'box-signup-requirements'}>
                             <Typography color={'black'}>Password Requirements</Typography>
                             <List>
@@ -172,7 +186,9 @@ const Signup = () => {
                                 </ListItem>
                             </List>
                         </Box>
-                    ): <Box></Box>}
+                    )}
+
+                    {isLoading && <CircularProgress />}
                     <Box className={'box-signup-fields'}>
                         <Button variant={'contained'} type='submit' disabled={isSubmitDisabled()}>Submit</Button>
                     </Box>
