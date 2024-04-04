@@ -14,10 +14,14 @@ const memberSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    account: [{
-        type: mongoose.SchemaTypes.ObjectId,
+    userId: {
+        type: mongoose.SchemaType.ObjectId,
+        ref: 'User',
+    },
+    accounts: {
+        type: [mongoose.SchemaTypes.ObjectId],
         ref: 'Account'
-    }],
-});
+    },
+}, { timestamps: true });
 
 export default memberSchema;
