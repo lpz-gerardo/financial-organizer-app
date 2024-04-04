@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 const accountSchema = new mongoose.Schema({
     name: String,
-    accountType: String,
+    accountType: {
+        type: String,
+        enum: ["credit", "loan"],
+    },
     creditLimit: Number,
     startingDebt: Number,
     remainingDebt: Number,
@@ -12,6 +15,10 @@ const accountSchema = new mongoose.Schema({
     memberName: String,
     remainingPayments: Number,
     lengthOfLoan: Number,
+    memberId: {
+        type: String,
+        required: true,
+    }
 });
 
 export default accountSchema;
