@@ -11,11 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createdAt: {
-        type: Date,
-        default: new Date(),
-    },
-});
+}, { timestamps: true });
 
 userSchema.pre('save', async function () {
     this.password = await bcrypt.hash(this.password, 12);
