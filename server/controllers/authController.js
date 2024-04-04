@@ -3,50 +3,50 @@ import asyncHandler from 'express-async-handler';
 import { User } from '../database/models/user.model.js';
 import { createSecretToken } from '../utils/SecretToken.js';
 
-const registerUser = asyncHandler(async (request, response) => {
-    const { username, password } = request.body;
+const registerUser = asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
 
     const userExists = await User.findOne({ username });
     if (userExists) {
-        response.status(400).json({ message: 'User already exists' });
+        return res.status(400).json({ message: 'Username already taken' });
     }
 
     const user = await User.create({ username, password });
     if (user) {
-        createSecretToken(response, user._id);
-        response.status(201).json({
+        createSecretToken(res, user._id);
+        res.status(201).json({
             _id: user._id,
             username,
             password,
         });
     } else {
-        response.status(400).json({ message: 'Invalid user data' });
+        res.status(400).json({ message: 'Invalid user data' });
     }
 });
 
-const loginUser = asyncHandler(async (request, response) => {
-        const { username, password } = request.body;
+const loginUser = asyncHandler(async (req, res) => {
+        const { username, password } = req.body;
         if (!username || !password) {
-            response.status(400).json({ message: "All fields are required" });
+            return res.status(400).json({ message: "All fields are required" });
         }
         const user = await User.findOne({ username });
         if (user && (await bcrypt.compare(password, user.password))) {
-            createSecretToken(response, user._id);
-            response.status(201).json({
+            createSecretToken(res, user._id);
+            res.status(200).json({
                 _id: user._id,
                 username,
             });
         } else {
-            response.status(403).json({ message: "Invalid username or password" });
+            res.status(403).json({ message: "Invalid username or password" });
         }
 });
 
-const logoutUser = asyncHandler(async (requeset, response) => {
-    response.cookie('token', '', {
+const logoutUser = asyncHandler(async (req, res) => {
+    res.cookie('token', '', {
         httpOnly: true,
         expires: new Date(0)
     });
-    response.status(200).json({ message: 'User logged out' });
+    res.status(200).json({ message: 'User logged out' });
 });
 
 
