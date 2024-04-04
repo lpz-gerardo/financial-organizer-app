@@ -15,7 +15,7 @@ const memberSchema = new mongoose.Schema({
         default: 0,
     },
     userId: {
-        type: mongoose.SchemaType.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'User',
     },
     accounts: {
