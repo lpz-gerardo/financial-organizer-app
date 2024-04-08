@@ -5,6 +5,8 @@ const Member = mongoose.model('Member', memberSchema);
 
 const createMember = async (data) => {
     try {
+        const formattedId = mongoose.Types.ObjectId(data.userId);
+        data.userId = formattedId;
         const member = await Member.create(data);
         return member;
     } catch (error) {
@@ -30,9 +32,10 @@ const findMember = async (filter) => {
     }
 }
 
-const findMembers = async () => {
+const findMembers = async (filter) => {
     try {
-        const members = await Member.find({});
+        const { userId } = filter;
+        const members = await Member.find({ userId: userId });
         return members;
     } catch (error) {
         console.log(error);
