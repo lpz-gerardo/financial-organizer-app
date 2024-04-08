@@ -5,11 +5,13 @@ import {
     editMember,
     removeMember,
 } from '../controllers/memberController.js';
+import { userVerification } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
-router.post('/', addMember);
-
-router.get('/', getMembers);
+router
+    .route('/')
+    .get(userVerification, getMembers)
+    .post(userVerification, addMember);
 
 router.put('/:currentName', editMember);
 
