@@ -1,16 +1,18 @@
 import express from 'express';
 import {
     addAccount,
-    getAccounts,
+    getUserAccounts,
     editAccount,
     removeAccount
 } from '../controllers/accountController.js';
+import { userVerification } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', addAccount);
-
-router.get('/', getAccounts);
+router
+    .route('/')
+    .get(userVerification, getUserAccounts)
+    .post(userVerification, addAccount);
 
 router.put('/:id', editAccount);
 
