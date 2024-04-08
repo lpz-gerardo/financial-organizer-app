@@ -7,10 +7,12 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material';
 
 const NavBar = () => {
     const { userInfo } = useSelector((state) => state.auth);
 
+    const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -36,13 +38,13 @@ const NavBar = () => {
                 <Box  display={'grid'} gridTemplateColumns={'repeat(8, 1fr)'} alignItems={'center'} sx={{ height: '40px'}}>
                     <Box gridColumn={1}>
                         <Button onClick={ goToHomPage }>
-                            <Typography color={'white'}>Fin View</Typography>
+                            <Typography color={theme.palette.neutral.light}>Fin View</Typography>
                         </Button>
                     </Box>
                     {userInfo && (
                         <Box gridColumn={8}>
                             <Button onClick={ handleLogout }>
-                                <Typography color={'white'}>Logout</Typography>
+                                <Typography color={theme.palette.neutral.light}>Logout</Typography>
                             </Button>
                         </Box>
                     )}

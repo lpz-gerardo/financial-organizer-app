@@ -10,6 +10,10 @@ import {
  } from 'react-router-dom';
  import store from './store.js';
  import { Provider } from 'react-redux';
+ import { ThemeProvider } from '@mui/material';
+ import { createTheme } from '@mui/material';
+ import { themeSettings } from './theme.js';
+
  import Home from './pages/Home.jsx';
  import Login from './pages/Login.jsx';
  import Signup from './pages/Signup.jsx';
@@ -24,10 +28,14 @@ const router = createBrowserRouter(
   )
 );
 
+const theme = createTheme(themeSettings());
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={ store }>
-    <React.StrictMode>
-      <RouterProvider router={ router } />
-    </React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <React.StrictMode>
+        <RouterProvider router={ router } />
+      </React.StrictMode>
+    </ThemeProvider>
   </Provider>
 );
