@@ -10,104 +10,109 @@ import {
     updateMember,
 } from '../database/models/member.model.js';
 
-const addAccount = async (request, response) => {
+const addAccount = async (req, res) => {
     try {
-        if (!request.body.accountType
-            || !request.body.memberName
-            || !request.body.accountName
-            || !request.body.creditLimit
-            || !request.body.debt
-            || !request.body.monthlyPayment
-            || !request.body.annualPercentRate
-            || !request.body.paymentDay)
+        if (!req.body.accountType
+            || !req.body.memberName
+            || !req.body.accountName
+            || !req.body.creditLimit
+            || !req.body.debt
+            || !req.body.monthlyPayment
+            || !req.body.annualPercentRate
+            || !req.body.paymentDay)
             {
-                return response.status(400).send({
+                return res.status(400).json({
                     message: 'Missing data.'
                 });
             }
 
-            const member = await findMember({ name: request.body.memberName });
+            const member = await findMember({ name: req.body.memberName });
             if (!member) {
-                return response.status(404).send({ message: 'Selected member does not exist.'});
+                return res.status(404).json({ message: 'Selected member does not exist.'});
             }
 
             const newAccount = {
-                name: request.body.accountName,
-                accountType: request.body.accountType,
-                creditLimit: request.body.creditLimit,
-                startingDebt: request.body.debt,
-                remainingDebt: request.body.debt,
-                minimumMonthlyPayment: request.body.monthlyPayment,
-                annualPercentRate: request.body.annualPercentRate,
-                paymentDay: request.body.paymentDay,
-                memberName: request.body.memberName,
-                remainingPayments: request.body.remainingPayments ?? 0,
-                lengthOfLoan: request.body.lengthOfLoan ?? 0,
+                name: req.body.accountName,
+                accountType: req.body.accountType,
+                creditLimit: req.body.creditLimit,
+                startingDebt: req.body.debt,
+                remainingDebt: req.body.debt,
+                minimumMonthlyPayment: req.body.monthlyPayment,
+                annualPercentRate: req.body.annualPercentRate,
+                paymentDay: req.body.paymentDay,
+                memberName: req.body.memberName,
+                remainingPayments: req.body.remainingPayments ?? 0,
+                lengthOfLoan: req.body.lengthOfLoan ?? 0,
+                memnberId: req.body.memberId,
+                userId: req.body.userId,
             };
 
             const account = await createAccount(newAccount);
-            member.account.push(account);
+            member.accounts.push(account._id);
+
             member.debt = Number(member.debt) + Number(account.startingDebt);
             member.monthlyPayment = Number(member.monthlyPayment) + Number(account.minimumMonthlyPayment);
             await updateMember(member);
 
-            return response.status(201).send(account);
+            res.status(201).json(account);
 
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
 
-const getAccounts = async (request, response) => {
+const getUserAccounts = async (req, res) => {
     try {
-        const accounts = await findAccounts();
-        return response.status(200).json({
+        const { userId } = req.body;
+        const accounts = await findAccounts({ userId: userId });
+
+        res.status(200).json({
             count: accounts.length,
             data: accounts,
         });
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
-const editAccount = async (request, response) => {
+const editAccount = async (req, res) => {
     try {
-        const { id } = request.params;
+        const { id } = req.params;
         const account = await findAccount(id);
         if (!account) {
-            return response.status(404).send({ message: 'Account does not exist.' });
+            return res.status(404).json({ message: 'Account does not exist.' });
         }
 
         const member = await findMember({ name: account.memberName });
         if (!member) {
-            return response.status(404).send({ message: 'Selected member does not exist.' });
+            return res.status(404).json({ message: 'Selected member does not exist.' });
         }
-        member.debt = member.debt - (account.remainingDebt - request.body.remainingDebt);
-        member.monthlyPayment = member.monthlyPayment - (account.minimumMonthlyPayment - request.body.monthlyPayment);
+        member.debt = member.debt - (account.remainingDebt - req.body.remainingDebt);
+        member.monthlyPayment = member.monthlyPayment - (account.minimumMonthlyPayment - req.body.monthlyPayment);
         await updateMember(member);
 
-        account.remainingDebt = request.body.remainingDebt;
-        account.minimumMonthlyPayment = request.body.monthlyPayment;
-        account.annualPercentRate = request.body.annualPercentRate;
+        account.remainingDebt = req.body.remainingDebt;
+        account.minimumMonthlyPayment = req.body.monthlyPayment;
+        account.annualPercentRate = req.body.annualPercentRate;
         await updateAccount(account);
 
-        return response.status(200).send({ message: 'Account data updated.' });
+        res.status(200).json({ message: 'Account data updated.' });
 
     } catch (error) {
         console.log(error);
-        return response.status(200).send({ message: error.message });
+        res.status(200).json({ message: error.message });
     }
 }
 
-const removeAccount = async(request, response) => {
+const removeAccount = async(req, res) => {
     try {
-        const { id } = request.params;
+        const { id } = req.params;
         const conditions = { _id: id };
         const account = await findAccount(id);
         if (!account) {
-            return response.status(404).send({ message: 'Accound does not exist.' });
+            return res.status(404).json({ message: 'Accound does not exist.' });
         }
 
         const member = await findMember({ name: account.memberName });
@@ -122,16 +127,21 @@ const removeAccount = async(request, response) => {
         const result = await deleteAccount(conditions);
 
         if (!result) {
-            return response.status(404).send({ message: 'Account does not exist.' });
+            return res.status(404).json({ message: 'Account does not exist.' });
         }
 
-        return response.status(200).send({
+        res.status(200).json({
             message: 'Account was successfully deleted.'
         });
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
-export { addAccount, getAccounts, editAccount, removeAccount };
+export {
+    addAccount,
+    getUserAccounts,
+    editAccount,
+    removeAccount,
+};
