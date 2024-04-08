@@ -5,6 +5,15 @@ const Account = mongoose.model('Account', accountSchema);
 
 const createAccount = async (newAccount) => {
     try {
+        const formattedMemberId = new mongoose.Types.ObjectId(newAccount.memberId);
+        const formattedUserId = new mongoose.Types.ObjectId(newAccount.userId);
+
+        newAccount = {
+            ...newAccount,
+            memberId: formattedMemberId,
+            userId: formattedUserId,
+        }
+
         const account = await Account.create(newAccount);
         return account;
     } catch (error) {
