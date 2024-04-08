@@ -9,17 +9,19 @@ const memberSchema = new mongoose.Schema({
     debt: {
         type: Number,
         default: 0,
+        min: 0,
     },
     monthlyPayment: {
         type: Number,
         default: 0,
+        min: 0,
     },
     userId: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
     accounts: {
-        type: [mongoose.SchemaTypes.ObjectId],
+        type: [mongoose.Types.ObjectId],
         ref: 'Account'
     },
 }, { timestamps: true });
