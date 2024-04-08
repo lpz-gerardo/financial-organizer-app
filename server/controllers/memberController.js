@@ -11,82 +11,87 @@ import {
     deleteAccounts,
 } from '../database/models/account.model.js';
 
-const addMember = async (request, response) => {
+const addMember = async (req, res) => {
     try {
-        if (!request.body.name) {
-            return response.status(400).send({ message: 'Missing name.' })
+        if (!req.body.userId) {
+            return res.status(401).json({ message: 'Not authorized.' });
+        }
+        if (!req.body.name) {
+            return res.status(400).json({ message: 'Missing name.' })
         }
 
-        if (await memberExists({ name: request.body.name })) {
-            return response.status(400).send({ message: 'Name already exists.'});
+        if (await memberExists({ name: req.body.name, userId: req.body.userId })) {
+            return res.status(400).json({ message: 'Name already exists.'});
         }
 
         const newMember = {
-            name: request.body.name,
+            name: req.body.name,
+            userId: req.body.userId,
             accounts: [],
         }
 
         const result = createMember(newMember);
-        return response.status(201).send(result);
+        res.status(201).json(result);
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
-const getMembers = async (request, response) => {
+const getMembers = async (req, res) => {
     try {
-        const members = await findMembers();
-        return response.status(200).send({
+        const { userId } = req.body;
+        const members = await findMembers({ userId: userId });
+        res.status(200).json({
             data: members,
         });
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
 
-const editMember = async (request, response) => {
+const editMember = async (req, res) => {
     try {
-        if (!request.params.currentName || !request.body.newName) {
-            return response.status(400).send({ message: 'Missing a name.' });
+        if (!req.params.currentName || !req.body.newName) {
+            return res.status(400).json({ message: 'Missing a name.' });
         }
 
-        const filter = { name: request.params.currentName };
+        const filter = { name: req.params.currentName };
         const member = await findMember(filter);
         if (!member) {
-            return response.status(400).send({ message: 'Member not found.' });
+            return res.status(400).json({ message: 'Member not found.' });
         }
 
-        const isNewNameTaken = await memberExists({ name: request.body.newName });
+        const isNewNameTaken = await memberExists({ name: req.body.newName });
         if (!isNewNameTaken) {
-            member.name = request.body.newName;
-            await updateAccounts({ memberName: request.params.currentName }, { memberName: member.name });
+            member.name = req.body.newName;
+            await updateAccounts({ memberName: req.params.currentName }, { memberName: member.name });
             await updateMember(member);
         } else {
-            return response.status(403).send({ message: 'Member name already exists.' });
+            return res.status(403).json({ message: 'Member name already exists.' });
         }
 
-        return response.status(200).send({ message: 'Member name has been updated.' });
+        return res.status(200).json({ message: 'Member name has been updated.' });
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
 
-const removeMember = async (request, response) => {
+const removeMember = async (req, res) => {
     try {
-        const conditions = { name: request.params.name };
+        const conditions = { name: req.params.name };
         const result = await deleteMember(conditions);
         if (!result) {
-            return response.status(404).send({ message: 'Member does not exist.' });
+            return res.status(404).json({ message: 'Member does not exist.' });
         }
 
-        await deleteAccounts({ memberName: request.params.name });
-        return response.status(200).send({ message: 'Member was successfully deleted.' });
+        await deleteAccounts({ memberName: req.params.name });
+        return res.status(200).json({ message: 'Member was successfully deleted.' });
     } catch (error) {
         console.log(error);
-        return response.status(500).send({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
 
