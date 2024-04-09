@@ -2,22 +2,51 @@ export const themeSettings = () => {
   return {
     palette: {
       primary: {
-        main: '#4caf50',
-        light: '#00e676',
-        dark: '#1b5e20',
+        main: '#FFB300',
+        light: '#FFE082',
+        dark: '#FF8F00',
       },
       secondary: {
-        main: '#fdd835',
-        light: '#ffff00',
-        dark: '#ff8f00',
+        main: '#03A9F4',
+        light: '#18FFFF',
+        dark: '#01579B',
       },
       neutral: {
-        main: '#9e9e9e',
-        light: '#fafafa',
-        dark: '#212121',
+        main: '#78909C',
+        light: '#CFD8DC',
+        dark: '#263238',
       },
       background: {
-        default: '#eeeeee',
+        default: '#CFD8DC',
+        alt: '#263238'
+      },
+    },
+    typography: {
+      fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+      fontSize: 12,
+      h1: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 40,
+      },
+      h2: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 32,
+      },
+      h3: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 24,
+      },
+      h4: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 20,
+      },
+      h5: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 16,
+      },
+      h6: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 14,
       },
     }
   }
