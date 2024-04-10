@@ -6,6 +6,7 @@ import { removeCredentials } from '../slices/authSlice';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import FlexStyle from './FlexStyle';
 
+import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -45,15 +46,16 @@ const NavBar = () => {
 	};
 
 	return (
-		<AppBar sx={{ bgcolor: theme.palette.neutral.dark}}>
+		<Box flexGrow={1}>
+			<AppBar sx={{ bgcolor: theme.palette.grey[50], position: 'static' }}>
 			<Toolbar sx={{ justifyContent: 'space-between'}}>
 				<FlexStyle>
 					<IconButton>
-						<MenuIcon sx={{ color: theme.palette.neutral.light}}/>
+						<MenuIcon sx={{ color: theme.palette.primary.dark}}/>
 					</IconButton>
 				<FlexStyle>
 					<Button onClick={handleNavigateHome}>
-						<Typography color={theme.palette.primary} fontFamily={theme.typography.h2}>Fin View</Typography>
+						<Typography color={theme.palette.primary.dark} fontFamily={theme.typography.h2} fontWeight={'bold'}>Fin View</Typography>
 					</Button>
 				</FlexStyle>
 				</FlexStyle>
@@ -86,6 +88,8 @@ const NavBar = () => {
 				)}
 			</Toolbar>
 		</AppBar>
+		</Box>
+
 	)
 }
 
