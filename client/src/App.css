@@ -121,10 +121,23 @@ html, body, #root {
 }
 
 .box-signup-fields, .box-login-fields {
-  margin-top: 15px;
+  margin-top: 1.25rem;
 }
 
 .box-signup-requirements {
   margin-top: 10px;
   background-color: #e3e5e6;
+}
+
+.box-hero {
+  margin: 1.5rem 2.5rem;
+  border: 1px solid;
+  width: 400px;
+  border-radius: 1.5rem;
+
+}
+
+.box-main-hero {
+  display: block;
+  width: 100%;
 }
