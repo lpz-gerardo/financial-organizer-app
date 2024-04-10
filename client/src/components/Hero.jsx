@@ -7,42 +7,44 @@ const Hero = () => {
 
   return (
     <>
-    <Box sx={{ display: 'block', width: '100%' }}>
+    <Box className={'box-main-hero'}>
 
       <FlexStyle sx={{
         justifyContent: 'center',
         boxSizing: 'border-box',
       }}>
         <Box
+          className={'box-hero'}
           sx={{
-            m: '1.5rem 2.5rem',
-            border: '1px solid',
             borderColor: theme.palette.primary.dark,
-            bgcolor: theme.palette.grey[50],
-            width: '400px',
-            height: '400px',
-            borderRadius: '0.55rem',
+            bgcolor: theme.palette.grey[0],
           }}
         >
-          <Box m={'5rem'}>
+          <Box m={'4rem'}>
             <Typography
-              fontFamily={theme.typography.h1}
+              variant='h1'
               fontWeight={'bold'}
               color={theme.palette.primary.dark}
             >
               FIN VIEW
             </Typography>
+            <Box sx={{ m: '1rem'}}>
+              <Typography variant='h5'>
+              Simplify the way you view your personal finance
+              </Typography>
+            </Box>
+
           </Box>
           <Box display={'inline-flex'}>
             <Box m={'1rem'}>
-              <Button href='/login' variant='contained' sx={{ bgcolor: theme.palette.primary.main }}>
+              <Button href='/login' variant='contained' sx={{ bgcolor: theme.palette.primary.main, m: '1rem' }}>
                 <Typography>
-                  Login
+                  Log in
                 </Typography>
               </Button>
             </Box>
             <Box m={'1rem'}>
-              <Button href='/signup' variant='contained' sx={{ bgcolor: theme.palette.primary.main }}>
+              <Button href='/signup' variant='contained' sx={{ bgcolor: theme.palette.primary.main, m: '1rem' }}>
                 <Typography>
                   Sign up
                 </Typography>
