@@ -9,7 +9,7 @@ const Hero = () => {
     <>
     <Box sx={{ display: 'block', width: '100%' }}>
 
-      <FlexStyle sx={{ 
+      <FlexStyle sx={{
         justifyContent: 'center',
         boxSizing: 'border-box',
       }}>
