@@ -47,7 +47,7 @@ const NavBar = () => {
 
 	return (
 		<Box flexGrow={1}>
-			<AppBar sx={{ bgcolor: theme.palette.grey[50], position: 'static' }}>
+			<AppBar sx={{ bgcolor: theme.palette.grey[0], position: 'static' }}>
 			<Toolbar sx={{ justifyContent: 'space-between'}}>
 				<FlexStyle>
 					<IconButton>
