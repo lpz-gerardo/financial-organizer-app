@@ -62,6 +62,11 @@ export const themeSettings = () => {
         fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
         fontSize: 14,
       },
+      subtitle: {
+        fontFamily: ['Lato', 'Inter', 'sans-serif'].join(','),
+        fontSize: 14,
+        fontWeight: 400,
+      }
     }
   }
 }
