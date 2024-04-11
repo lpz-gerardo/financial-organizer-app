@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRegisterMutation } from '../slices/usersApiSlice.js';
 import { setCredentials } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
+import { useTheme, useMediaQuery } from '@mui/material';
 
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import CircularProgress from '@mui/material/CircularProgress';
+import LoginIcon from '@mui/icons-material/Login';
 
 const Signup = () => {
     const [userInputs, setUserInputs] = useState({
@@ -34,11 +35,12 @@ const Signup = () => {
     const { usernameErrors, passwordErrors, confirmPasswordErrors } = inputErrors;
     const { minimumLength, minimumDigits, minimumLowercase, minimumUppercase } = passwordRequirements;
 
+    const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isMobileScreen = useMediaQuery('(min-width: 600px)');
 
     const [register, { isLoading }] = useRegisterMutation();
-
     const { userInfo } = useSelector((state) => state.auth);
 
     const handleOnInputChange = (prop, value) => {
@@ -124,9 +126,21 @@ const Signup = () => {
     }, [navigate, userInfo]);
 
     return(
-        <Container className={'container-signup'}>
-            <Box className={'box-signup'}>
-                <Typography variant='h4' color={'black'}>Signup</Typography>
+        <Box
+            sx={{
+            display: 'inline-block',
+            boxSizing: 'border-box',
+            m: '2rem 2.5rem',
+            border: '1px solid',
+            borderColor: theme.palette.primary.main,
+            bgcolor: theme.palette.grey[0],
+            borderRadius: '1.5rem',
+            width: !isMobileScreen ? '300px' : '400px',
+            p: '2rem',
+      }}
+        >
+            <Box >
+                <Typography variant='h2'>Sign Up</Typography>
                 <form onSubmit={handleSubmit}>
                     <Box className={'box-signup-fields'}>
                        <TextField
@@ -134,6 +148,7 @@ const Signup = () => {
                             type='input'
                             color='primary'
                             variant='outlined'
+                            autoComplete='off'
                             name='username'
                             label='Username'
                             value={username}
@@ -169,8 +184,8 @@ const Signup = () => {
                     </Box>
 
                     {password && (
-                        <Box className={'box-signup-requirements'}>
-                            <Typography color={'black'}>Password Requirements</Typography>
+                        <Box sx={{ m: '1rem' }}>
+                            <Typography variant='subtitle'>Password Requirements</Typography>
                             <List>
                                 <ListItem>
                                     <Typography color={minimumLength ? 'green' : 'red'}>Minimum 8 characters</Typography>
@@ -189,15 +204,17 @@ const Signup = () => {
                     )}
 
                     {isLoading && <CircularProgress />}
+
                     <Box className={'box-signup-fields'}>
-                        <Button variant={'contained'} type='submit' disabled={isSubmitDisabled()}>Submit</Button>
+                        <Button variant={'contained'} type='submit' disabled={isSubmitDisabled()}>SIGN UP <LoginIcon /></Button>
                     </Box>
                 </form>
                 <Box className={'box-signup-fields'}>
-                    <Typography variant='subtitle' color={'gray'}>Already have an account? </Typography><Link to={'/login'}>Login</Link>
+                    <Typography variant='subtitle'>Already have an account? </Typography><Link to={'/login'}>Login</Link>
                 </Box>
             </Box>
-        </Container>
+        </Box>
+
     );
 }
 
