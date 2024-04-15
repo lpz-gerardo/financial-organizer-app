@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
-import { User } from '../database/models/user.model.js';
+import User from '../database/models/user.model.js';
 
 const userVerification = asyncHandler(async (req, res, next) => {
     const token = req.cookies.token;
