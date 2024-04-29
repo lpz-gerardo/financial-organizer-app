@@ -5,21 +5,21 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (data) => ({
-                url: `${REACT_APP_DEV_URL}/login`,
+                url: `${REACT_APP_DEV_URL}/user/login`,
                 method: 'POST',
                 body: data,
             }),
         }),
         register: builder.mutation({
             query: (data) => ({
-                url: `${REACT_APP_DEV_URL}/signup`,
+                url: `${REACT_APP_DEV_URL}/user/signup`,
                 method: 'POST',
                 body: data,
             }),
         }),
         logout: builder.mutation({
             query: () => ({
-                url: `${REACT_APP_DEV_URL}/logout`,
+                url: `${REACT_APP_DEV_URL}/user/logout`,
                 method: 'POST',
             }),
         }),       
