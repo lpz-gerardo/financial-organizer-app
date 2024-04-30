@@ -43,9 +43,8 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ ...response }));
-      toast.success(`Welcome back ${username}!`);
+      const res = await login({ username, password }).unwrap();
+      dispatch(setCredentials({...res}));
       navigate('/');
     } catch (err) {
       toast.error(err.error);
