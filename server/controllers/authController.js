@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import asyncHandler from 'express-async-handler';
-import { User } from '../database/models/user.model.js';
-import { createSecretToken } from '../utils/SecretToken.js';
+import User from '../database/models/user.model.js';
+import createSecretToken from '../utils/SecretToken.js';
 
 const registerUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
@@ -17,7 +17,6 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(201).json({
             _id: user._id,
             username,
-            password,
         });
     } else {
         res.status(400).json({ message: 'Invalid user data' });
@@ -25,20 +24,20 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-        const { username, password } = req.body;
-        if (!username || !password) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
-        const user = await User.findOne({ username });
-        if (user && (await bcrypt.compare(password, user.password))) {
-            createSecretToken(res, user._id);
-            res.status(200).json({
-                _id: user._id,
-                username,
-            });
-        } else {
-            res.status(403).json({ message: "Invalid username or password" });
-        }
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+    const user = await User.findOne({ username });
+    if (user && (await bcrypt.compare(password, user.password))) {
+        createSecretToken(res, user._id);
+        res.status(201).json({
+            _id: user._id,
+            username: user.username,
+        });
+    } else {
+        res.status(401).json({ message: "Invalid username or password" });
+    }
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
