@@ -11,10 +11,8 @@ const router = express.Router();
 router
     .route('/')
     .get(userVerification, getMembers)
-    .post(userVerification, addMember);
-
-router.put('/:currentName', editMember);
-
-router.delete('/:name', removeMember);
+    .post(userVerification, addMember)
+    .put(userVerification, editMember)
+    .delete(userVerification, removeMember);
 
 export default router;
